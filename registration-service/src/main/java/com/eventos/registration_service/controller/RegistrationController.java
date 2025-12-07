@@ -1,7 +1,7 @@
 package com.eventos.registration_service.controller;
 
-import com.eventos.inscricao_service.model.Registration;
-import com.eventos.inscricao_service.repository.RegistrationRepository;
+import com.eventos.registration_service.model.Registration;
+import com.eventos.registration_service.repository.RegistrationRepo;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
