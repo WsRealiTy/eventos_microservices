@@ -1,4 +1,4 @@
-package com.eventos.event_service.config;
+/*package com.eventos.event_service.config;
 
 import com.eventos.event_service.security.SimpleTokenFilter;
 import org.springframework.context.annotation.*;
@@ -22,4 +22,4 @@ public class SecurityConfig {
             .addFilterBefore(tokenFilter, UsernamePasswordAuthenticationFilter.class);
         return http.build();
     }
-}
+}*/

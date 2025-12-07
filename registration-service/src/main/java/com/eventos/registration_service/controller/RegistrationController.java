@@ -16,7 +16,7 @@ public class RegistrationController {
 
     @PostMapping
     public Registration create(@RequestBody Registration registration){
-        return repo.save(Registration);
+        return repo.save(registration);
     }
 
     @GetMapping("/{id}")
