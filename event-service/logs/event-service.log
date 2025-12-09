@@ -1,0 +1,1168 @@
+2025-12-09T10:19:17.517-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:19:17.524-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:19:17.570-03:00  INFO 8268 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-09T10:19:17.571-03:00  INFO 8268 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-09T10:19:18.078-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:19:18.125-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interface.
+2025-12-09T10:19:18.562-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:19:18.574-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:19:18.575-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:19:18.615-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1043 ms
+2025-12-09T10:19:18.741-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:19:18.789-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-09T10:19:19.211-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:19:19.241-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T10:19:19.566-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@56b92d19
+2025-12-09T10:19:19.568-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T10:19:19.601-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:19:19.652-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:19:20.485-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:19:20.578-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:19:20.667-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-09T10:19:20.758-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:19:20.988-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6d159f02-f38f-4d87-adb7-8aa06fe4759f
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:19:21.050-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:19:21.256-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:19:21.261-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 4.132 seconds (process running for 4.522)
+2025-12-09T10:25:43.835-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 7 class path changes (0 additions, 0 deletions, 7 modifications)
+2025-12-09T10:25:43.840-03:00  INFO 8268 --- [event-service] [Thread-1] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:25:43.854-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:25:43.857-03:00  INFO 8268 --- [event-service] [Thread-1] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:25:43.861-03:00  INFO 8268 --- [event-service] [Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T10:25:43.957-03:00  INFO 8268 --- [event-service] [Thread-1] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-09T10:25:44.060-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:25:44.061-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:25:44.191-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:25:44.200-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 1 JPA repository interface.
+2025-12-09T10:25:44.269-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:25:44.270-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:25:44.270-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:25:44.290-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 227 ms
+2025-12-09T10:25:44.322-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:25:44.355-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:25:44.356-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-12-09T10:25:44.458-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@2b04baee
+2025-12-09T10:25:44.458-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-12-09T10:25:44.472-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:25:44.515-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:25:44.557-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:25:44.594-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:25:44.640-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:25:44.699-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 49315b0d-9546-4055-83f8-3ae945495d41
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:25:44.710-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:25:44.774-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:25:44.776-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.739 seconds (process running for 388.038)
+2025-12-09T10:25:44.778-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:26:13.768-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-12-09T10:26:13.771-03:00  INFO 8268 --- [event-service] [Thread-5] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:26:13.797-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:26:13.800-03:00  INFO 8268 --- [event-service] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:26:13.801-03:00  INFO 8268 --- [event-service] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown initiated...
+2025-12-09T10:26:13.892-03:00  INFO 8268 --- [event-service] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Shutdown completed.
+2025-12-09T10:26:13.996-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:26:13.997-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:26:14.122-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:26:14.130-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 1 JPA repository interface.
+2025-12-09T10:26:14.193-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:26:14.193-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:26:14.194-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:26:14.214-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 215 ms
+2025-12-09T10:26:14.244-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:26:14.277-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:26:14.279-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Starting...
+2025-12-09T10:26:14.383-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-3 - Added connection org.postgresql.jdbc.PgConnection@4a1e252b
+2025-12-09T10:26:14.383-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Start completed.
+2025-12-09T10:26:14.396-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:26:14.433-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:26:14.463-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:26:36.050-03:00  WARN 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.ProxyConnection   : HikariPool-3 - Connection org.postgresql.jdbc.PgConnection@4a1e252b marked as broken because of SQLSTATE(08006), ErrorCode(0)
+
+org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:399) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:139) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgDatabaseMetaData.getColumns(PgDatabaseMetaData.java:1815) ~[postgresql-42.7.8.jar:42.7.8]
+	at com.zaxxer.hikari.pool.ProxyDatabaseMetaData.getColumns(ProxyDatabaseMetaData.java:129) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyDatabaseMetaData.getColumns(HikariProxyDatabaseMetaData.java) ~[HikariCP-7.0.2.jar:na]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processColumnsResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:88) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.populateTablesWithColumns(AbstractInformationExtractorImpl.java:616) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.lambda$getTables$3(AbstractInformationExtractorImpl.java:543) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processTableResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:74) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.getTables(AbstractInformationExtractorImpl.java:535) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:120) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:70) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:230) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:109) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:267) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:139) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:350) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:436) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1459) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:433) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:416) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:409) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:966) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1374) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-4.0.0.jar:4.0.0]
+	at com.eventos.event_service.EventServiceApplication.main(EventServiceApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.0.jar:4.0.0]
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:313) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:340) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:789) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1025) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:477) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1461) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1066) ~[na:na]
+	at org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:192) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:159) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:144) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:76) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:477) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2175) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.8.jar:42.7.8]
+	... 50 common frames omitted
+
+2025-12-09T10:26:36.073-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.jdbc.error             : HHH000247: ErrorCode: 0, SQLState: 08006
+2025-12-09T10:26:36.073-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.jdbc.error             : An I/O error occurred while sending to the backend.
+2025-12-09T10:26:36.077-03:00 ERROR 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Failed to initialize JPA EntityManagerFactory: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.exception.JDBCConnectionException: Error accessing tables metadata [An I/O error occurred while sending to the backend.] [n/a]
+2025-12-09T10:26:36.077-03:00  WARN 8268 --- [event-service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.exception.JDBCConnectionException: Error accessing tables metadata [An I/O error occurred while sending to the backend.] [n/a]
+2025-12-09T10:26:36.078-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown initiated...
+2025-12-09T10:26:43.147-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-3 - Shutdown completed.
+2025-12-09T10:26:43.148-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-12-09T10:26:43.148-03:00  INFO 8268 --- [event-service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-09T10:26:43.167-03:00 ERROR 8268 --- [event-service] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'entityManagerFactory' defined in class path resource [org/springframework/boot/hibernate/autoconfigure/HibernateJpaConfiguration.class]: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.exception.JDBCConnectionException: Error accessing tables metadata [An I/O error occurred while sending to the backend.] [n/a]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1817) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:603) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.finishBeanFactoryInitialization(AbstractApplicationContext.java:966) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:620) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1374) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-4.0.0.jar:4.0.0]
+	at com.eventos.event_service.EventServiceApplication.main(EventServiceApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.0.jar:4.0.0]
+Caused by: jakarta.persistence.PersistenceException: Unable to build Hibernate SessionFactory  [persistence unit: default] ; nested exception is org.hibernate.exception.JDBCConnectionException: Error accessing tables metadata [An I/O error occurred while sending to the backend.] [n/a]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:428) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.afterPropertiesSet(AbstractEntityManagerFactoryBean.java:396) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.afterPropertiesSet(LocalContainerEntityManagerFactoryBean.java:409) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.invokeInitMethods(AbstractAutowireCapableBeanFactory.java:1864) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.initializeBean(AbstractAutowireCapableBeanFactory.java:1813) ~[spring-beans-7.0.1.jar:7.0.1]
+	... 18 common frames omitted
+Caused by: org.hibernate.exception.JDBCConnectionException: Error accessing tables metadata [An I/O error occurred while sending to the backend.] [n/a]
+	at org.hibernate.exception.internal.SQLStateConversionDelegate.convert(SQLStateConversionDelegate.java:80) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.exception.internal.StandardSQLExceptionConverter.convert(StandardSQLExceptionConverter.java:34) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:115) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.engine.jdbc.spi.SqlExceptionHelper.convert(SqlExceptionHelper.java:101) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.convertSQLException(AbstractInformationExtractorImpl.java:123) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.populateTablesWithColumns(AbstractInformationExtractorImpl.java:638) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.lambda$getTables$3(AbstractInformationExtractorImpl.java:543) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processTableResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:74) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.getTables(AbstractInformationExtractorImpl.java:535) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.DatabaseInformationImpl.getTablesInformation(DatabaseInformationImpl.java:120) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.GroupedSchemaMigratorImpl.performTablesMigration(GroupedSchemaMigratorImpl.java:70) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.performMigration(AbstractSchemaMigrator.java:230) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.internal.AbstractSchemaMigrator.doMigration(AbstractSchemaMigrator.java:109) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.performDatabaseAction(SchemaManagementToolCoordinator.java:267) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.lambda$process$5(SchemaManagementToolCoordinator.java:142) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at java.base/java.util.HashMap.forEach(HashMap.java:1429) ~[na:na]
+	at org.hibernate.tool.schema.spi.SchemaManagementToolCoordinator.process(SchemaManagementToolCoordinator.java:139) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryObserverForSchemaExport.sessionFactoryCreated(SessionFactoryObserverForSchemaExport.java:35) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryObserverChain.sessionFactoryCreated(SessionFactoryObserverChain.java:33) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.internal.SessionFactoryImpl.<init>(SessionFactoryImpl.java:350) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.boot.internal.SessionFactoryBuilderImpl.build(SessionFactoryBuilderImpl.java:436) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.jpa.boot.internal.EntityManagerFactoryBuilderImpl.build(EntityManagerFactoryBuilderImpl.java:1459) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.springframework.orm.jpa.vendor.SpringHibernateJpaPersistenceProvider.createContainerEntityManagerFactory(SpringHibernateJpaPersistenceProvider.java:66) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.LocalContainerEntityManagerFactoryBean.createNativeEntityManagerFactory(LocalContainerEntityManagerFactoryBean.java:433) ~[spring-orm-7.0.1.jar:7.0.1]
+	at org.springframework.orm.jpa.AbstractEntityManagerFactoryBean.buildNativeEntityManagerFactory(AbstractEntityManagerFactoryBean.java:416) ~[spring-orm-7.0.1.jar:7.0.1]
+	... 22 common frames omitted
+Caused by: org.postgresql.util.PSQLException: An I/O error occurred while sending to the backend.
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:399) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgStatement.executeInternal(PgStatement.java:525) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgStatement.execute(PgStatement.java:435) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgPreparedStatement.executeWithFlags(PgPreparedStatement.java:196) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgPreparedStatement.executeQuery(PgPreparedStatement.java:139) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.jdbc.PgDatabaseMetaData.getColumns(PgDatabaseMetaData.java:1815) ~[postgresql-42.7.8.jar:42.7.8]
+	at com.zaxxer.hikari.pool.ProxyDatabaseMetaData.getColumns(ProxyDatabaseMetaData.java:129) ~[HikariCP-7.0.2.jar:na]
+	at com.zaxxer.hikari.pool.HikariProxyDatabaseMetaData.getColumns(HikariProxyDatabaseMetaData.java) ~[HikariCP-7.0.2.jar:na]
+	at org.hibernate.tool.schema.extract.internal.InformationExtractorJdbcDatabaseMetaDataImpl.processColumnsResultSet(InformationExtractorJdbcDatabaseMetaDataImpl.java:88) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	at org.hibernate.tool.schema.extract.internal.AbstractInformationExtractorImpl.populateTablesWithColumns(AbstractInformationExtractorImpl.java:616) ~[hibernate-core-7.1.8.Final.jar:7.1.8.Final]
+	... 41 common frames omitted
+Caused by: java.net.SocketException: Connection reset
+	at java.base/sun.nio.ch.NioSocketImpl.implRead(NioSocketImpl.java:313) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl.read(NioSocketImpl.java:340) ~[na:na]
+	at java.base/sun.nio.ch.NioSocketImpl$1.read(NioSocketImpl.java:789) ~[na:na]
+	at java.base/java.net.Socket$SocketInputStream.read(Socket.java:1025) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.read(SSLSocketInputRecord.java:483) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.readHeader(SSLSocketInputRecord.java:477) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketInputRecord.bytesInCompletePacket(SSLSocketInputRecord.java:70) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl.readApplicationRecord(SSLSocketImpl.java:1461) ~[na:na]
+	at java.base/sun.security.ssl.SSLSocketImpl$AppInputStream.read(SSLSocketImpl.java:1066) ~[na:na]
+	at org.postgresql.core.VisibleBufferedInputStream.readMore(VisibleBufferedInputStream.java:192) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:159) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.VisibleBufferedInputStream.ensureBytes(VisibleBufferedInputStream.java:144) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.VisibleBufferedInputStream.read(VisibleBufferedInputStream.java:76) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.PGStream.receiveChar(PGStream.java:477) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.processResults(QueryExecutorImpl.java:2175) ~[postgresql-42.7.8.jar:42.7.8]
+	at org.postgresql.core.v3.QueryExecutorImpl.execute(QueryExecutorImpl.java:372) ~[postgresql-42.7.8.jar:42.7.8]
+	... 50 common frames omitted
+
+2025-12-09T10:26:44.640-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:26:44.641-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:26:44.806-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:26:44.814-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 1 JPA repository interface.
+2025-12-09T10:26:44.866-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:26:44.866-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:26:44.866-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:26:44.890-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 248 ms
+2025-12-09T10:26:44.900-03:00 ERROR 8268 --- [event-service] [restartedMain] t.s.DeferredServletContainerInitializers : Error starting Tomcat context. Exception: org.springframework.beans.factory.BeanCreationException. Message: Error creating bean with name 'simpleTokenFilter' defined in file [C:\Users\Panzer\eventos_microservices\event-service\target\classes\com\eventos\event_service\security\SimpleTokenFilter.class]: Failed to instantiate [com.eventos.event_service.security.SimpleTokenFilter]: Constructor threw exception
+2025-12-09T10:26:44.903-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-12-09T10:26:44.905-03:00  WARN 8268 --- [event-service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-12-09T10:26:44.906-03:00  INFO 8268 --- [event-service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-09T10:26:44.906-03:00 ERROR 8268 --- [event-service] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:167) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:614) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1374) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-4.0.0.jar:4.0.0]
+	at com.eventos.event_service.EventServiceApplication.main(EventServiceApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.0.jar:4.0.0]
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:150) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:110) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:408) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:166) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:190) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:164) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	... 11 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'simpleTokenFilter' defined in file [C:\Users\Panzer\eventos_microservices\event-service\target\classes\com\eventos\event_service\security\SimpleTokenFilter.class]: Failed to instantiate [com.eventos.event_service.security.SimpleTokenFilter]: Constructor threw exception
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1344) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBeanInstance(AbstractAutowireCapableBeanFactory.java:1231) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:565) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:231) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:185) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:180) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:165) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:97) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.context.servlet.WebApplicationContextInitializer.initialize(WebApplicationContextInitializer.java:53) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.servlet.DeferredServletContainerInitializers.onStartup(DeferredServletContainerInitializers.java:55) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4416) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1162) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1158) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:81) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:714) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:767) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1162) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1158) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:81) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:714) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:201) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:410) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:864) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:435) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.springframework.boot.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:131) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	... 16 common frames omitted
+Caused by: org.springframework.beans.BeanInstantiationException: Failed to instantiate [com.eventos.event_service.security.SimpleTokenFilter]: Constructor threw exception
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:224) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.SimpleInstantiationStrategy.instantiate(SimpleInstantiationStrategy.java:106) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.instantiateBean(AbstractAutowireCapableBeanFactory.java:1338) ~[spring-beans-7.0.1.jar:7.0.1]
+	... 54 common frames omitted
+Caused by: java.lang.Error: Unresolved compilation problem: 
+	The public type SimpleTokenFilter must be defined in its own file
+
+	at com.eventos.event_service.security.SimpleTokenFilter.<init>(JwtValidationFilter.java:13) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectConstructorHandleAccessor.newInstance(DirectConstructorHandleAccessor.java:67) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstanceWithCaller(Constructor.java:500) ~[na:na]
+	at java.base/java.lang.reflect.Constructor.newInstance(Constructor.java:484) ~[na:na]
+	at org.springframework.beans.BeanUtils.instantiateClass(BeanUtils.java:198) ~[spring-beans-7.0.1.jar:7.0.1]
+	... 56 common frames omitted
+
+2025-12-09T10:26:49.506-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:26:49.507-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:26:49.651-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:26:49.658-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interface.
+2025-12-09T10:26:49.699-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:26:49.699-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:26:49.699-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:26:49.732-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 223 ms
+2025-12-09T10:26:49.737-03:00 ERROR 8268 --- [event-service] [restartedMain] t.s.DeferredServletContainerInitializers : Error starting Tomcat context. Exception: org.springframework.beans.factory.BeanCreationException. Message: Error creating bean with name 'jwtValidationFilter': Injection of autowired dependencies failed
+2025-12-09T10:26:49.737-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Stopping service [Tomcat]
+2025-12-09T10:26:49.740-03:00  WARN 8268 --- [event-service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Unable to start web server
+2025-12-09T10:26:49.742-03:00  INFO 8268 --- [event-service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-09T10:26:49.744-03:00 ERROR 8268 --- [event-service] [restartedMain] o.s.boot.SpringApplication               : Application run failed
+
+org.springframework.context.ApplicationContextException: Unable to start web server
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:167) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.context.support.AbstractApplicationContext.refresh(AbstractApplicationContext.java:614) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.refresh(ServletWebServerApplicationContext.java:143) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refresh(SpringApplication.java:765) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.refreshContext(SpringApplication.java:454) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:321) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1374) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.SpringApplication.run(SpringApplication.java:1363) ~[spring-boot-4.0.0.jar:4.0.0]
+	at com.eventos.event_service.EventServiceApplication.main(EventServiceApplication.java:10) ~[classes/:na]
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104) ~[na:na]
+	at java.base/java.lang.reflect.Method.invoke(Method.java:578) ~[na:na]
+	at org.springframework.boot.devtools.restart.RestartLauncher.run(RestartLauncher.java:52) ~[spring-boot-devtools-4.0.0.jar:4.0.0]
+Caused by: org.springframework.boot.web.server.WebServerException: Unable to start embedded Tomcat
+	at org.springframework.boot.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:150) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.TomcatWebServer.<init>(TomcatWebServer.java:110) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory.getTomcatWebServer(TomcatServletWebServerFactory.java:408) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.servlet.TomcatServletWebServerFactory.getWebServer(TomcatServletWebServerFactory.java:166) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.createWebServer(ServletWebServerApplicationContext.java:190) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.server.servlet.context.ServletWebServerApplicationContext.onRefresh(ServletWebServerApplicationContext.java:164) ~[spring-boot-web-server-4.0.0.jar:4.0.0]
+	... 11 common frames omitted
+Caused by: org.springframework.beans.factory.BeanCreationException: Error creating bean with name 'jwtValidationFilter': Injection of autowired dependencies failed
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:498) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.populateBean(AbstractAutowireCapableBeanFactory.java:1446) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.doCreateBean(AbstractAutowireCapableBeanFactory.java:602) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractAutowireCapableBeanFactory.createBean(AbstractAutowireCapableBeanFactory.java:525) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.lambda$doGetBean$0(AbstractBeanFactory.java:333) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.DefaultSingletonBeanRegistry.getSingleton(DefaultSingletonBeanRegistry.java:371) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.doGetBean(AbstractBeanFactory.java:331) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.getBean(AbstractBeanFactory.java:201) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.getOrderedBeansOfType(ServletContextInitializerBeans.java:231) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:185) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAsRegistrationBean(ServletContextInitializerBeans.java:180) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.addAdaptableBeans(ServletContextInitializerBeans.java:165) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.servlet.ServletContextInitializerBeans.<init>(ServletContextInitializerBeans.java:97) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.web.context.servlet.WebApplicationContextInitializer.initialize(WebApplicationContextInitializer.java:53) ~[spring-boot-4.0.0.jar:4.0.0]
+	at org.springframework.boot.tomcat.servlet.DeferredServletContainerInitializers.onStartup(DeferredServletContainerInitializers.java:55) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	at org.apache.catalina.core.StandardContext.startInternal(StandardContext.java:4416) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1162) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1158) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:81) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:714) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardHost.startInternal(StandardHost.java:767) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1162) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.ContainerBase$StartChild.call(ContainerBase.java:1158) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:317) ~[na:na]
+	at org.apache.tomcat.util.threads.InlineExecutorService.execute(InlineExecutorService.java:81) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at java.base/java.util.concurrent.AbstractExecutorService.submit(AbstractExecutorService.java:145) ~[na:na]
+	at org.apache.catalina.core.ContainerBase.startInternal(ContainerBase.java:714) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardEngine.startInternal(StandardEngine.java:201) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardService.startInternal(StandardService.java:410) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.core.StandardServer.startInternal(StandardServer.java:864) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.util.LifecycleBase.start(LifecycleBase.java:164) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.apache.catalina.startup.Tomcat.start(Tomcat.java:435) ~[tomcat-embed-core-11.0.14.jar:11.0.14]
+	at org.springframework.boot.tomcat.TomcatWebServer.initialize(TomcatWebServer.java:131) ~[spring-boot-tomcat-4.0.0.jar:4.0.0]
+	... 16 common frames omitted
+Caused by: org.springframework.util.PlaceholderResolutionException: Could not resolve placeholder 'jwt.secret' in value "${jwt.secret}"
+	at org.springframework.util.PlaceholderResolutionException.withValue(PlaceholderResolutionException.java:81) ~[spring-core-7.0.1.jar:7.0.1]
+	at org.springframework.util.PlaceholderParser$ParsedValue.resolve(PlaceholderParser.java:296) ~[spring-core-7.0.1.jar:7.0.1]
+	at org.springframework.util.PlaceholderParser.replacePlaceholders(PlaceholderParser.java:129) ~[spring-core-7.0.1.jar:7.0.1]
+	at org.springframework.util.PropertyPlaceholderHelper.replacePlaceholders(PropertyPlaceholderHelper.java:96) ~[spring-core-7.0.1.jar:7.0.1]
+	at org.springframework.core.env.AbstractPropertyResolver.doResolvePlaceholders(AbstractPropertyResolver.java:286) ~[spring-core-7.0.1.jar:7.0.1]
+	at org.springframework.core.env.AbstractPropertyResolver.resolveRequiredPlaceholders(AbstractPropertyResolver.java:257) ~[spring-core-7.0.1.jar:7.0.1]
+	at org.springframework.context.support.PropertySourcesPlaceholderConfigurer.lambda$processProperties$0(PropertySourcesPlaceholderConfigurer.java:184) ~[spring-context-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.AbstractBeanFactory.resolveEmbeddedValue(AbstractBeanFactory.java:959) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.doResolveDependency(DefaultListableBeanFactory.java:1672) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.support.DefaultListableBeanFactory.resolveDependency(DefaultListableBeanFactory.java:1651) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.resolveFieldValue(AutowiredAnnotationBeanPostProcessor.java:763) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor$AutowiredFieldElement.inject(AutowiredAnnotationBeanPostProcessor.java:747) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.annotation.InjectionMetadata.inject(InjectionMetadata.java:146) ~[spring-beans-7.0.1.jar:7.0.1]
+	at org.springframework.beans.factory.annotation.AutowiredAnnotationBeanPostProcessor.postProcessProperties(AutowiredAnnotationBeanPostProcessor.java:492) ~[spring-beans-7.0.1.jar:7.0.1]
+	... 54 common frames omitted
+
+2025-12-09T10:29:06.796-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:29:06.796-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:29:06.942-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:29:06.942-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interface.
+2025-12-09T10:29:07.012-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:29:07.012-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:29:07.013-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:29:07.032-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 234 ms
+2025-12-09T10:29:07.067-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:29:07.097-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:29:07.097-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Starting...
+2025-12-09T10:29:07.200-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-4 - Added connection org.postgresql.jdbc.PgConnection@7d70deb0
+2025-12-09T10:29:07.200-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Start completed.
+2025-12-09T10:29:07.213-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:29:07.244-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:29:07.277-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:29:07.323-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:29:07.363-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:29:07.409-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 6b8f70bb-45c5-4cdc-ae44-515cfa9c3547
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:29:07.426-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:29:07.526-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:29:07.526-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.76 seconds (process running for 590.791)
+2025-12-09T10:29:07.526-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:32:00.189-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 7 class path changes (0 additions, 6 deletions, 1 modification)
+2025-12-09T10:32:00.189-03:00  INFO 8268 --- [event-service] [Thread-9] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:32:00.189-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:32:00.205-03:00  INFO 8268 --- [event-service] [Thread-9] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:32:00.206-03:00  INFO 8268 --- [event-service] [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown initiated...
+2025-12-09T10:32:00.288-03:00  INFO 8268 --- [event-service] [Thread-9] com.zaxxer.hikari.HikariDataSource       : HikariPool-4 - Shutdown completed.
+2025-12-09T10:32:00.389-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:32:00.389-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:32:00.540-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:32:00.540-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-12-09T10:32:00.637-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:32:00.638-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:32:00.638-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:32:00.659-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 270 ms
+2025-12-09T10:32:00.695-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:32:00.726-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:32:00.726-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Starting...
+2025-12-09T10:32:00.833-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-5 - Added connection org.postgresql.jdbc.PgConnection@279d867c
+2025-12-09T10:32:00.834-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Start completed.
+2025-12-09T10:32:00.846-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:32:00.881-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:32:00.900-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:32:00.900-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:32:00.929-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:32:01.005-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 068fbbde-7eb8-4da2-9b2e-d30d089e664d
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:32:01.029-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:32:01.088-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:32:01.088-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.733 seconds (process running for 764.363)
+2025-12-09T10:32:01.088-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:32:02.427-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (6 additions, 0 deletions, 0 modifications)
+2025-12-09T10:32:02.428-03:00  INFO 8268 --- [event-service] [Thread-22] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:32:02.439-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:32:02.441-03:00  INFO 8268 --- [event-service] [Thread-22] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:32:02.441-03:00  INFO 8268 --- [event-service] [Thread-22] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown initiated...
+2025-12-09T10:32:02.522-03:00  INFO 8268 --- [event-service] [Thread-22] com.zaxxer.hikari.HikariDataSource       : HikariPool-5 - Shutdown completed.
+2025-12-09T10:32:02.588-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:32:02.604-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:32:02.737-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:32:02.747-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 7 ms. Found 1 JPA repository interface.
+2025-12-09T10:32:02.805-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:32:02.805-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:32:02.821-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:32:02.840-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 235 ms
+2025-12-09T10:32:02.873-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:32:02.905-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:32:02.906-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Starting...
+2025-12-09T10:32:03.009-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-6 - Added connection org.postgresql.jdbc.PgConnection@f9b8806
+2025-12-09T10:32:03.010-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Start completed.
+2025-12-09T10:32:03.035-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:32:03.072-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:32:03.106-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:32:03.156-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:32:03.204-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:32:03.255-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: bc464507-1ea7-45a1-a66a-37418127bf1a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:32:03.278-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:32:03.347-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:32:03.349-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.768 seconds (process running for 766.611)
+2025-12-09T10:32:03.350-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:32:03.802-03:00  INFO 8704 --- [event-service] [main] c.e.e.EventServiceApplicationTests       : Starting EventServiceApplicationTests using Java 20.0.1 with PID 8704 (started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:32:03.804-03:00  INFO 8704 --- [event-service] [main] c.e.e.EventServiceApplicationTests       : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:32:04.505-03:00  INFO 8704 --- [event-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:32:04.557-03:00  INFO 8704 --- [event-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 43 ms. Found 1 JPA repository interface.
+2025-12-09T10:32:04.972-03:00  INFO 8704 --- [event-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:32:05.043-03:00  INFO 8704 --- [event-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-09T10:32:05.688-03:00  INFO 8704 --- [event-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:32:05.725-03:00  INFO 8704 --- [event-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T10:32:06.137-03:00  INFO 8704 --- [event-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@4c9ef9c9
+2025-12-09T10:32:06.139-03:00  INFO 8704 --- [event-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T10:32:06.171-03:00  WARN 8704 --- [event-service] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:32:06.239-03:00  INFO 8704 --- [event-service] [main] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:32:07.189-03:00  INFO 8704 --- [event-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:32:07.276-03:00  INFO 8704 --- [event-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:32:07.355-03:00  INFO 8704 --- [event-service] [main] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-09T10:32:07.539-03:00  WARN 8704 --- [event-service] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:32:07.955-03:00  WARN 8704 --- [event-service] [main] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 52e06c78-ecca-4ecc-a770-9dda0a9bd9d9
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:32:08.022-03:00  INFO 8704 --- [event-service] [main] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:32:08.305-03:00  INFO 8704 --- [event-service] [main] c.e.e.EventServiceApplicationTests       : Started EventServiceApplicationTests in 4.831 seconds (process running for 6.001)
+2025-12-09T10:32:08.672-03:00  INFO 8704 --- [event-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:32:08.672-03:00  INFO 8704 --- [event-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T10:32:08.772-03:00  INFO 8704 --- [event-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-09T10:33:02.759-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (0 additions, 6 deletions, 0 modifications)
+2025-12-09T10:33:02.759-03:00  INFO 8268 --- [event-service] [Thread-26] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:33:02.759-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:33:02.774-03:00  INFO 8268 --- [event-service] [Thread-26] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:33:02.774-03:00  INFO 8268 --- [event-service] [Thread-26] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown initiated...
+2025-12-09T10:33:02.859-03:00  INFO 8268 --- [event-service] [Thread-26] com.zaxxer.hikari.HikariDataSource       : HikariPool-6 - Shutdown completed.
+2025-12-09T10:33:02.926-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:33:02.926-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:33:03.059-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:33:03.076-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 2 ms. Found 0 JPA repository interfaces.
+2025-12-09T10:33:03.143-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:33:03.143-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:33:03.143-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:33:03.166-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 240 ms
+2025-12-09T10:33:03.212-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:33:03.243-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:33:03.243-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Starting...
+2025-12-09T10:33:03.354-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-7 - Added connection org.postgresql.jdbc.PgConnection@5b9e4ada
+2025-12-09T10:33:03.355-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Start completed.
+2025-12-09T10:33:03.359-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:33:03.404-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:33:03.421-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:33:03.423-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:33:03.449-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:33:03.582-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7d379a5f-6e65-4b81-8d37-f3f9b1112e42
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:33:03.635-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:33:03.743-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:33:03.746-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.836 seconds (process running for 827.008)
+2025-12-09T10:33:03.747-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:33:05.029-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (6 additions, 0 deletions, 0 modifications)
+2025-12-09T10:33:05.031-03:00  INFO 8268 --- [event-service] [Thread-30] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:33:05.032-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:33:05.043-03:00  INFO 8268 --- [event-service] [Thread-30] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:33:05.044-03:00  INFO 8268 --- [event-service] [Thread-30] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown initiated...
+2025-12-09T10:33:05.126-03:00  INFO 8268 --- [event-service] [Thread-30] com.zaxxer.hikari.HikariDataSource       : HikariPool-7 - Shutdown completed.
+2025-12-09T10:33:05.197-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:33:05.198-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:33:05.344-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:33:05.354-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 1 JPA repository interface.
+2025-12-09T10:33:05.464-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:33:05.465-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:33:05.466-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:33:05.486-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 287 ms
+2025-12-09T10:33:05.523-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:33:05.557-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:33:05.558-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Starting...
+2025-12-09T10:33:05.658-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-8 - Added connection org.postgresql.jdbc.PgConnection@6776a0f1
+2025-12-09T10:33:05.659-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Start completed.
+2025-12-09T10:33:05.670-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:33:05.706-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:33:05.737-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:33:05.774-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:33:05.821-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:33:05.886-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 7553d4b3-3cf4-4da1-af1b-a1daa7676690
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:33:05.898-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:33:05.972-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:33:05.972-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.796 seconds (process running for 829.236)
+2025-12-09T10:33:05.975-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:33:05.993-03:00  INFO 22404 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 22404 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:33:05.996-03:00  INFO 22404 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:33:06.040-03:00  INFO 22404 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-09T10:33:06.040-03:00  INFO 22404 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-09T10:33:06.538-03:00  INFO 22404 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:33:06.587-03:00  INFO 22404 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 40 ms. Found 1 JPA repository interface.
+2025-12-09T10:33:07.073-03:00  INFO 22404 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:33:07.085-03:00  INFO 22404 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:33:07.085-03:00  INFO 22404 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:33:07.126-03:00  INFO 22404 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 1085 ms
+2025-12-09T10:33:07.257-03:00  INFO 22404 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:33:07.299-03:00  INFO 22404 --- [event-service] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 7.1.8.Final
+2025-12-09T10:33:07.734-03:00  INFO 22404 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:33:07.763-03:00  INFO 22404 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T10:33:08.153-03:00  INFO 22404 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@39f29428
+2025-12-09T10:33:08.156-03:00  INFO 22404 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T10:33:08.230-03:00  WARN 22404 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:33:08.299-03:00  INFO 22404 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:33:09.093-03:00  INFO 22404 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:33:09.183-03:00  INFO 22404 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:33:09.253-03:00  INFO 22404 --- [event-service] [restartedMain] o.s.d.j.r.query.QueryEnhancerFactories   : Hibernate is in classpath; If applicable, HQL parser will be used.
+2025-12-09T10:33:09.344-03:00  WARN 22404 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:33:09.576-03:00  WARN 22404 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 272ab9f2-d2e4-4f80-bbe0-78ac66e8da6a
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:33:09.614-03:00  INFO 22404 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:33:09.787-03:00  WARN 22404 --- [event-service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-12-09T10:33:09.788-03:00  INFO 22404 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:33:09.791-03:00  INFO 22404 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T10:33:09.887-03:00  INFO 22404 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-09T10:33:09.916-03:00  INFO 22404 --- [event-service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-09T10:33:09.951-03:00 ERROR 22404 --- [event-service] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2025-12-09T10:34:55.418-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 7 class path changes (0 additions, 7 deletions, 0 modifications)
+2025-12-09T10:34:55.418-03:00  INFO 8268 --- [event-service] [Thread-34] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:34:55.440-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:34:55.444-03:00  INFO 8268 --- [event-service] [Thread-34] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:34:55.445-03:00  INFO 8268 --- [event-service] [Thread-34] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown initiated...
+2025-12-09T10:34:55.535-03:00  INFO 8268 --- [event-service] [Thread-34] com.zaxxer.hikari.HikariDataSource       : HikariPool-8 - Shutdown completed.
+2025-12-09T10:39:48.012-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:39:48.013-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:39:48.122-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:39:48.122-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interface.
+2025-12-09T10:39:48.172-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:39:48.172-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:39:48.172-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:39:48.205-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 191 ms
+2025-12-09T10:39:48.232-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:39:48.259-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:39:48.260-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Starting...
+2025-12-09T10:39:48.382-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-9 - Added connection org.postgresql.jdbc.PgConnection@7dc85dcc
+2025-12-09T10:39:48.383-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Start completed.
+2025-12-09T10:39:48.397-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:39:48.436-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:39:48.489-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:39:48.531-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:39:48.576-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:39:48.622-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 4c11d75e-0765-435f-b29e-7ccd5e772955
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:39:48.622-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:39:48.673-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:39:48.689-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.716 seconds (process running for 1231.951)
+2025-12-09T10:39:48.689-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:39:57.156-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 7 class path changes (0 additions, 6 deletions, 1 modification)
+2025-12-09T10:39:57.156-03:00  INFO 8268 --- [event-service] [Thread-38] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:39:57.156-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:39:57.168-03:00  INFO 8268 --- [event-service] [Thread-38] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:39:57.169-03:00  INFO 8268 --- [event-service] [Thread-38] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown initiated...
+2025-12-09T10:39:57.257-03:00  INFO 8268 --- [event-service] [Thread-38] com.zaxxer.hikari.HikariDataSource       : HikariPool-9 - Shutdown completed.
+2025-12-09T10:39:57.323-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:39:57.323-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:39:57.539-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:39:57.540-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 0 ms. Found 0 JPA repository interfaces.
+2025-12-09T10:39:57.608-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:39:57.622-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:39:57.622-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:39:57.648-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 325 ms
+2025-12-09T10:39:57.686-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:39:57.728-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:39:57.729-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Starting...
+2025-12-09T10:39:57.825-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-10 - Added connection org.postgresql.jdbc.PgConnection@416dde5b
+2025-12-09T10:39:57.825-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Start completed.
+2025-12-09T10:39:57.841-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:39:57.887-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:39:57.903-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:39:57.905-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:39:57.937-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:39:58.061-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 85316a42-3edd-4e1e-8a2e-9d5479d007dc
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:39:58.073-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:39:58.159-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:39:58.161-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.855 seconds (process running for 1241.422)
+2025-12-09T10:39:58.161-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:39:59.491-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (6 additions, 0 deletions, 0 modifications)
+2025-12-09T10:39:59.494-03:00  INFO 8268 --- [event-service] [Thread-45] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:39:59.514-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:39:59.520-03:00  INFO 8268 --- [event-service] [Thread-45] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:39:59.522-03:00  INFO 8268 --- [event-service] [Thread-45] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown initiated...
+2025-12-09T10:39:59.618-03:00  INFO 8268 --- [event-service] [Thread-45] com.zaxxer.hikari.HikariDataSource       : HikariPool-10 - Shutdown completed.
+2025-12-09T10:39:59.696-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:39:59.696-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:39:59.807-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:39:59.807-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interface.
+2025-12-09T10:39:59.882-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:39:59.882-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:39:59.883-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:39:59.897-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 201 ms
+2025-12-09T10:39:59.934-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:39:59.958-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:39:59.958-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Starting...
+2025-12-09T10:40:00.074-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-11 - Added connection org.postgresql.jdbc.PgConnection@5e7edfa0
+2025-12-09T10:40:00.074-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Start completed.
+2025-12-09T10:40:00.098-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:40:00.131-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:40:00.157-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:40:00.203-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:00.247-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:40:00.297-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 0574d1ad-166a-4a96-82d5-8c25bfa456fc
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:40:00.308-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:40:00.374-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:40:00.376-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.699 seconds (process running for 1243.638)
+2025-12-09T10:40:00.377-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:40:04.914-03:00  INFO 18348 --- [event-service] [main] c.e.e.EventServiceApplicationTests       : Starting EventServiceApplicationTests using Java 20.0.1 with PID 18348 (started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:40:04.914-03:00  INFO 18348 --- [event-service] [main] c.e.e.EventServiceApplicationTests       : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:40:05.542-03:00  INFO 18348 --- [event-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:40:05.608-03:00  INFO 18348 --- [event-service] [main] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 54 ms. Found 1 JPA repository interface.
+2025-12-09T10:40:06.118-03:00  INFO 18348 --- [event-service] [main] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:40:06.178-03:00  INFO 18348 --- [event-service] [main] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-12-09T10:40:06.224-03:00  INFO 18348 --- [event-service] [main] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-09T10:40:06.474-03:00  INFO 18348 --- [event-service] [main] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:40:06.508-03:00  INFO 18348 --- [event-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T10:40:06.924-03:00  INFO 18348 --- [event-service] [main] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@65e620b0
+2025-12-09T10:40:06.924-03:00  INFO 18348 --- [event-service] [main] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T10:40:06.973-03:00  WARN 18348 --- [event-service] [main] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:40:07.874-03:00  INFO 18348 --- [event-service] [main] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:40:07.957-03:00  INFO 18348 --- [event-service] [main] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:08.341-03:00  WARN 18348 --- [event-service] [main] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:40:08.740-03:00  WARN 18348 --- [event-service] [main] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 5b2fb3d5-c860-4873-b16c-b406e9891ed0
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:40:08.858-03:00  INFO 18348 --- [event-service] [main] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@78723798, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@ab3b54, org.springframework.security.web.context.SecurityContextHolderFilter@6c0bf8f4, org.springframework.security.web.header.HeaderWriterFilter@193c810, org.springframework.web.filter.CorsFilter@35d62807, org.springframework.security.web.csrf.CsrfFilter@759c53e5, org.springframework.security.web.authentication.logout.LogoutFilter@3ef4a8fb, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@4eb3b690, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@37fc7e3c, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6fc03cf6, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@6db2a260, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@52b77d5e, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6ab6ec33, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@6e70861, org.springframework.security.web.access.ExceptionTranslationFilter@44a1ae4e, org.springframework.security.web.access.intercept.AuthorizationFilter@48614fb3]
+2025-12-09T10:40:08.908-03:00  INFO 18348 --- [event-service] [main] c.e.e.EventServiceApplicationTests       : Started EventServiceApplicationTests in 4.25 seconds (process running for 5.273)
+2025-12-09T10:40:09.431-03:00  INFO 18348 --- [event-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:09.431-03:00  INFO 18348 --- [event-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T10:40:09.525-03:00  INFO 18348 --- [event-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-09T10:40:28.242-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (0 additions, 6 deletions, 0 modifications)
+2025-12-09T10:40:28.242-03:00  INFO 8268 --- [event-service] [Thread-49] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:40:28.242-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:40:28.255-03:00  INFO 8268 --- [event-service] [Thread-49] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:28.256-03:00  INFO 8268 --- [event-service] [Thread-49] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Shutdown initiated...
+2025-12-09T10:40:28.342-03:00  INFO 8268 --- [event-service] [Thread-49] com.zaxxer.hikari.HikariDataSource       : HikariPool-11 - Shutdown completed.
+2025-12-09T10:40:28.405-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:40:28.406-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:40:28.557-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:40:28.568-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 9 ms. Found 1 JPA repository interface.
+2025-12-09T10:40:28.642-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:40:28.642-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:40:28.642-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:40:28.692-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 283 ms
+2025-12-09T10:40:28.742-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:40:28.776-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:40:28.777-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Starting...
+2025-12-09T10:40:28.876-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-12 - Added connection org.postgresql.jdbc.PgConnection@2dbca458
+2025-12-09T10:40:28.876-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Start completed.
+2025-12-09T10:40:28.894-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:40:28.930-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:40:28.959-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:40:28.992-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:29.043-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:40:29.093-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: afc6617d-9acf-47cc-a4ca-3cf49c4bd568
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:40:29.116-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:40:29.176-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:40:29.176-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.789 seconds (process running for 1272.441)
+2025-12-09T10:40:29.176-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:40:30.412-03:00  INFO 17352 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 17352 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:40:30.412-03:00  INFO 17352 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:40:30.452-03:00  INFO 17352 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-09T10:40:30.452-03:00  INFO 17352 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-09T10:40:30.529-03:00  INFO 8268 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 6 class path changes (6 additions, 0 deletions, 0 modifications)
+2025-12-09T10:40:30.529-03:00  INFO 8268 --- [event-service] [Thread-53] o.s.boot.tomcat.GracefulShutdown         : Commencing graceful shutdown. Waiting for active requests to complete
+2025-12-09T10:40:30.543-03:00  INFO 8268 --- [event-service] [tomcat-shutdown] o.s.boot.tomcat.GracefulShutdown         : Graceful shutdown complete
+2025-12-09T10:40:30.544-03:00  INFO 8268 --- [event-service] [Thread-53] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:30.545-03:00  INFO 8268 --- [event-service] [Thread-53] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown initiated...
+2025-12-09T10:40:30.626-03:00  INFO 8268 --- [event-service] [Thread-53] com.zaxxer.hikari.HikariDataSource       : HikariPool-12 - Shutdown completed.
+2025-12-09T10:40:30.691-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 8268 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:40:30.692-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:40:30.809-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:40:30.809-03:00  INFO 8268 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 6 ms. Found 1 JPA repository interface.
+2025-12-09T10:40:30.893-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat initialized with port 8081 (http)
+2025-12-09T10:40:30.893-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:40:30.893-03:00  INFO 8268 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/11.0.14]
+2025-12-09T10:40:30.927-03:00  INFO 8268 --- [event-service] [restartedMain] b.w.c.s.WebApplicationContextInitializer : Root WebApplicationContext: initialization completed in 235 ms
+2025-12-09T10:40:30.967-03:00  INFO 8268 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:40:30.997-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:40:30.997-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Starting...
+2025-12-09T10:40:31.014-03:00  INFO 17352 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:40:31.047-03:00  INFO 17352 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 38 ms. Found 1 JPA repository interface.
+2025-12-09T10:40:31.093-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-13 - Added connection org.postgresql.jdbc.PgConnection@7fde226
+2025-12-09T10:40:31.093-03:00  INFO 8268 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-13 - Start completed.
+2025-12-09T10:40:31.110-03:00  WARN 8268 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:40:31.146-03:00  INFO 8268 --- [event-service] [restartedMain] org.hibernate.orm.connections.pooling    : HHH10001005: Database info:
+	Database JDBC URL [jdbc:postgresql://177.44.248.112:5432/eventos]
+	Database driver: PostgreSQL JDBC Driver
+	Database dialect: PostgreSQLDialect
+	Database version: 16.11
+	Default catalog/schema: eventos/public
+	Autocommit mode: undefined/unknown
+	Isolation level: READ_COMMITTED [default READ_COMMITTED]
+	JDBC fetch size: none
+	Pool: DatasourceConnectionProviderImpl
+	Minimum pool size: undefined/unknown
+	Maximum pool size: undefined/unknown
+2025-12-09T10:40:31.175-03:00  INFO 8268 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:40:31.209-03:00  INFO 8268 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:31.256-03:00  WARN 8268 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:40:31.309-03:00  WARN 8268 --- [event-service] [restartedMain] .s.a.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 78714d03-90f7-483d-8bff-f32985bc9ae8
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:40:31.309-03:00  INFO 8268 --- [event-service] [restartedMain] r$InitializeUserDetailsManagerConfigurer : Global AuthenticationManager configured with UserDetailsService bean with name inMemoryUserDetailsManager
+2025-12-09T10:40:31.376-03:00  INFO 8268 --- [event-service] [restartedMain] o.s.boot.tomcat.TomcatWebServer          : Tomcat started on port 8081 (http) with context path '/'
+2025-12-09T10:40:31.376-03:00  INFO 8268 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.707 seconds (process running for 1274.642)
+2025-12-09T10:40:31.376-03:00  INFO 8268 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
+2025-12-09T10:40:31.542-03:00  INFO 17352 --- [event-service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-12-09T10:40:31.552-03:00  INFO 17352 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:40:31.552-03:00  INFO 17352 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-12-09T10:40:31.593-03:00  INFO 17352 --- [event-service] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-09T10:40:31.593-03:00  INFO 17352 --- [event-service] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1141 ms
+2025-12-09T10:40:31.727-03:00  INFO 17352 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:40:31.789-03:00  INFO 17352 --- [event-service] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-12-09T10:40:31.811-03:00  INFO 17352 --- [event-service] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-09T10:40:31.992-03:00  INFO 17352 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:40:32.014-03:00  INFO 17352 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T10:40:32.359-03:00  INFO 17352 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@1b8af159
+2025-12-09T10:40:32.359-03:00  INFO 17352 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T10:40:32.398-03:00  WARN 17352 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:40:33.060-03:00  INFO 17352 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:40:33.146-03:00  INFO 17352 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:33.326-03:00  WARN 17352 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:40:33.559-03:00  WARN 17352 --- [event-service] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 95402c81-437a-43db-aad0-b531e71c0b5e
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:40:33.643-03:00  INFO 17352 --- [event-service] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@308a7118, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@c49fec1, org.springframework.security.web.context.SecurityContextHolderFilter@1b942369, org.springframework.security.web.header.HeaderWriterFilter@171de933, org.springframework.web.filter.CorsFilter@b886ea9, org.springframework.security.web.csrf.CsrfFilter@53a3223b, org.springframework.security.web.authentication.logout.LogoutFilter@10c5c756, org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter@7df04d3f, org.springframework.security.web.authentication.ui.DefaultLoginPageGeneratingFilter@270324c1, org.springframework.security.web.authentication.ui.DefaultLogoutPageGeneratingFilter@6d30e57, org.springframework.security.web.authentication.www.BasicAuthenticationFilter@68ca86be, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@28453015, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@2ae9f91f, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@65b2bd24, org.springframework.security.web.access.ExceptionTranslationFilter@a5a2e6b, org.springframework.security.web.access.intercept.AuthorizationFilter@6acdaf3]
+2025-12-09T10:40:33.693-03:00  INFO 17352 --- [event-service] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-12-09T10:40:33.693-03:00  WARN 17352 --- [event-service] [restartedMain] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.context.ApplicationContextException: Failed to start bean 'webServerStartStop'
+2025-12-09T10:40:33.708-03:00  INFO 17352 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:40:33.711-03:00  INFO 17352 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T10:40:33.800-03:00  INFO 17352 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-09T10:40:33.811-03:00  INFO 17352 --- [event-service] [restartedMain] .s.b.a.l.ConditionEvaluationReportLogger : 
+
+Error starting ApplicationContext. To display the condition evaluation report re-run your application with 'debug' enabled.
+2025-12-09T10:40:33.827-03:00 ERROR 17352 --- [event-service] [restartedMain] o.s.b.d.LoggingFailureAnalysisReporter   : 
+
+***************************
+APPLICATION FAILED TO START
+***************************
+
+Description:
+
+Web server failed to start. Port 8081 was already in use.
+
+Action:
+
+Identify and stop the process that's listening on port 8081 or configure this application to listen on another port.
+
+2025-12-09T10:46:09.667-03:00  INFO 13380 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 13380 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:46:09.668-03:00  INFO 13380 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:46:09.707-03:00  INFO 13380 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : Devtools property defaults active! Set 'spring.devtools.add-properties' to 'false' to disable
+2025-12-09T10:46:09.707-03:00  INFO 13380 --- [event-service] [restartedMain] .e.DevToolsPropertyDefaultsPostProcessor : For additional web related logging consider setting the 'logging.level.web' property to 'DEBUG'
+2025-12-09T10:46:10.234-03:00  INFO 13380 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:46:10.296-03:00  INFO 13380 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 56 ms. Found 1 JPA repository interface.
+2025-12-09T10:46:10.767-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-12-09T10:46:10.767-03:00  INFO 13380 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:46:10.767-03:00  INFO 13380 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-12-09T10:46:10.819-03:00  INFO 13380 --- [event-service] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-09T10:46:10.819-03:00  INFO 13380 --- [event-service] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 1112 ms
+2025-12-09T10:46:10.951-03:00  INFO 13380 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:46:11.001-03:00  INFO 13380 --- [event-service] [restartedMain] org.hibernate.Version                    : HHH000412: Hibernate ORM core version 6.4.4.Final
+2025-12-09T10:46:11.058-03:00  INFO 13380 --- [event-service] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-09T10:46:11.268-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:46:11.292-03:00  INFO 13380 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Starting...
+2025-12-09T10:46:11.618-03:00  INFO 13380 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-1 - Added connection org.postgresql.jdbc.PgConnection@25d20bd
+2025-12-09T10:46:11.618-03:00  INFO 13380 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Start completed.
+2025-12-09T10:46:11.658-03:00  WARN 13380 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:46:12.318-03:00  INFO 13380 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:46:12.401-03:00  INFO 13380 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:46:12.602-03:00  WARN 13380 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:46:12.605-03:00  WARN 13380 --- [event-service] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: 183da12c-5bb0-41d9-8c67-a4e59498966b
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:46:12.801-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@11a76331, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@cda34e9, org.springframework.security.web.context.SecurityContextHolderFilter@535381ab, org.springframework.security.web.header.HeaderWriterFilter@44d688de, org.springframework.web.filter.CorsFilter@15ea36fb, org.springframework.security.web.authentication.logout.LogoutFilter@4dacbbe, com.eventos.event_service.security.JwtValidationFilter@40713d41, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@27e20885, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@6736daa4, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@53c2998f, org.springframework.security.web.session.SessionManagementFilter@5a11ce1, org.springframework.security.web.access.ExceptionTranslationFilter@66e3def2, org.springframework.security.web.access.intercept.AuthorizationFilter@6e0e6dc9]
+2025-12-09T10:46:12.951-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-12-09T10:46:12.974-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2025-12-09T10:46:12.975-03:00  INFO 13380 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 3.637 seconds (process running for 3.978)
+2025-12-09T10:53:46.685-03:00  INFO 13380 --- [event-service] [http-nio-8081-exec-4] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring DispatcherServlet 'dispatcherServlet'
+2025-12-09T10:53:46.685-03:00  INFO 13380 --- [event-service] [http-nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Initializing Servlet 'dispatcherServlet'
+2025-12-09T10:53:46.685-03:00  INFO 13380 --- [event-service] [http-nio-8081-exec-4] o.s.web.servlet.DispatcherServlet        : Completed initialization in 0 ms
+2025-12-09T10:58:13.071-03:00  INFO 13380 --- [event-service] [File Watcher] rtingClassPathChangeChangedEventListener : Restarting due to 1 class path change (0 additions, 0 deletions, 1 modification)
+2025-12-09T10:58:13.098-03:00  INFO 13380 --- [event-service] [Thread-5] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:58:13.101-03:00  INFO 13380 --- [event-service] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T10:58:23.119-03:00  WARN 13380 --- [event-service] [Thread-5] com.zaxxer.hikari.pool.HikariPool        : Timed-out waiting for close connection executor to shutdown
+2025-12-09T10:58:23.120-03:00  INFO 13380 --- [event-service] [Thread-5] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
+2025-12-09T10:58:23.228-03:00  INFO 13380 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Starting EventServiceApplication using Java 20.0.1 with PID 13380 (C:\Users\Panzer\eventos_microservices\event-service\target\classes started by Panzer in C:\Users\Panzer\eventos_microservices\event-service)
+2025-12-09T10:58:23.228-03:00  INFO 13380 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : No active profile set, falling back to 1 default profile: "default"
+2025-12-09T10:58:23.384-03:00  INFO 13380 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Bootstrapping Spring Data JPA repositories in DEFAULT mode.
+2025-12-09T10:58:23.393-03:00  INFO 13380 --- [event-service] [restartedMain] .s.d.r.c.RepositoryConfigurationDelegate : Finished Spring Data repository scanning in 8 ms. Found 1 JPA repository interface.
+2025-12-09T10:58:23.479-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat initialized with port 8081 (http)
+2025-12-09T10:58:23.480-03:00  INFO 13380 --- [event-service] [restartedMain] o.apache.catalina.core.StandardService   : Starting service [Tomcat]
+2025-12-09T10:58:23.480-03:00  INFO 13380 --- [event-service] [restartedMain] o.apache.catalina.core.StandardEngine    : Starting Servlet engine: [Apache Tomcat/10.1.20]
+2025-12-09T10:58:23.516-03:00  INFO 13380 --- [event-service] [restartedMain] o.a.c.c.C.[Tomcat].[localhost].[/]       : Initializing Spring embedded WebApplicationContext
+2025-12-09T10:58:23.517-03:00  INFO 13380 --- [event-service] [restartedMain] w.s.c.ServletWebServerApplicationContext : Root WebApplicationContext: initialization completed in 287 ms
+2025-12-09T10:58:23.550-03:00  INFO 13380 --- [event-service] [restartedMain] o.hibernate.jpa.internal.util.LogHelper  : HHH000204: Processing PersistenceUnitInfo [name: default]
+2025-12-09T10:58:23.553-03:00  INFO 13380 --- [event-service] [restartedMain] o.h.c.internal.RegionFactoryInitiator    : HHH000026: Second-level cache disabled
+2025-12-09T10:58:23.558-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.o.j.p.SpringPersistenceUnitInfo      : No LoadTimeWeaver setup: ignoring JPA class transformer
+2025-12-09T10:58:23.559-03:00  INFO 13380 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Starting...
+2025-12-09T10:58:23.674-03:00  INFO 13380 --- [event-service] [restartedMain] com.zaxxer.hikari.pool.HikariPool        : HikariPool-2 - Added connection org.postgresql.jdbc.PgConnection@6f9afe5f
+2025-12-09T10:58:23.674-03:00  INFO 13380 --- [event-service] [restartedMain] com.zaxxer.hikari.HikariDataSource       : HikariPool-2 - Start completed.
+2025-12-09T10:58:23.687-03:00  WARN 13380 --- [event-service] [restartedMain] org.hibernate.orm.deprecation            : HHH90000025: PostgreSQLDialect does not need to be specified explicitly using 'hibernate.dialect' (remove the property setting and it will be selected by default)
+2025-12-09T10:58:23.733-03:00  INFO 13380 --- [event-service] [restartedMain] o.h.e.t.j.p.i.JtaPlatformInitiator       : HHH000489: No JTA platform available (set 'hibernate.transaction.jta.platform' to enable JTA platform integration)
+2025-12-09T10:58:23.772-03:00  INFO 13380 --- [event-service] [restartedMain] j.LocalContainerEntityManagerFactoryBean : Initialized JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T10:58:23.818-03:00  WARN 13380 --- [event-service] [restartedMain] JpaBaseConfiguration$JpaWebConfiguration : spring.jpa.open-in-view is enabled by default. Therefore, database queries may be performed during view rendering. Explicitly configure spring.jpa.open-in-view to disable this warning
+2025-12-09T10:58:23.824-03:00  WARN 13380 --- [event-service] [restartedMain] .s.s.UserDetailsServiceAutoConfiguration : 
+
+Using generated security password: a2c02c1b-afe2-4364-9731-b5be58058934
+
+This generated password is for development use only. Your security configuration must be updated before running your application in production.
+
+2025-12-09T10:58:23.868-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.s.web.DefaultSecurityFilterChain     : Will secure any request with [org.springframework.security.web.session.DisableEncodeUrlFilter@25686561, org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter@38e61828, org.springframework.security.web.context.SecurityContextHolderFilter@4061d6b, org.springframework.security.web.header.HeaderWriterFilter@cad9d2b, org.springframework.web.filter.CorsFilter@1677fa6a, org.springframework.security.web.authentication.logout.LogoutFilter@5c30a1e, com.eventos.event_service.security.JwtValidationFilter@2fc001b2, org.springframework.security.web.savedrequest.RequestCacheAwareFilter@1a39c82a, org.springframework.security.web.servletapi.SecurityContextHolderAwareRequestFilter@7a9d5a83, org.springframework.security.web.authentication.AnonymousAuthenticationFilter@60682ae7, org.springframework.security.web.session.SessionManagementFilter@5523ddfe, org.springframework.security.web.access.ExceptionTranslationFilter@1840cc25, org.springframework.security.web.access.intercept.AuthorizationFilter@4136ebe8]
+2025-12-09T10:58:23.903-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : LiveReload server is running on port 35729
+2025-12-09T10:58:23.910-03:00  INFO 13380 --- [event-service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
+2025-12-09T10:58:23.914-03:00  INFO 13380 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 0.711 seconds (process running for 734.913)
+2025-12-09T10:58:23.916-03:00  INFO 13380 --- [event-service] [restartedMain] .ConditionEvaluationDeltaLoggingListener : Condition evaluation unchanged
