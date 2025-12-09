@@ -16,6 +16,23 @@ public class Certificate {
     private Long userId;
     private Long eventId;
 
-    private String code; // Código único de autenticação
-    private LocalDateTime issuedAt; // Data de emissão
+    private String code; 
+    private LocalDateTime issuedAt;
+
+    // --- GETTERS E SETTERS MANUAIS ---
+
+    public Long getId() { return id; }
+    public void setId(Long id) { this.id = id; }
+
+    public Long getUserId() { return userId; }
+    public void setUserId(Long userId) { this.userId = userId; }
+
+    public Long getEventId() { return eventId; }
+    public void setEventId(Long eventId) { this.eventId = eventId; }
+
+    public String getCode() { return code; }
+    public void setCode(String code) { this.code = code; }
+
+    public LocalDateTime getIssuedAt() { return issuedAt; }
+    public void setIssuedAt(LocalDateTime issuedAt) { this.issuedAt = issuedAt; }
 }

@@ -2,9 +2,11 @@ package com.eventos.certificate_service.controller;
 
 import com.eventos.certificate_service.model.Certificate;
 import com.eventos.certificate_service.service.CertificateService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/certificados")
@@ -16,18 +18,33 @@ public class CertificateController {
         this.service = service;
     }
 
+    // LISTAR MEUS CERTIFICADOS (Autenticado)
     @GetMapping
-    public List<Certificate> listar() {
-        return service.findAll();
+    public List<Certificate> listarMeus(@RequestAttribute("userId") Long userId) {
+        return service.listarPorUsuario(userId);
     }
 
-    @GetMapping("/{code}")
-    public Certificate buscar(@PathVariable String code) {
-        return service.findByCode(code);
-    }
-
+    // EMITIR CERTIFICADO (Autenticado)
+    // Body: { "eventId": 1 }
     @PostMapping
-    public Certificate emitir(@RequestParam Long userId, @RequestParam Long eventId) {
-        return service.issueCertificate(userId, eventId);
+    public ResponseEntity<?> emitir(@RequestBody Map<String, Long> body, 
+                                    @RequestAttribute("userId") Long userId) {
+        try {
+            Long eventId = body.get("eventId");
+            Certificate cert = service.issueCertificate(userId, eventId);
+            return ResponseEntity.ok(cert);
+        } catch (RuntimeException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    // VALIDAR AUTENTICIDADE (PÚBLICO - Qualquer um pode checar)
+    @GetMapping("/validar/{code}")
+    public ResponseEntity<?> validar(@PathVariable String code) {
+        Certificate cert = service.validarPorCodigo(code);
+        if (cert != null) {
+            return ResponseEntity.ok(cert);
+        }
+        return ResponseEntity.notFound().build();
     }
 }

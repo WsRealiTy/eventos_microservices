@@ -11,9 +11,9 @@
     </parent>
 
     <groupId>com.eventos</groupId>
-    <artifactId>event-service</artifactId>
+    <artifactId>registration-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>event-service</name>
+    <name>registration-service</name>
     <description>Microserviço de Eventos</description>
 
     <properties>
