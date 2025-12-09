@@ -1198,3 +1198,6 @@ This generated password is for development use only. Your security configuration
 2025-12-09T18:03:10.150-03:00  WARN 11375 --- [event-service] [restartedMain] o.s.b.d.a.OptionalLiveReloadServer       : Unable to start LiveReload server
 2025-12-09T18:03:10.215-03:00  INFO 11375 --- [event-service] [restartedMain] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port 8081 (http) with context path ''
 2025-12-09T18:03:10.228-03:00  INFO 11375 --- [event-service] [restartedMain] c.e.e.EventServiceApplication            : Started EventServiceApplication in 6.622 seconds (process running for 7.25)
+2025-12-09T18:11:57.556-03:00  INFO 11375 --- [event-service] [SpringApplicationShutdownHook] j.LocalContainerEntityManagerFactoryBean : Closing JPA EntityManagerFactory for persistence unit 'default'
+2025-12-09T18:11:57.640-03:00  INFO 11375 --- [event-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown initiated...
+2025-12-09T18:11:57.719-03:00  INFO 11375 --- [event-service] [SpringApplicationShutdownHook] com.zaxxer.hikari.HikariDataSource       : HikariPool-1 - Shutdown completed.
