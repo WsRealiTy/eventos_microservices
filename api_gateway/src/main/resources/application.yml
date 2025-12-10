@@ -1,0 +1,57 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      # Configuração global de CORS (Para o Frontend não ser bloqueado)
+      globalcors:
+        cors-configurations:
+          '[/**]':
+            allowedOrigins: "*"   # Em produção, troque pelo domínio do front
+            allowedMethods:
+              - GET
+              - POST
+              - PUT
+              - DELETE
+            allowedHeaders: "*"
+
+      # --- AQUI COMEÇAM AS ROTAS ---
+      routes:
+        # 1. Rota para USER-SERVICE
+        - id: user-service
+          uri: http://localhost:8081
+          predicates:
+            - Path=/users/**, /auth/** # Se chegar /users ou /auth, manda pra cá
+
+        # 2. Rota para EVENT-SERVICE
+        - id: event-service
+          uri: http://localhost:8082
+          predicates:
+            - Path=/eventos/**
+
+        # 3. Rota para REGISTRATION-SERVICE (Inscrições)
+        - id: registration-service
+          uri: http://localhost:8083
+          predicates:
+            - Path=/inscricoes/**
+
+        # 4. Rota para ATTENDANCE-SERVICE (Presenças)
+        - id: attendance-service
+          uri: http://localhost:8084
+          predicates:
+            - Path=/presencas/**
+
+        # 5. Rota para CERTIFICATE-SERVICE
+        - id: certificate-service
+          uri: http://localhost:8085
+          predicates:
+            - Path=/certificados/**
+
+        # 6. Rota para EMAIL-SERVICE (PYTHON)
+        - id: email-service
+          uri: http://localhost:8090
+          predicates:
+            - Path=/email/**

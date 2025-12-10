@@ -45,7 +45,7 @@ def verificar_token(authorization: str = Header(None)):
 
 @app.get("/")
 def health_check():
-    return {"status": "Email Service (Python) rodando 🚀"}
+    return {"status": "Email Service (Python) rodando"}
 
 @app.post("/emails")
 def enviar_email(email: EmailSchema, usuario: dict = Depends(verificar_token)):
@@ -65,4 +65,4 @@ def enviar_email(email: EmailSchema, usuario: dict = Depends(verificar_token)):
     return {"message": "E-mail enviado com sucesso", "status": "enviado"}
 
 if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8082)
+    uvicorn.run(app, host="0.0.0.0", port=8090)
