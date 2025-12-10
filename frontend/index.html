@@ -3,283 +3,545 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Portal de Eventos Univates</title>
+    <title>Portal de Eventos (PWA Mode)</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
-        body { background-color: #f8f9fa; padding-top: 50px; }
-        .card { margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        .hidden { display: none; }
-        .loading { text-align: center; color: #666; font-style: italic; }
-        .cursor-pointer { cursor: pointer; color: #0d6efd; text-decoration: underline; }
+        body { background-color: #f0f2f5; padding-top: 20px; }
+        .card { box-shadow: 0 2px 4px rgba(0,0,0,0.1); border: none; }
+        .hidden { display: none !important; }
+        .offline-banner { background: #dc3545; color: white; text-align: center; padding: 5px; display: none; font-weight: bold;}
+        .sync-badge { position: absolute; top: -5px; right: -5px; }
     </style>
 </head>
 <body>
 
+<div id="offline-indicator" class="offline-banner">⚠️ MODO OFFLINE ATIVADO - DADOS SALVOS LOCALMENTE</div>
+
 <div class="container">
-    <h1 class="text-center mb-5">Sistema de Eventos</h1>
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="text-primary fw-bold">🎓 Eventos Univates</h2>
+        <div id="user-info" class="d-flex align-items-center gap-3 hidden">
+            <span>Olá, <b id="user-name">User</b></span>
+            <button onclick="logout()" class="btn btn-outline-danger btn-sm">Sair</button>
+        </div>
+    </div>
 
     <div id="auth-screen" class="row justify-content-center">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="card p-4">
-                <h3 class="text-center" id="auth-title">Login</h3>
+                <h4 class="text-center mb-3" id="auth-title">Login</h4>
                 
-                <div class="mb-3 hidden" id="name-group">
-                    <label>Nome Completo</label>
-                    <input type="text" id="name" class="form-control" placeholder="Seu nome">
+                <div id="register-fields" class="hidden">
+                    <input type="text" id="reg-name" class="form-control mb-2" placeholder="Nome Completo">
                 </div>
 
-                <div class="mb-3">
-                    <label>Email</label>
-                    <input type="email" id="email" class="form-control" placeholder="user@teste.com">
+                <input type="email" id="email" class="form-control mb-2" placeholder="Email">
+                <input type="password" id="password" class="form-control mb-3" placeholder="Senha">
+                
+                <button onclick="handleAuth()" id="btn-auth" class="btn btn-primary w-100">Entrar</button>
+                
+                <div class="text-center mt-3">
+                    <a href="#" onclick="toggleAuthMode()" id="toggle-auth-link">Não tem conta? Cadastre-se</a>
                 </div>
-                <div class="mb-3">
-                    <label>Senha</label>
-                    <input type="password" id="password" class="form-control" placeholder="******">
-                </div>
-                
-                <button onclick="handleAuth()" id="auth-btn" class="btn btn-primary w-100">Entrar</button>
-                
-                <p class="text-center mt-3">
-                    <span id="toggle-auth" class="cursor-pointer" onclick="toggleAuthMode()">Não tem conta? Cadastre-se</span>
-                </p>
-                
-                <p id="login-error" class="text-danger mt-2 text-center"></p>
             </div>
         </div>
     </div>
 
     <div id="dashboard-screen" class="hidden">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4>Olá, <span id="user-name">Participante</span>!</h4>
-            <button onclick="logout()" class="btn btn-outline-danger btn-sm">Sair</button>
-        </div>
+        
+        <ul class="nav nav-pills mb-3" id="mainTab" role="tablist">
+            <li class="nav-item">
+                <button class="nav-link active" onclick="switchTab('eventos')">📅 Eventos</button>
+            </li>
+            <li class="nav-item">
+                <button class="nav-link" onclick="switchTab('inscricoes')">🎫 Minhas Inscrições</button>
+            </li>
+            <li class="nav-item hidden" id="tab-admin">
+                <button class="nav-link bg-dark text-white position-relative" onclick="switchTab('admin')">
+                    🛡️ Área do Atendente
+                    <span id="sync-count" class="badge rounded-pill bg-danger sync-badge hidden">0</span>
+                </button>
+            </li>
+        </ul>
 
-        <div class="row">
-            <div class="col-md-8">
-                <h5>📅 Eventos Disponíveis</h5>
-                <div id="lista-eventos">
-                    <p class="loading">Carregando eventos...</p>
-                </div>
-            </div>
-
-            <div class="col-md-4">
-                <div class="card p-3">
-                    <h6>Seu Status</h6>
-                    <p><strong>ID do Usuário:</strong> <span id="user-id">-</span></p>
-                    <hr>
-                    <button class="btn btn-success w-100 mb-2" onclick="alert('Em breve!')">Meus Certificados</button>
-                    <button onclick="carregarEventos()" class="btn btn-secondary w-100">Atualizar Lista</button>
-                </div>
+        <div id="view-eventos" class="view-section">
+            <div id="lista-eventos" class="row">
+                <p class="text-muted text-center">Carregando eventos...</p>
             </div>
         </div>
+
+        <div id="view-inscricoes" class="view-section hidden">
+            <div class="card p-3">
+                <h5>Minhas Inscrições & Certificados</h5>
+                <button onclick="carregarMinhasInscricoes()" class="btn btn-sm btn-light w-25 mb-3">Atualizar</button>
+                <div class="table-responsive">
+                    <table class="table align-middle">
+                        <thead><tr><th>Evento</th><th>Data</th><th>Status</th><th>Ação</th></tr></thead>
+                        <tbody id="tbody-inscricoes"></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="view-admin" class="view-section hidden">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="card p-3 mb-3 border-danger">
+                        <h5 class="text-danger">📡 Controle de Portaria (Offline Capable)</h5>
+                        <p class="small text-muted">Use esta área para check-in e cadastros rápidos na porta.</p>
+                        
+                        <div class="d-grid gap-2 mb-3">
+                             <button onclick="sincronizarDados()" id="btn-sync" class="btn btn-secondary" disabled>
+                                🔄 Sincronizar com Servidor
+                             </button>
+                             <button onclick="atualizarCacheAdmin()" class="btn btn-outline-primary btn-sm">
+                                ⬇️ Baixar Dados para Cache Local
+                             </button>
+                        </div>
+                        
+                        <hr>
+
+                        <h6>📍 Registrar Presença (Check-in)</h6>
+                        <select id="admin-evento-select" class="form-select mb-2"></select>
+                        
+                        <input list="users-datalist" id="admin-user-input" class="form-control mb-2" placeholder="Buscar Participante (Nome ou Email)...">
+                        <datalist id="users-datalist"></datalist>
+
+                        <button onclick="adminCheckIn()" class="btn btn-success w-100 mb-4">✅ Confirmar Presença</button>
+
+                        <hr>
+
+                        <h6>📝 Cadastro Rápido (Novo Participante)</h6>
+                        <input type="text" id="quick-name" class="form-control mb-2" placeholder="Nome">
+                        <input type="email" id="quick-email" class="form-control mb-2" placeholder="Email">
+                        <button onclick="adminQuickRegister()" class="btn btn-primary w-100">Cadastrar e Selecionar</button>
+
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="card p-3 bg-light">
+                        <h6>🗃️ Fila de Sincronização (Local)</h6>
+                        <ul id="sync-queue-list" class="list-group small" style="max-height: 400px; overflow-y: auto;">
+                            <li class="list-group-item text-muted">Fila vazia.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 
 <script>
     const API_URL = "http://localhost:8080";
     
-    // Estado
-    let userToken = localStorage.getItem("token");
-    let userId = localStorage.getItem("userId");
-    let userName = localStorage.getItem("userName");
-    let isLoginMode = true;
+    // --- ESTADO GLOBAL ---
+    let currentUser = null;
+    let token = localStorage.getItem("token");
+    let isRegisterMode = false;
+    
+    // Cache Local (Simulação de Banco Local)
+    let localUsers = JSON.parse(localStorage.getItem("cache_users")) || [];
+    let localEvents = JSON.parse(localStorage.getItem("cache_events")) || [];
+    let syncQueue = JSON.parse(localStorage.getItem("sync_queue")) || [];
 
-    if (userToken) mostrarDashboard();
+    // --- INICIALIZAÇÃO ---
+    checkLogin();
+    updateNetworkStatus();
+    renderQueue();
 
-    // --- UTILITÁRIO: Decodificar JWT (Porque seu Java só manda o token) ---
-    function parseJwt (token) {
-        try {
-            var base64Url = token.split('.')[1];
-            var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-            var jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
-                return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-            }).join(''));
-            return JSON.parse(jsonPayload);
-        } catch (e) {
-            return null;
+    // Event Listeners para Rede
+    window.addEventListener('online', updateNetworkStatus);
+    window.addEventListener('offline', updateNetworkStatus);
+
+    function updateNetworkStatus() {
+        const indicator = document.getElementById("offline-indicator");
+        const btnSync = document.getElementById("btn-sync");
+        
+        if (navigator.onLine) {
+            indicator.style.display = "none";
+            btnSync.disabled = syncQueue.length === 0;
+            if(syncQueue.length > 0) btnSync.classList.replace("btn-secondary", "btn-warning");
+        } else {
+            indicator.style.display = "block";
+            btnSync.disabled = true;
+            btnSync.innerText = "Sem Conexão (Aguardando...)";
         }
     }
 
-    // --- CONTROLE DE TELA ---
+    // --- AUTENTICAÇÃO ---
     function toggleAuthMode() {
-        isLoginMode = !isLoginMode;
-        const title = document.getElementById("auth-title");
-        const btn = document.getElementById("auth-btn");
-        const toggleLink = document.getElementById("toggle-auth");
-        const nameGroup = document.getElementById("name-group");
-        document.getElementById("login-error").innerText = "";
-
-        if (isLoginMode) {
-            title.innerText = "Login";
-            btn.innerText = "Entrar";
-            toggleLink.innerText = "Não tem conta? Cadastre-se";
-            nameGroup.classList.add("hidden");
-        } else {
-            title.innerText = "Criar Nova Conta";
-            btn.innerText = "Cadastrar";
-            toggleLink.innerText = "Já tenho conta. Fazer Login";
-            nameGroup.classList.remove("hidden");
-        }
+        isRegisterMode = !isRegisterMode;
+        document.getElementById("register-fields").classList.toggle("hidden");
+        document.getElementById("auth-title").innerText = isRegisterMode ? "Novo Cadastro" : "Login";
+        document.getElementById("btn-auth").innerText = isRegisterMode ? "Cadastrar" : "Entrar";
+        document.getElementById("toggle-auth-link").innerText = isRegisterMode ? "Já tenho conta" : "Não tem conta? Cadastre-se";
     }
 
     async function handleAuth() {
-        isLoginMode ? await fazerLogin() : await fazerCadastro();
-    }
-
-    // --- CADASTRO (Rota: /users) ---
-    async function fazerCadastro() {
-        const nome = document.getElementById("name").value;
         const email = document.getElementById("email").value;
         const password = document.getElementById("password").value;
-        const errorMsg = document.getElementById("login-error");
-
-        if (!nome || !email || !password) {
-            errorMsg.innerText = "Preencha todos os campos!";
-            return;
-        }
-        errorMsg.innerText = "Processando...";
-        errorMsg.className = "text-info mt-2 text-center";
+        const name = document.getElementById("reg-name").value;
 
         try {
-            // CORREÇÃO: Endpoint agora é /users
-            const response = await fetch(`${API_URL}/users`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ name: nome, email: email, password: password, role: "PARTICIPANTE" })
-            });
-
-            if (response.ok) {
-                alert("Cadastro realizado! Faça login.");
+            if (isRegisterMode) {
+                const resp = await fetch(`${API_URL}/users`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name, email, password, role: "PARTICIPANTE" })
+                });
+                if(!resp.ok) throw new Error("Erro no cadastro");
+                alert("Cadastrado! Faça login.");
                 toggleAuthMode();
             } else {
-                throw new Error("Erro ao cadastrar (Email já existe?)");
+                const resp = await fetch(`${API_URL}/auth`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ email, password })
+                });
+                if(!resp.ok) throw new Error("Login falhou");
+                
+                const data = await resp.json();
+                localStorage.setItem("token", data.token);
+                token = data.token;
+                location.reload();
             }
-        } catch (error) {
-            console.error(error);
-            errorMsg.className = "text-danger mt-2 text-center";
-            errorMsg.innerText = error.message;
+        } catch (e) {
+            alert(e.message);
         }
     }
 
-    // --- LOGIN (Rota: /auth) ---
-    async function fazerLogin() {
-        const email = document.getElementById("email").value;
-        const password = document.getElementById("password").value;
-        const errorMsg = document.getElementById("login-error");
-
-        errorMsg.innerText = "Conectando...";
-        errorMsg.className = "text-info mt-2 text-center";
-
+    function parseJwt(token) {
         try {
-            // CORREÇÃO: Endpoint agora é /auth
-            const response = await fetch(`${API_URL}/auth`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json" },
-                body: JSON.stringify({ email, password })
-            });
-
-            if (!response.ok) throw new Error("Email ou senha inválidos!");
-
-            const data = await response.json(); // Retorna { "token": "..." }
-            userToken = data.token;
-            
-            // CORREÇÃO: Extrair ID e Email de dentro do Token
-            const claims = parseJwt(userToken);
-            if (!claims) throw new Error("Token inválido recebido");
-
-            userId = claims.id; // O Java salvou .claim("id", user.getId())
-            userName = claims.sub.split('@')[0]; // Pega o começo do email como nome
-
-            localStorage.setItem("token", userToken);
-            localStorage.setItem("userId", userId);
-            localStorage.setItem("userName", userName);
-            mostrarDashboard();
-
-        } catch (error) {
-            console.error(error);
-            errorMsg.className = "text-danger mt-2 text-center";
-            errorMsg.innerText = error.message;
-        }
+            return JSON.parse(atob(token.split('.')[1]));
+        } catch (e) { return null; }
     }
 
-    function mostrarDashboard() {
+    function checkLogin() {
+        if (!token) return;
+        
+        const payload = parseJwt(token);
+        currentUser = { 
+            id: payload.id, 
+            name: payload.sub.split('@')[0], 
+            email: payload.sub,
+            // HACK: Se o backend não retornar role, assumimos admin se o email começar com 'admin'
+            // Na apresentação, crie um usuário 'admin@evento.com'
+            role: payload.roles || (payload.sub.includes('admin') ? "ADMIN" : "PARTICIPANTE") 
+        };
+
         document.getElementById("auth-screen").classList.add("hidden");
         document.getElementById("dashboard-screen").classList.remove("hidden");
-        document.getElementById("user-name").innerText = userName;
-        document.getElementById("user-id").innerText = userId;
+        document.getElementById("user-info").classList.remove("hidden");
+        document.getElementById("user-name").innerText = currentUser.name;
+
+        // Se for Admin, mostra aba e carrega dados
+        if (currentUser.role.includes("ADMIN")) {
+            document.getElementById("tab-admin").classList.remove("hidden");
+            // Carrega dropdowns do admin com cache local
+            populateAdminDropdowns();
+        }
+
         carregarEventos();
     }
 
     function logout() {
-        localStorage.clear();
+        localStorage.removeItem("token");
         location.reload();
     }
 
-    // --- EVENTOS E INSCRIÇÃO ---
+    function switchTab(tab) {
+        document.querySelectorAll(".view-section").forEach(el => el.classList.add("hidden"));
+        document.getElementById(`view-${tab}`).classList.remove("hidden");
+        
+        document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("active"));
+        event.target.classList.add("active");
+
+        if(tab === 'inscricoes') carregarMinhasInscricoes();
+    }
+
+    // --- DADOS E EVENTOS (Fluxo Normal) ---
     async function carregarEventos() {
-        const listaDiv = document.getElementById("lista-eventos");
-        listaDiv.innerHTML = '<p class="loading">Buscando dados...</p>';
-
         try {
-            const response = await fetch(`${API_URL}/eventos`);
-            const eventos = await response.json();
-            listaDiv.innerHTML = ""; 
+            // Tenta pegar da API, se falhar pega do cache
+            let eventos = [];
+            try {
+                const res = await fetch(`${API_URL}/eventos`);
+                if(res.ok) {
+                    eventos = await res.json();
+                    localStorage.setItem("cache_events", JSON.stringify(eventos)); // Atualiza cache
+                    localEvents = eventos;
+                }
+            } catch(e) { console.log("Usando cache eventos"); eventos = localEvents; }
 
-            if (eventos.length === 0) {
-                listaDiv.innerHTML = "<div class='alert alert-warning'>Nenhum evento encontrado.</div>";
-                return;
-            }
-
-            eventos.forEach(evento => {
-                const titulo = evento.titulo || evento.title || "Sem Título";
-                const local = evento.local || "Online";
-                const duracao = evento.duracaoMin || evento.carga_horaria || 0;
-                const dataEvento = evento.data || "Data a definir";
-
-                const html = `
-                    <div class="card p-3 mb-3 border-start border-4 border-primary">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div>
-                                <h5 class="fw-bold text-primary">${titulo}</h5>
-                                <p class="mb-1 text-muted">📍 ${local} | ⏱️ ${duracao} min</p>
-                                <small class="text-secondary">📅 Data: ${dataEvento}</small>
+            const div = document.getElementById("lista-eventos");
+            div.innerHTML = "";
+            
+            eventos.forEach(ev => {
+                div.innerHTML += `
+                    <div class="col-md-4 mb-4">
+                        <div class="card h-100 border-primary">
+                            <div class="card-body">
+                                <h5 class="card-title text-primary">${ev.titulo || ev.title}</h5>
+                                <p class="card-text text-muted">📅 ${ev.data || 'Data a definir'}</p>
+                                <button onclick="inscrever(${ev.id})" class="btn btn-outline-primary w-100">Inscrever-se</button>
                             </div>
-                            <button class="btn btn-outline-primary" onclick="inscrever(${evento.id})">
-                                Inscrever-se
-                            </button>
                         </div>
-                    </div>
-                `;
-                listaDiv.innerHTML += html;
+                    </div>`;
             });
-        } catch (error) {
-            listaDiv.innerHTML = `<div class='alert alert-danger'>Erro ao carregar eventos.</div>`;
-        }
+            // Atualiza também o dropdown do admin
+            populateAdminDropdowns();
+        } catch (e) { console.error(e); }
     }
 
     async function inscrever(eventoId) {
-        if (!confirm("Confirmar inscrição?")) return;
-
-        const payload = { eventoId: eventoId }; // Java pega o userId do token
-
-        try {
-            const response = await fetch(`${API_URL}/inscricoes`, {
+        if(!confirm("Confirmar inscrição?")) return;
+        
+        const payload = { eventoId, userId: currentUser.id }; // userId pode ser redundante se o back pegar do token
+        
+        if (navigator.onLine) {
+            const res = await fetch(`${API_URL}/inscricoes`, {
                 method: "POST",
-                headers: { 
-                    "Content-Type": "application/json",
-                    "Authorization": `Bearer ${userToken}`
-                },
-                body: JSON.stringify(payload)
+                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                body: JSON.stringify({ eventoId })
             });
+            if(res.ok) alert("Inscrito com sucesso!");
+            else alert("Erro ao inscrever.");
+        } else {
+            // Se for um participante tentando se inscrever offline (raro, mas possível app PWA)
+            alert("Você está offline. Ação não permitida para participantes comuns.");
+        }
+    }
 
-            if (response.ok) {
-                alert("Inscrição realizada com sucesso! 🎉");
-            } else {
-                const erroTxt = await response.text();
-                alert("Erro: " + erroTxt);
+    async function carregarMinhasInscricoes() {
+        const tbody = document.getElementById("tbody-inscricoes");
+        tbody.innerHTML = "<tr><td colspan='4'>Carregando...</td></tr>";
+        
+        try {
+            const res = await fetch(`${API_URL}/inscricoes`, {
+                headers: { "Authorization": `Bearer ${token}` }
+            });
+            const dados = await res.json();
+            
+            tbody.innerHTML = "";
+            dados.forEach(ins => {
+                // Tenta achar nome do evento no cache local
+                const evt = localEvents.find(e => e.id == ins.eventoId) || { titulo: `Evento ID ${ins.eventoId}` };
+                
+                let btn = `<span class="badge bg-warning text-dark">Aguardando Check-in</span>`;
+                if(ins.presente) {
+                    btn = `<button class="btn btn-success btn-sm" onclick="alert('Certificado gerado! ID: ${ins.id}')">🏆 Certificado</button>`;
+                }
+
+                tbody.innerHTML += `
+                    <tr>
+                        <td>${evt.titulo || evt.title}</td>
+                        <td>${new Date(ins.dataInscricao).toLocaleDateString()}</td>
+                        <td>${ins.presente ? '✅ Presente' : '🕒 Pendente'}</td>
+                        <td>${btn}</td>
+                    </tr>
+                `;
+            });
+        } catch (e) {
+            tbody.innerHTML = "<tr><td colspan='4' class='text-danger'>Erro ao carregar (Offline?)</td></tr>";
+        }
+    }
+
+    // --- LÓGICA DO ADMIN / OFFLINE (O CORAÇÃO DA TAREFA) ---
+
+    async function atualizarCacheAdmin() {
+        if(!navigator.onLine) return alert("Precisa estar online para baixar dados.");
+        try {
+            // Baixa Usuários
+            const r1 = await fetch(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${token}` } });
+            localUsers = await r1.json();
+            localStorage.setItem("cache_users", JSON.stringify(localUsers));
+
+            // Baixa Eventos (já temos função, mas reforça)
+            carregarEventos(); 
+
+            alert(`Cache Atualizado!\n${localUsers.length} Usuários\n${localEvents.length} Eventos`);
+            populateAdminDropdowns();
+        } catch(e) { alert("Erro ao baixar dados: " + e.message); }
+    }
+
+    function populateAdminDropdowns() {
+        // Dropdown Eventos
+        const selEvent = document.getElementById("admin-evento-select");
+        selEvent.innerHTML = localEvents.map(e => `<option value="${e.id}">${e.titulo || e.title}</option>`).join('');
+
+        // Datalist Usuários
+        const dlUsers = document.getElementById("users-datalist");
+        dlUsers.innerHTML = localUsers.map(u => `<option value="${u.id} - ${u.name} (${u.email})">`).join('');
+    }
+
+    // Ação 1: Cadastrar Rápido (Offline)
+    function adminQuickRegister() {
+        const name = document.getElementById("quick-name").value;
+        const email = document.getElementById("quick-email").value;
+        if(!name || !email) return alert("Preencha nome e email");
+
+        // Cria ID Temporário
+        const tempId = "temp_" + Date.now();
+        const newUser = { id: tempId, name, email, password: "123", role: "PARTICIPANTE" };
+
+        // Adiciona à fila de sincronização
+        addToQueue({
+            type: "REGISTER",
+            data: newUser,
+            desc: `Cadastro: ${name}`
+        });
+
+        // Adiciona ao cache local imediatamente para poder usar no check-in
+        localUsers.push(newUser);
+        populateAdminDropdowns();
+        
+        // Auto-preenche o campo de busca com o novo usuário
+        document.getElementById("admin-user-input").value = `${newUser.id} - ${newUser.name} (${newUser.email})`;
+        
+        alert("Usuário salvo localmente! (ID Provisório gerado)");
+        document.getElementById("quick-name").value = "";
+        document.getElementById("quick-email").value = "";
+    }
+
+    // Ação 2: Check-in (Pode ser Offline)
+    function adminCheckIn() {
+        const eventoId = document.getElementById("admin-evento-select").value;
+        const userInput = document.getElementById("admin-user-input").value;
+        
+        // Extrai o ID do input (formato "123 - Nome...")
+        const userId = userInput.split(" - ")[0];
+
+        if(!userId || !eventoId) return alert("Selecione evento e usuário");
+
+        // Verifica se é ID temporário
+        const isTemp = userId.startsWith("temp_");
+
+        addToQueue({
+            type: "CHECKIN",
+            data: { eventoId, userId },
+            dependsOnUser: isTemp ? userId : null, // Se for temp, check-in depende do cadastro
+            desc: `Check-in: User ${userId} no Evento ${eventoId}`
+        });
+
+        alert("Presença registrada na fila!");
+        document.getElementById("admin-user-input").value = "";
+    }
+
+    // Gerenciamento da Fila
+    function addToQueue(item) {
+        syncQueue.push(item);
+        saveQueue();
+    }
+
+    function saveQueue() {
+        localStorage.setItem("sync_queue", JSON.stringify(syncQueue));
+        renderQueue();
+        updateNetworkStatus();
+    }
+
+    function renderQueue() {
+        const list = document.getElementById("sync-queue-list");
+        const badge = document.getElementById("sync-count");
+        
+        list.innerHTML = "";
+        badge.innerText = syncQueue.length;
+        badge.classList.toggle("hidden", syncQueue.length === 0);
+
+        if(syncQueue.length === 0) {
+            list.innerHTML = `<li class="list-group-item text-muted">Nada pendente.</li>`;
+            return;
+        }
+
+        syncQueue.forEach((item, idx) => {
+            list.innerHTML += `
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>${item.desc}</span>
+                    <span class="badge bg-secondary">${item.type}</span>
+                </li>`;
+        });
+    }
+
+    // --- SINCRONIZAÇÃO (A mágica acontece aqui) ---
+    async function sincronizarDados() {
+        if (syncQueue.length === 0) return alert("Nada para sincronizar.");
+        
+        const btn = document.getElementById("btn-sync");
+        btn.disabled = true;
+        btn.innerText = "Sincronizando...";
+
+        // Mapa para traduzir IDs temporários -> IDs reais do banco
+        // Ex: { "temp_123": 55 }
+        let idMap = {}; 
+        let failedItems = [];
+
+        for (const item of syncQueue) {
+            try {
+                // 1. Resolve dependencia de ID se houver
+                if (item.dependsOnUser && idMap[item.dependsOnUser]) {
+                    item.data.userId = idMap[item.dependsOnUser];
+                }
+
+                // 2. Executa a Ação
+                if (item.type === "REGISTER") {
+                    console.log("Enviando cadastro...", item.data);
+                    // Remove o ID temp antes de enviar pro banco
+                    const { id, ...payload } = item.data; 
+                    
+                    const res = await fetch(`${API_URL}/users`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(payload)
+                    });
+                    
+                    if (!res.ok) throw new Error("Falha ao criar user");
+                    const createdUser = await res.json();
+                    
+                    // Mapeia Temp ID -> Real ID
+                    idMap[item.data.id] = createdUser.id;
+                    console.log(`Mapeado: ${item.data.id} -> ${createdUser.id}`);
+
+                } else if (item.type === "CHECKIN") {
+                    console.log("Enviando checkin...", item.data);
+                    
+                    // Primeiro, garante a inscrição (regra do sistema: checkin requer inscrição)
+                    // Tentamos inscrever silenciosamente antes do checkin
+                    await fetch(`${API_URL}/inscricoes`, {
+                         method: "POST",
+                         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                         body: JSON.stringify({ eventoId: item.data.eventoId, userId: item.data.userId }) // Assumindo que endpoint aceita userId no body se for admin
+                    }).catch(() => {}); // Ignora erro se já inscrito
+
+                    // Agora o Check-in
+                    const res = await fetch(`${API_URL}/inscricoes/presenca`, { // Ajuste sua rota se for /presencas
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                        body: JSON.stringify({ eventoId: item.data.eventoId, userId: item.data.userId }) // O endpoint precisa suportar receber userId explícito
+                    });
+
+                    if(!res.ok) throw new Error("Falha no checkin");
+                }
+
+            } catch (error) {
+                console.error("Erro na sync:", error);
+                item.error = error.message;
+                failedItems.push(item);
             }
-        } catch (error) {
-            alert("Erro de conexão.");
+        }
+
+        // Limpa e atualiza fila
+        syncQueue = failedItems;
+        saveQueue();
+        
+        btn.disabled = false;
+        btn.innerText = "🔄 Sincronizar com Servidor";
+        
+        if (failedItems.length === 0) {
+            alert("✅ Sincronização completa com sucesso!");
+            atualizarCacheAdmin(); // Atualiza dados locais com os novos IDs reais
+        } else {
+            alert(`⚠️ Sincronização terminou com ${failedItems.length} erros. Verifique o console.`);
         }
     }
 </script>
