@@ -1,6 +1,26 @@
 version: '3.8'
 
 services:
+  # --- DATABASE (NOVO: Banco de Dados Centralizado) ---
+  postgres-db:
+    image: postgres:15
+    container_name: postgres-db
+    environment:
+      - POSTGRES_USER=user_micro
+      - POSTGRES_PASSWORD=postgres123
+      - POSTGRES_DB=eventos
+    ports:
+      - "5432:5432" # Libera acesso para ferramentas externas (DBeaver/PgAdmin)
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - eventos-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user_micro -d eventos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # --- API GATEWAY ---
   api-gateway:
     build: ./api_gateway
@@ -10,6 +30,9 @@ services:
       - SERVER_PORT=8080
     networks:
       - eventos-network
+    depends_on:
+      - user-service
+      - event-service
 
   # --- USER SERVICE ---
   user-service:
@@ -20,6 +43,9 @@ services:
       - SERVER_PORT=8081
     networks:
       - eventos-network
+    depends_on:
+      postgres-db:
+        condition: service_healthy
 
   # --- EVENT SERVICE ---
   event-service:
@@ -30,16 +56,60 @@ services:
       - SERVER_PORT=8082
     networks:
       - eventos-network
+    depends_on:
+      postgres-db:
+        condition: service_healthy 
+
+  # --- REGISTRATION SERVICE ---
+  registration-service:
+    build: ./registration-service   
+    ports:
+      - "8083:8083"
+    environment:
+      - SERVER_PORT=8083
+    networks:
+      - eventos-network
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  # --- ATTENDANCE SERVICE ---
+  attendance-service:
+    build: ./attendance-service    
+    ports:
+      - "8084:8084"
+    environment:
+      - SERVER_PORT=8084
+    networks:
+      - eventos-network
+    depends_on:
+      postgres-db:
+        condition: service_healthy
+
+  # --- CERTIFICATE SERVICE ---
+  certificate-service:
+    build: ./certificate-service   
+    ports:
+      - "8085:8085"
+    environment:
+      - SERVER_PORT=8085
+    networks:
+      - eventos-network
+    depends_on:
+      postgres-db:
+        condition: service_healthy
 
   # --- EMAIL SERVICE (PYTHON) ---
   email-service:
-    build: ./email-service-py # Ajuste para o nome da sua pasta python
+    build: ./email-service-py
     ports:
       - "8090:8090"
     networks:
       - eventos-network
-      
 
 networks:
   eventos-network:
     driver: bridge
+
+volumes:
+  postgres_data:

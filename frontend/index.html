@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal de Eventos Univates</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; padding-top: 50px; }
+        .card { margin-bottom: 20px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
+        .hidden { display: none; }
+        .loading { text-align: center; color: #666; font-style: italic; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1 class="text-center mb-5">Sistema de Eventos</h1>
+
+    <div id="login-screen" class="row justify-content-center">
+        <div class="col-md-4">
+            <div class="card p-4">
+                <h3 class="text-center">Login</h3>
+                <div class="mb-3">
+                    <label>Email</label>
+                    <input type="email" id="email" class="form-control" placeholder="teste@teste.com" value="user@teste.com">
+                </div>
+                <div class="mb-3">
+                    <label>Senha</label>
+                    <input type="password" id="password" class="form-control" placeholder="Senha" value="123456">
+                </div>
+                <button onclick="fazerLogin()" class="btn btn-primary w-100">Entrar</button>
+                <p id="login-error" class="text-danger mt-2 text-center"></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="dashboard-screen" class="hidden">
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4>Olá, <span id="user-name">Participante</span>!</h4>
+            <button onclick="logout()" class="btn btn-outline-danger btn-sm">Sair</button>
+        </div>
+
+        <div class="row">
+            <div class="col-md-8">
+                <h5>📅 Eventos Disponíveis</h5>
+                <div id="lista-eventos">
+                    <p class="loading">Carregando eventos...</p>
+                </div>
+            </div>
+
+            <div class="col-md-4">
+                <div class="card p-3">
+                    <h6>Seu Status</h6>
+                    <p><strong>ID do Usuário:</strong> <span id="user-id">-</span></p>
+                    <hr>
+                    <button class="btn btn-success w-100 mb-2" onclick="alert('Funcionalidade futura!')">Meus Certificados</button>
+                    <button onclick="carregarEventos()" class="btn btn-secondary w-100">Atualizar Lista</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // --- CONFIGURAÇÃO ---
+    // Aponta para o seu API Gateway no Docker
+    const API_URL = "http://localhost:8080";
+    
+    // --- ESTADO DA APLICAÇÃO ---
+    let userToken = localStorage.getItem("token");
+    let userId = localStorage.getItem("userId");
+    let userName = localStorage.getItem("userName");
+
+    // Verifica se já está logado ao abrir a página
+    if (userToken) {
+        mostrarDashboard();
+    }
+
+    // --- FUNÇÃO DE LOGIN ---
+    async function fazerLogin() {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+        const errorMsg = document.getElementById("login-error");
+
+        errorMsg.innerText = "Conectando...";
+
+        try {
+            // Nota: Se seu endpoint de login for diferente de /auth/login, ajuste aqui
+            // Assumindo que o User Service ou Gateway responde em /auth/login ou similar
+            // Para simplificar o teste, vamos focar em carregar os eventos primeiro.
+            
+            // SIMULAÇÃO DE LOGIN (Para testar a lista de eventos sem travar no Auth)
+            // Se o seu endpoint /auth ainda não estiver 100%, isso permite testar a lista.
+            // Se o auth estiver ok, descomente o fetch abaixo.
+            
+            /* const response = await fetch(`${API_URL}/auth/login`, {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ email, password })
+            });
+            if (!response.ok) throw new Error("Falha no login");
+            const data = await response.json();
+            userToken = data.token;
+            */
+
+            // --- MOCK TEMPORÁRIO PARA TESTAR A LISTA ---
+            userToken = "token_ficticio_para_teste"; 
+            userId = 1; 
+            userName = email.split('@')[0];
+            // ------------------------------------------
+
+            // Salva no navegador
+            localStorage.setItem("token", userToken);
+            localStorage.setItem("userId", userId);
+            localStorage.setItem("userName", userName);
+
+            mostrarDashboard();
+
+        } catch (error) {
+            console.error(error);
+            errorMsg.innerText = "Erro ao fazer login. Verifique o console (F12).";
+        }
+    }
+
+    function mostrarDashboard() {
+        document.getElementById("login-screen").classList.add("hidden");
+        document.getElementById("dashboard-screen").classList.remove("hidden");
+        document.getElementById("user-name").innerText = userName;
+        document.getElementById("user-id").innerText = userId;
+        carregarEventos();
+    }
+
+    function logout() {
+        localStorage.clear();
+        location.reload();
+    }
+
+    // --- CARREGAR EVENTOS DO BACKEND JAVA ---
+    async function carregarEventos() {
+        const listaDiv = document.getElementById("lista-eventos");
+        listaDiv.innerHTML = '<p class="loading">Buscando dados no Docker...</p>';
+
+        try {
+            // Chama o GET /eventos
+            const response = await fetch(`${API_URL}/eventos`);
+            
+            if (!response.ok) {
+                throw new Error(`Erro API: ${response.status}`);
+            }
+
+            const eventos = await response.json();
+            console.log("Eventos recebidos:", eventos); // Para debug no F12
+
+            listaDiv.innerHTML = ""; // Limpa o loading
+
+            if (eventos.length === 0) {
+                listaDiv.innerHTML = "<div class='alert alert-warning'>Nenhum evento encontrado no banco.</div>";
+                return;
+            }
+
+            // Renderiza cada evento
+            eventos.forEach(evento => {
+                // CORREÇÃO: Usando os nomes exatos que vêm do Java (titulo, duracaoMin, etc)
+                const titulo = evento.titulo || evento.title || "Sem Título";
+                const local = evento.local || "Online";
+                const duracao = evento.duracaoMin || evento.carga_horaria || 0;
+                const dataEvento = evento.data || "Data a definir";
+
+                const html = `
+                    <div class="card p-3 mb-3 border-start border-4 border-primary">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <div>
+                                <h5 class="fw-bold text-primary">${titulo}</h5>
+                                <p class="mb-1 text-muted">📍 ${local} | ⏱️ ${duracao} min</p>
+                                <small class="text-secondary">📅 Data: ${dataEvento}</small>
+                            </div>
+                            <button class="btn btn-outline-primary" onclick="inscrever(${evento.id})">
+                                Inscrever-se
+                            </button>
+                        </div>
+                    </div>
+                `;
+                listaDiv.innerHTML += html;
+            });
+
+        } catch (error) {
+            console.error("Erro no fetch:", error);
+            listaDiv.innerHTML = `
+                <div class='alert alert-danger'>
+                    <strong>Erro ao conectar no servidor!</strong><br>
+                    1. Verifique se o Docker está rodando.<br>
+                    2. Verifique se liberou o CORS no Java.<br>
+                    3. Erro detalhado: ${error.message}
+                </div>`;
+        }
+    }
+
+    // --- INSCRIÇÃO ---
+    async function inscrever(eventoId) {
+        if (!confirm("Confirmar inscrição neste evento?")) return;
+
+        const payload = {
+            userId: parseInt(userId),
+            eventId: eventoId,
+            data: new Date().toISOString().split('T')[0]
+        };
+
+        try {
+            const response = await fetch(`${API_URL}/inscricoes`, {
+                method: "POST",
+                headers: { 
+                    "Content-Type": "application/json",
+                    "Authorization": `Bearer ${userToken}`
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (response.ok) {
+                alert("Inscrição realizada com sucesso! 🎉");
+            } else {
+                const erroTxt = await response.text();
+                alert("Erro ao inscrever: " + erroTxt);
+            }
+        } catch (error) {
+            alert("Erro de conexão ao tentar inscrever.");
+        }
+    }
+</script>
+
+</body>
+</html>
