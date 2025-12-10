@@ -15,11 +15,11 @@
 </head>
 <body>
 
-<div id="offline-indicator" class="offline-banner">⚠️ MODO OFFLINE ATIVADO - DADOS SALVOS LOCALMENTE</div>
+<div id="offline-indicator" class="offline-banner">MODO OFFLINE ATIVADO - DADOS SALVOS LOCALMENTE</div>
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary fw-bold">🎓 Sistema deEventos </h2>
+        <h2 class="text-primary fw-bold">Sistema de Eventos</h2>
         <div id="user-info" class="d-flex align-items-center gap-3 hidden">
             <span>Olá, <b id="user-name">User</b></span>
             <button onclick="logout()" class="btn btn-outline-danger btn-sm">Sair</button>
@@ -51,14 +51,14 @@
         
         <ul class="nav nav-pills mb-3" id="mainTab" role="tablist">
             <li class="nav-item">
-                <button class="nav-link active" onclick="switchTab('eventos')">📅 Eventos</button>
+                <button class="nav-link active" onclick="switchTab('eventos')">Eventos</button>
             </li>
             <li class="nav-item">
-                <button class="nav-link" onclick="switchTab('inscricoes')">🎫 Minhas Inscrições</button>
+                <button class="nav-link" onclick="switchTab('inscricoes')">Minhas Inscrições</button>
             </li>
             <li class="nav-item hidden" id="tab-admin">
                 <button class="nav-link bg-dark text-white position-relative" onclick="switchTab('admin')">
-                    🛡️ Área do Atendente
+                    Área do Atendente
                     <span id="sync-count" class="badge rounded-pill bg-danger sync-badge hidden">0</span>
                 </button>
             </li>
@@ -87,31 +87,31 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="card p-3 mb-3 border-danger">
-                        <h5 class="text-danger">📡 Controle de Portaria (Offline Capable)</h5>
+                        <h5 class="text-danger">Controle de Portaria (Offline Capable)</h5>
                         <p class="small text-muted">Use esta área para check-in e cadastros rápidos na porta.</p>
                         
                         <div class="d-grid gap-2 mb-3">
                              <button onclick="sincronizarDados()" id="btn-sync" class="btn btn-secondary" disabled>
-                                🔄 Sincronizar com Servidor
+                                Sincronizar com Servidor
                              </button>
                              <button onclick="atualizarCacheAdmin()" class="btn btn-outline-primary btn-sm">
-                                ⬇️ Baixar Dados para Cache Local
+                                Baixar Dados para Cache Local
                              </button>
                         </div>
                         
                         <hr>
 
-                        <h6>📍 Registrar Presença (Check-in)</h6>
+                        <h6>Registrar Presença (Check-in)</h6>
                         <select id="admin-evento-select" class="form-select mb-2"></select>
                         
                         <input list="users-datalist" id="admin-user-input" class="form-control mb-2" placeholder="Buscar Participante (Nome ou Email)...">
                         <datalist id="users-datalist"></datalist>
 
-                        <button onclick="adminCheckIn()" class="btn btn-success w-100 mb-4">✅ Confirmar Presença</button>
+                        <button onclick="adminCheckIn()" class="btn btn-success w-100 mb-4">Confirmar Presença</button>
 
                         <hr>
 
-                        <h6>📝 Cadastro Rápido (Novo Participante)</h6>
+                        <h6>Cadastro Rápido (Novo Participante)</h6>
                         <input type="text" id="quick-name" class="form-control mb-2" placeholder="Nome">
                         <input type="email" id="quick-email" class="form-control mb-2" placeholder="Email">
                         <button onclick="adminQuickRegister()" class="btn btn-primary w-100">Cadastrar e Selecionar</button>
@@ -121,7 +121,7 @@
 
                 <div class="col-md-6">
                     <div class="card p-3 bg-light">
-                        <h6>🗃️ Fila de Sincronização (Local)</h6>
+                        <h6>Fila de Sincronização (Local)</h6>
                         <ul id="sync-queue-list" class="list-group small" style="max-height: 400px; overflow-y: auto;">
                             <li class="list-group-item text-muted">Fila vazia.</li>
                         </ul>
@@ -141,15 +141,14 @@
     let token = localStorage.getItem("token");
     let isRegisterMode = false;
     
-    // Cache Local (Simulação de Banco Local)
+    // Cache Local
     let localUsers = JSON.parse(localStorage.getItem("cache_users")) || [];
     let localEvents = JSON.parse(localStorage.getItem("cache_events")) || [];
     let syncQueue = JSON.parse(localStorage.getItem("sync_queue")) || [];
-    // NOVO: Cache de Inscrições. Estrutura: { 'id-evento': [ { userId: 1, registrationId: 'uuid', presente: false }, ... ] }
     let localRegistrations = JSON.parse(localStorage.getItem("cache_registrations")) || {}; 
 
     // --- INICIALIZAÇÃO ---
-    checkLogin();
+    if(token) checkLogin();
     updateNetworkStatus();
     renderQueue();
 
@@ -191,8 +190,7 @@
                 const resp = await fetch(`${API_URL}/users`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    // CORREÇÃO AQUI: Mapeando 'name' (variável JS) para 'nome' (propriedade Java)
-                    body: JSON.stringify({ nome: name, email, password, role: "ADMIN" }) 
+                    body: JSON.stringify({ nome: name, email, password, role: "PARTICIPANTE" }) 
                 });
                 if(!resp.ok) throw new Error("Erro no cadastro");
                 alert("Cadastrado! Faça login.");
@@ -216,22 +214,20 @@
     }
 
     function parseJwt(token) {
-        try {
-            return JSON.parse(atob(token.split('.')[1]));
-        } catch (e) { return null; }
+        try { return JSON.parse(atob(token.split('.')[1])); } catch (e) { return null; }
     }
 
     function checkLogin() {
         if (!token) return;
         
         const payload = parseJwt(token);
+        if(!payload) { logout(); return; }
+
         currentUser = { 
             id: payload.id, 
-            name: payload.sub.split('@')[0], 
+            name: payload.sub ? payload.sub.split('@')[0] : "Usuario", 
             email: payload.sub,
-            // HACK: Se o backend não retornar role, assumimos admin se o email começar com 'admin'
-            // Na apresentação, crie um usuário 'admin@evento.com'
-            role: payload.roles || (payload.sub.includes('admin') ? "ADMIN" : "PARTICIPANTE") 
+            role: (payload.roles && payload.roles.includes('ADMIN')) || (payload.sub && payload.sub.includes('admin')) ? "ADMIN" : "PARTICIPANTE" 
         };
 
         document.getElementById("auth-screen").classList.add("hidden");
@@ -239,10 +235,8 @@
         document.getElementById("user-info").classList.remove("hidden");
         document.getElementById("user-name").innerText = currentUser.name;
 
-        // Se for Admin, mostra aba e carrega dados
-        if (currentUser.role.includes("ADMIN")) {
+        if (currentUser.role === "ADMIN") {
             document.getElementById("tab-admin").classList.remove("hidden");
-            // Carrega dropdowns do admin com cache local
             populateAdminDropdowns();
         }
 
@@ -257,340 +251,279 @@
     function switchTab(tab) {
         document.querySelectorAll(".view-section").forEach(el => el.classList.add("hidden"));
         document.getElementById(`view-${tab}`).classList.remove("hidden");
-        
         document.querySelectorAll(".nav-link").forEach(el => el.classList.remove("active"));
         event.target.classList.add("active");
-
         if(tab === 'inscricoes') carregarMinhasInscricoes();
     }
 
-    // --- DADOS E EVENTOS (Fluxo Normal) ---
+    // --- EVENTOS ---
     async function carregarEventos() {
         try {
-            // Tenta pegar da API, se falhar pega do cache
             let eventos = [];
-            try {
+            if (navigator.onLine) {
                 const res = await fetch(`${API_URL}/eventos`);
                 if(res.ok) {
                     eventos = await res.json();
-                    localStorage.setItem("cache_events", JSON.stringify(eventos)); // Atualiza cache
+                    localStorage.setItem("cache_events", JSON.stringify(eventos)); 
                     localEvents = eventos;
                 }
-            } catch(e) { console.log("Usando cache eventos"); eventos = localEvents; }
+            } else {
+                eventos = localEvents;
+            }
 
             const div = document.getElementById("lista-eventos");
             div.innerHTML = "";
-            
             eventos.forEach(ev => {
                 div.innerHTML += `
                     <div class="col-md-4 mb-4">
                         <div class="card h-100 border-primary">
                             <div class="card-body">
                                 <h5 class="card-title text-primary">${ev.titulo || ev.title}</h5>
-                                <p class="card-text text-muted">📅 ${ev.data || 'Data a definir'}</p>
+                                <p class="card-text text-muted">Data: ${ev.data || 'Data a definir'}</p>
                                 <button onclick="inscrever(${ev.id})" class="btn btn-outline-primary w-100">Inscrever-se</button>
                             </div>
                         </div>
                     </div>`;
             });
-            // Atualiza também o dropdown do admin
             populateAdminDropdowns();
         } catch (e) { console.error(e); }
     }
 
     async function inscrever(eventoId) {
         if(!confirm("Confirmar inscrição?")) return;
-        
-        const payload = { eventoId, userId: currentUser.id }; // userId pode ser redundante se o back pegar do token
-        
         if (navigator.onLine) {
-            const res = await fetch(`${API_URL}/inscricoes`, {
-                method: "POST",
-                headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                body: JSON.stringify({ eventoId })
-            });
-            if(res.ok) alert("Inscrito com sucesso!");
-            else alert("Erro ao inscrever.");
+            try {
+                const res = await fetch(`${API_URL}/inscricoes`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                    body: JSON.stringify({ eventoId })
+                });
+                if(res.ok || res.status === 400) alert("Inscrito (ou já existente).");
+                else alert("Erro ao inscrever.");
+            } catch(e) { alert("Erro de rede."); }
         } else {
-            // Se for um participante tentando se inscrever offline (raro, mas possível app PWA)
-            alert("Você está offline. Ação não permitida para participantes comuns.");
+            alert("Offline: Ação não permitida para participantes.");
         }
     }
 
     async function carregarMinhasInscricoes() {
         const tbody = document.getElementById("tbody-inscricoes");
         tbody.innerHTML = "<tr><td colspan='4'>Carregando...</td></tr>";
-        
         try {
-            const res = await fetch(`${API_URL}/inscricoes`, {
-                headers: { "Authorization": `Bearer ${token}` }
-            });
+            const res = await fetch(`${API_URL}/inscricoes`, { headers: { "Authorization": `Bearer ${token}` } });
+            if(!res.ok) throw new Error("Erro");
             const dados = await res.json();
-            
             tbody.innerHTML = "";
             dados.forEach(ins => {
-                // Tenta achar nome do evento no cache local
-                const evt = localEvents.find(e => e.id == ins.eventoId) || { titulo: `Evento ID ${ins.eventoId}` };
-                
-                let btn = `<span class="badge bg-warning text-dark">Aguardando Check-in</span>`;
-                if(ins.presente) {
-                    btn = `<button class="btn btn-success btn-sm" onclick="alert('Certificado gerado! ID: ${ins.id}')">🏆 Certificado</button>`;
-                }
-
-                tbody.innerHTML += `
-                    <tr>
-                        <td>${evt.titulo || evt.title}</td>
-                        <td>${new Date(ins.dataInscricao).toLocaleDateString()}</td>
-                        <td>${ins.presente ? '✅ Presente' : '🕒 Pendente'}</td>
-                        <td>${btn}</td>
-                    </tr>
-                `;
+                const evt = localEvents.find(e => e.id == ins.eventoId) || { titulo: `ID ${ins.eventoId}` };
+                let btn = ins.presente ? `<span class="badge bg-success">Certificado</span>` : `<span class="badge bg-warning text-dark">Pendente</span>`;
+                tbody.innerHTML += `<tr><td>${evt.titulo || evt.title}</td><td>-</td><td>${ins.presente ? 'Presente' : 'Pendente'}</td><td>${btn}</td></tr>`;
             });
-        } catch (e) {
-            tbody.innerHTML = "<tr><td colspan='4' class='text-danger'>Erro ao carregar (Offline?)</td></tr>";
-        }
+        } catch (e) { tbody.innerHTML = "<tr><td colspan='4'>Erro ao carregar.</td></tr>"; }
     }
 
-    // --- LÓGICA DO ADMIN / OFFLINE (O CORAÇÃO DA TAREFA) ---
+    // --- ADMIN / OFFLINE ---
 
     async function atualizarCacheAdmin() {
-        if(!navigator.onLine) return alert("Precisa estar online para baixar dados.");
+        if(!navigator.onLine) return alert("Fique online para baixar dados.");
         try {
-            // Baixa Usuários
+            // 1. Users
             const r1 = await fetch(`${API_URL}/users`, { headers: { "Authorization": `Bearer ${token}` } });
-            localUsers = await r1.json();
-            localStorage.setItem("cache_users", JSON.stringify(localUsers));
-
-            // Baixa Eventos (já temos função, mas reforça)
-            carregarEventos(); 
-
-            // NOVO: Baixar TODAS as Inscrições para cache
-            // Assumindo que a rota para todas as inscrições é /inscricoes/all
-            const r2 = await fetch(`${API_URL}/inscricoes/all`, { 
-                headers: { "Authorization": `Bearer ${token}` } 
-            });
-            const registrations = await r2.json(); 
-            
-            // Mapear inscrições por evento { 'id-evento': [ { userId: 1, registrationId: 'uuid', presente: false }, ... ] }
-            const newLocalRegistrations = {};
-            registrations.forEach(reg => {
-                const eventIdKey = reg.eventoId; // Ajuste o campo conforme o retorno real do seu backend
-                if (!newLocalRegistrations[eventIdKey]) {
-                    newLocalRegistrations[eventIdKey] = [];
-                }
-                newLocalRegistrations[eventIdKey].push(reg);
-            });
-
-            localRegistrations = newLocalRegistrations;
-            localStorage.setItem("cache_registrations", JSON.stringify(localRegistrations));
-            
-            alert(`Cache Atualizado!\n${localUsers.length} Usuários\n${localEvents.length} Eventos\n${registrations.length} Inscrições`);
+            if(r1.ok) {
+                localUsers = await r1.json();
+                localStorage.setItem("cache_users", JSON.stringify(localUsers));
+            }
+            // 2. Eventos
+            carregarEventos();
+            // 3. Inscricoes (Se endpoint existir)
+            const r2 = await fetch(`${API_URL}/inscricoes/all`, { headers: { "Authorization": `Bearer ${token}` } });
+            if(r2.ok) {
+                const regs = await r2.json();
+                // Indexar por evento
+                const map = {};
+                regs.forEach(r => {
+                    if(!map[r.eventoId]) map[r.eventoId] = [];
+                    map[r.eventoId].push(r);
+                });
+                localRegistrations = map;
+                localStorage.setItem("cache_registrations", JSON.stringify(localRegistrations));
+                alert("Dados baixados com sucesso!");
+            } else {
+                console.warn("Rota /inscricoes/all falhou. Modo offline parcial.");
+                alert("Dados parciais atualizados.");
+            }
             populateAdminDropdowns();
-        } catch(e) { alert("Erro ao baixar dados: " + e.message); }
+        } catch(e) { alert("Erro de rede: " + e.message); }
     }
 
     function populateAdminDropdowns() {
-        // Dropdown Eventos
-        const selEvent = document.getElementById("admin-evento-select");
-        selEvent.innerHTML = localEvents.map(e => `<option value="${e.id}">${e.titulo || e.title}</option>`).join('');
-
-        // Datalist Usuários
-        const dlUsers = document.getElementById("users-datalist");
-        dlUsers.innerHTML = localUsers.map(u => `<option value="${u.id} - ${u.name} (${u.email})">`).join('');
+        const sel = document.getElementById("admin-evento-select");
+        if(localEvents.length) sel.innerHTML = localEvents.map(e => `<option value="${e.id}">${e.titulo || e.title}</option>`).join('');
+        const dl = document.getElementById("users-datalist");
+        if(localUsers.length) dl.innerHTML = localUsers.map(u => `<option value="${u.id} - ${u.name} (${u.email})">`).join('');
     }
 
-    // Ação 1: Cadastrar Rápido (Offline)
-    function adminQuickRegister() {
-        const name = document.getElementById("quick-name").value;
-        const email = document.getElementById("quick-email").value;
-        if(!name || !email) return alert("Preencha nome e email");
-
-        // Cria ID Temporário
-        const tempId = "temp_" + Date.now();
-        const newUser = { id: tempId, name, email, password: "123", role: "PARTICIPANTE" };
-
-        // Adiciona à fila de sincronização
-        addToQueue({
-            type: "REGISTER",
-            data: newUser,
-            desc: `Cadastro: ${name}`
-        });
-
-        // Adiciona ao cache local imediatamente para poder usar no check-in
-        localUsers.push(newUser);
-        populateAdminDropdowns();
-        
-        // Auto-preenche o campo de busca com o novo usuário
-        document.getElementById("admin-user-input").value = `${newUser.id} - ${newUser.name} (${newUser.email})`;
-        
-        alert("Usuário salvo localmente! (ID Provisório gerado)");
-        document.getElementById("quick-name").value = "";
-        document.getElementById("quick-email").value = "";
-    }
-
-    // Ação 2: Check-in (Pode ser Offline)
     function adminCheckIn() {
         const eventoId = document.getElementById("admin-evento-select").value;
-        const userInput = document.getElementById("admin-user-input").value;
-        
-        // Extrai o ID do input (formato "123 - Nome...")
-        const userId = userInput.split(" - ")[0];
+        const input = document.getElementById("admin-user-input").value;
+        const userId = input.split(" - ")[0];
 
-        if(!userId || !eventoId) return alert("Selecione evento e usuário");
+        if(!userId || !eventoId) return alert("Selecione evento e usuário.");
 
-        // NOVO: 1. Verifica se o usuário JÁ está registrado/presente para o evento (localmente)
-        const eventRegistrations = localRegistrations[eventoId] || [];
-        // Assumindo que a propriedade 'presente' existe na Registration e é booleana
-        const existingRegistration = eventRegistrations.find(reg => reg.userId == userId);
-
-        if (existingRegistration && existingRegistration.presente) {
-            return alert("Erro: Participante já fez check-in (Verificado no cache local).");
+        // Validar no cache se já está presente
+        const regs = localRegistrations[eventoId] || [];
+        const existing = regs.find(r => r.userId == userId);
+        if(existing && existing.presente) {
+            if(!confirm("Usuário já consta como presente no cache. Registrar novamente?")) return;
         }
 
-        // Verifica se é ID temporário
-        const isTemp = userId.startsWith("temp_");
+        const isTemp = userId.toString().startsWith("temp_");
 
         addToQueue({
             type: "CHECKIN",
             data: { eventoId, userId },
-            dependsOnUser: isTemp ? userId : null, // Se for temp, check-in depende do cadastro
-            desc: `Check-in: User ${userId} no Evento ${eventoId}`
+            dependsOnUser: isTemp ? userId : null,
+            desc: `Check-in: User ${userId} -> Evento ${eventoId}`
         });
-
-        alert("Presença registrada na fila!");
+        
+        alert("Check-in na fila!");
         document.getElementById("admin-user-input").value = "";
     }
 
-    // Gerenciamento da Fila
+    function adminQuickRegister() {
+        const name = document.getElementById("quick-name").value;
+        const email = document.getElementById("quick-email").value;
+        if(!name || !email) return alert("Preencha dados.");
+
+        const tempId = "temp_" + Date.now();
+        const newUser = { id: tempId, name, email, password: "123", role: "PARTICIPANTE" };
+
+        addToQueue({ type: "REGISTER", data: newUser, desc: `Cadastro: ${name}` });
+        
+        localUsers.push(newUser);
+        populateAdminDropdowns();
+        document.getElementById("admin-user-input").value = `${newUser.id} - ${newUser.name} (${newUser.email})`;
+        alert("Usuário temporário criado!");
+        document.getElementById("quick-name").value = "";
+        document.getElementById("quick-email").value = "";
+    }
+
+    // --- FILA E SYNC ---
     function addToQueue(item) {
         syncQueue.push(item);
         saveQueue();
     }
-
     function saveQueue() {
         localStorage.setItem("sync_queue", JSON.stringify(syncQueue));
         renderQueue();
         updateNetworkStatus();
     }
-
     function renderQueue() {
         const list = document.getElementById("sync-queue-list");
         const badge = document.getElementById("sync-count");
-        
         list.innerHTML = "";
         badge.innerText = syncQueue.length;
         badge.classList.toggle("hidden", syncQueue.length === 0);
 
-        if(syncQueue.length === 0) {
-            list.innerHTML = `<li class="list-group-item text-muted">Nada pendente.</li>`;
+        if(!syncQueue.length) {
+            list.innerHTML = "<li class='list-group-item text-muted'>Fila vazia.</li>";
             return;
         }
-
         syncQueue.forEach((item, idx) => {
+            let cls = item.error ? 'list-group-item-danger' : '';
             list.innerHTML += `
-                <li class="list-group-item d-flex justify-content-between align-items-center">
-                    <span>${item.desc}</span>
-                    <span class="badge bg-secondary">${item.type}</span>
+                <li class="list-group-item ${cls} d-flex justify-content-between">
+                    <div><strong>${item.type}</strong> <small>${item.desc}</small>
+                    ${item.error ? `<br><small class='text-danger'>${item.error}</small>` : ''}</div>
+                    <button class="btn btn-sm btn-outline-danger" onclick="removeFromQueue(${idx})">X</button>
                 </li>`;
         });
     }
+    function removeFromQueue(i) { syncQueue.splice(i, 1); saveQueue(); }
 
-    // --- SINCRONIZAÇÃO (A mágica acontece aqui) ---
     async function sincronizarDados() {
-        if (syncQueue.length === 0) return alert("Nada para sincronizar.");
-        
+        if(!syncQueue.length) return;
         const btn = document.getElementById("btn-sync");
-        btn.disabled = true;
-        btn.innerText = "Sincronizando...";
+        btn.disabled = true; btn.innerText = "Sincronizando...";
 
-        // Mapa para traduzir IDs temporários -> IDs reais do banco
-        // Ex: { "temp_123": 55 }
-        let idMap = {}; 
-        let failedItems = [];
+        let idMap = {}; // De: temp_xxx Para: ID real
+        let failed = [];
+        let success = 0;
 
-        for (const item of syncQueue) {
+        for(const item of syncQueue) {
             try {
-                // 1. Resolve dependencia de ID se houver
-                if (item.dependsOnUser && idMap[item.dependsOnUser]) {
+                // Resolver ID dependente
+                if(item.dependsOnUser && idMap[item.dependsOnUser]) {
                     item.data.userId = idMap[item.dependsOnUser];
                 }
 
-                // 2. Executa a Ação
-                if (item.type === "REGISTER") {
-                    console.log("Enviando cadastro...", item.data);
-                    // Remove o ID temp antes de enviar pro banco
+                if(item.type === "REGISTER") {
                     const { id, ...payload } = item.data; 
-                    
                     const res = await fetch(`${API_URL}/users`, {
                         method: "POST",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(payload)
                     });
-                    
-                    if (!res.ok) throw new Error("Falha ao criar user");
-                    const createdUser = await res.json();
-                    
-                    // Mapeia Temp ID -> Real ID
-                    idMap[item.data.id] = createdUser.id;
-                    console.log(`Mapeado: ${item.data.id} -> ${createdUser.id}`);
+                    if(!res.ok) throw new Error("Falha cadastro HTTP " + res.status);
+                    const user = await res.json();
+                    idMap[item.data.id] = user.id;
+                    success++;
 
                 } else if (item.type === "CHECKIN") {
-                    console.log("Enviando checkin...", item.data);
-                    
-                    // Primeiro, garante a inscrição (regra do sistema: checkin requer inscrição)
-                    // Tentamos inscrever silenciosamente antes do checkin
+                    // 1. Garantir Inscrição
+                    // Payload: deve ser userId e eventoId (conforme RegistrationController espera, ou DTO)
+                    // Se o back espera { eventoId, usuarioId } ou { eventId, userId } precisa testar. 
+                    // Padrão REST costuma ser camelCase.
                     await fetch(`${API_URL}/inscricoes`, {
-                         method: "POST",
-                         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                         body: JSON.stringify({ eventoId: item.data.eventoId, userId: item.data.userId }) // Assumindo que endpoint aceita userId no body se for admin
-                    }).catch(() => {}); // Ignora erro se já inscrito
-
-                    // Agora o Check-in
-                    const res = await fetch(`${API_URL}/inscricoes/presenca`, { // Ajuste sua rota se for /presencas
                         method: "POST",
                         headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
-                        body: JSON.stringify({ eventoId: item.data.eventoId, userId: item.data.userId }) // O endpoint precisa suportar receber userId explícito
+                        // Tenta mandar userId para garantir
+                        body: JSON.stringify({ eventoId: parseInt(item.data.eventoId), userId: parseInt(item.data.userId) })
+                    }).catch(()=>{}); // Ignora erro (provavel 400 já inscrito)
+
+                    // 2. Registrar Presença
+                    // CORREÇÃO CRÍTICA AQUI: Rota correta /presencas
+                    // O Model Java Attendance espera: eventId, userId, checkedIn
+                    const payloadCheckin = {
+                        eventId: parseInt(item.data.eventoId),
+                        userId: parseInt(item.data.userId),
+                        checkedIn: true,
+                        timestamp: new Date().toISOString()
+                    };
+
+                    const res = await fetch(`${API_URL}/presencas`, {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json", "Authorization": `Bearer ${token}` },
+                        body: JSON.stringify(payloadCheckin)
                     });
 
-                    if(!res.ok) throw new Error("Falha no checkin");
+                    if(!res.ok) {
+                        const txt = await res.text();
+                        throw new Error(`Falha checkin (${res.status}): ${txt}`);
+                    }
+                    success++;
                 }
 
-            } catch (error) {
-                console.error("Erro na sync:", error);
-                item.error = error.message;
-                failedItems.push(item);
+            } catch(err) {
+                console.error(err);
+                item.error = err.message;
+                failed.push(item);
             }
         }
 
-        // Limpa e atualiza fila
-        syncQueue = failedItems;
+        syncQueue = failed;
         saveQueue();
+        btn.disabled = false; btn.innerText = "Sincronizar";
         
-        btn.disabled = false;
-        btn.innerText = "🔄 Sincronizar com Servidor";
-        
-        if (failedItems.length === 0) {
-            alert("✅ Sincronização completa com sucesso!");
-            atualizarCacheAdmin(); // Atualiza dados locais com os novos IDs reais
-        } else {
-            alert(`⚠️ Sincronização terminou com ${failedItems.length} erros. Verifique o console.`);
-        }
+        if(success > 0 && failed.length === 0) alert("Sincronização concluída!");
+        else if(failed.length > 0) alert(`Terminado com ${failed.length} erros.`);
     }
-    
-    // --- REGISTRO DO SERVICE WORKER (PWA Offline) ---
-    // Você precisa criar um arquivo sw.js no mesmo diretório
+
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/sw.js')
-                .then(registration => {
-                    console.log('Service Worker registrado com sucesso:', registration);
-                })
-                .catch(error => {
-                    console.log('Falha no registro do Service Worker:', error);
-                });
+            navigator.serviceWorker.register('/sw.js').catch(console.error);
         });
     }
 </script>
-
 </body>
 </html>
