@@ -19,7 +19,7 @@
 
 <div class="container">
     <div class="d-flex justify-content-between align-items-center mb-4">
-        <h2 class="text-primary fw-bold">🎓 Eventos Univates</h2>
+        <h2 class="text-primary fw-bold">🎓 Sistema deEventos </h2>
         <div id="user-info" class="d-flex align-items-center gap-3 hidden">
             <span>Olá, <b id="user-name">User</b></span>
             <button onclick="logout()" class="btn btn-outline-danger btn-sm">Sair</button>
@@ -145,6 +145,8 @@
     let localUsers = JSON.parse(localStorage.getItem("cache_users")) || [];
     let localEvents = JSON.parse(localStorage.getItem("cache_events")) || [];
     let syncQueue = JSON.parse(localStorage.getItem("sync_queue")) || [];
+    // NOVO: Cache de Inscrições. Estrutura: { 'id-evento': [ { userId: 1, registrationId: 'uuid', presente: false }, ... ] }
+    let localRegistrations = JSON.parse(localStorage.getItem("cache_registrations")) || {}; 
 
     // --- INICIALIZAÇÃO ---
     checkLogin();
@@ -189,7 +191,7 @@
                 const resp = await fetch(`${API_URL}/users`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, password, role: "PARTICIPANTE" })
+                    body: JSON.stringify({ name, email, password, role: "ADMIN" })
                 });
                 if(!resp.ok) throw new Error("Erro no cadastro");
                 alert("Cadastrado! Faça login.");
@@ -361,7 +363,27 @@
             // Baixa Eventos (já temos função, mas reforça)
             carregarEventos(); 
 
-            alert(`Cache Atualizado!\n${localUsers.length} Usuários\n${localEvents.length} Eventos`);
+            // NOVO: Baixar TODAS as Inscrições para cache
+            // Assumindo que a rota para todas as inscrições é /inscricoes/all
+            const r2 = await fetch(`${API_URL}/inscricoes/all`, { 
+                headers: { "Authorization": `Bearer ${token}` } 
+            });
+            const registrations = await r2.json(); 
+            
+            // Mapear inscrições por evento { 'id-evento': [ { userId: 1, registrationId: 'uuid', presente: false }, ... ] }
+            const newLocalRegistrations = {};
+            registrations.forEach(reg => {
+                const eventIdKey = reg.eventoId; // Ajuste o campo conforme o retorno real do seu backend
+                if (!newLocalRegistrations[eventIdKey]) {
+                    newLocalRegistrations[eventIdKey] = [];
+                }
+                newLocalRegistrations[eventIdKey].push(reg);
+            });
+
+            localRegistrations = newLocalRegistrations;
+            localStorage.setItem("cache_registrations", JSON.stringify(localRegistrations));
+            
+            alert(`Cache Atualizado!\n${localUsers.length} Usuários\n${localEvents.length} Eventos\n${registrations.length} Inscrições`);
             populateAdminDropdowns();
         } catch(e) { alert("Erro ao baixar dados: " + e.message); }
     }
@@ -414,6 +436,15 @@
         const userId = userInput.split(" - ")[0];
 
         if(!userId || !eventoId) return alert("Selecione evento e usuário");
+
+        // NOVO: 1. Verifica se o usuário JÁ está registrado/presente para o evento (localmente)
+        const eventRegistrations = localRegistrations[eventoId] || [];
+        // Assumindo que a propriedade 'presente' existe na Registration e é booleana
+        const existingRegistration = eventRegistrations.find(reg => reg.userId == userId);
+
+        if (existingRegistration && existingRegistration.presente) {
+            return alert("Erro: Participante já fez check-in (Verificado no cache local).");
+        }
 
         // Verifica se é ID temporário
         const isTemp = userId.startsWith("temp_");
@@ -543,6 +574,20 @@
         } else {
             alert(`⚠️ Sincronização terminou com ${failedItems.length} erros. Verifique o console.`);
         }
+    }
+    
+    // --- REGISTRO DO SERVICE WORKER (PWA Offline) ---
+    // Você precisa criar um arquivo sw.js no mesmo diretório
+    if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+            navigator.serviceWorker.register('/sw.js')
+                .then(registration => {
+                    console.log('Service Worker registrado com sucesso:', registration);
+                })
+                .catch(error => {
+                    console.log('Falha no registro do Service Worker:', error);
+                });
+        });
     }
 </script>
 
