@@ -191,7 +191,8 @@
                 const resp = await fetch(`${API_URL}/users`, {
                     method: "POST",
                     headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ name, email, password, role: "ADMIN" })
+                    // CORREÇÃO AQUI: Mapeando 'name' (variável JS) para 'nome' (propriedade Java)
+                    body: JSON.stringify({ nome: name, email, password, role: "ADMIN" }) 
                 });
                 if(!resp.ok) throw new Error("Erro no cadastro");
                 alert("Cadastrado! Faça login.");
