@@ -18,10 +18,9 @@ spring:
               - DELETE
             allowedHeaders: "*"
 
-      # --- AQUI COMEÇAM AS ROTAS ---
       routes:
         # 1. Rota para USER-SERVICE
-        - id: user-service
+        - id: user-services
           uri: http://user-service:8081
           predicates:
             - Path=/users/**, /auth/** # Se chegar /users ou /auth, manda pra cá

@@ -1,21 +1,29 @@
 version: '3.8'
 
 services:
-  # --- DATABASE (NOVO: Banco de Dados Centralizado) ---
+  # --- BANCO DE DADOS CENTRALIZADO ---
   postgres-db:
     image: postgres:15
     container_name: postgres-db
+    # AUMENTA O LIMITE DE CONEXÕES PARA 200 (Evita o erro FATAL)
+    command: postgres -c max_connections=200
     environment:
       - POSTGRES_USER=user_micro
       - POSTGRES_PASSWORD=postgres123
       - POSTGRES_DB=eventos
     ports:
-      - "5432:5432" # Libera acesso para ferramentas externas (DBeaver/PgAdmin)
+      # MUDANÇA CRÍTICA: Porta externa 5438 para não bater com o seu Linux
+      - "5438:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - eventos-network
-   
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user_micro -d eventos"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # --- API GATEWAY ---
   api-gateway:
     build: ./api_gateway
@@ -26,7 +34,8 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - postgres-db
+      - user-service
+      - event-service
 
   # --- USER SERVICE ---
   user-service:
@@ -38,7 +47,8 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy
 
   # --- EVENT SERVICE ---
   event-service:
@@ -50,7 +60,8 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy
 
   # --- REGISTRATION SERVICE ---
   registration-service:
@@ -62,7 +73,8 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy
 
   # --- ATTENDANCE SERVICE ---
   attendance-service:
@@ -74,7 +86,8 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy
 
   # --- CERTIFICATE SERVICE ---
   certificate-service:
@@ -86,7 +99,8 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - postgres-db
+      postgres-db:
+        condition: service_healthy
 
   # --- EMAIL SERVICE (PYTHON) ---
   email-service:
@@ -95,6 +109,9 @@ services:
       - "8090:8090"
     networks:
       - eventos-network
+    depends_on:
+      postgres-db:
+        condition: service_healthy
 
 networks:
   eventos-network:
