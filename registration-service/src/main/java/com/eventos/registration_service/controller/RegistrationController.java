@@ -16,7 +16,7 @@ import com.eventos.registration_service.model.Registration;
 import com.eventos.registration_service.repository.RegistrationRepo;
 
 @RestController
-@RequestMapping("/inscricoes") // Mudei para português conforme o checklist
+@RequestMapping("/inscricoes")
 public class RegistrationController {
 
     private final RegistrationRepo repo;

@@ -15,12 +15,7 @@ services:
       - postgres_data:/var/lib/postgresql/data
     networks:
       - eventos-network
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user_micro -d eventos"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
-
+   
   # --- API GATEWAY ---
   api-gateway:
     build: ./api_gateway
@@ -31,8 +26,7 @@ services:
     networks:
       - eventos-network
     depends_on:
-      - user-service
-      - event-service
+      - postgres-db
 
   # --- USER SERVICE ---
   user-service:
@@ -44,8 +38,7 @@ services:
     networks:
       - eventos-network
     depends_on:
-      postgres-db:
-        condition: service_healthy
+      - postgres-db
 
   # --- EVENT SERVICE ---
   event-service:
@@ -57,8 +50,7 @@ services:
     networks:
       - eventos-network
     depends_on:
-      postgres-db:
-        condition: service_healthy 
+      - postgres-db
 
   # --- REGISTRATION SERVICE ---
   registration-service:
@@ -70,8 +62,7 @@ services:
     networks:
       - eventos-network
     depends_on:
-      postgres-db:
-        condition: service_healthy
+      - postgres-db
 
   # --- ATTENDANCE SERVICE ---
   attendance-service:
@@ -83,8 +74,7 @@ services:
     networks:
       - eventos-network
     depends_on:
-      postgres-db:
-        condition: service_healthy
+      - postgres-db
 
   # --- CERTIFICATE SERVICE ---
   certificate-service:
@@ -96,8 +86,7 @@ services:
     networks:
       - eventos-network
     depends_on:
-      postgres-db:
-        condition: service_healthy
+      - postgres-db
 
   # --- EMAIL SERVICE (PYTHON) ---
   email-service:
