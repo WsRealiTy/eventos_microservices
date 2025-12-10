@@ -15,4 +15,5 @@ public class Attendance {
     private Long userId;
     private Long eventId;
     private boolean checkedIn;
+    private String timestamp;
 }

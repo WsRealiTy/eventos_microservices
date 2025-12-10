@@ -30,4 +30,10 @@ public class AttendanceController {
     public List<Attendance> listarPorUsuario(@PathVariable Long userId) {
         return service.getByUser(userId);
     }
+
+    @PostMapping("/sync")
+    public List<Attendance> sincronizar(@RequestBody List<Attendance> attendances) {
+       // lembrar de add dps para evitar duplicados
+        return service.saveAll(attendances); 
+    }
 }

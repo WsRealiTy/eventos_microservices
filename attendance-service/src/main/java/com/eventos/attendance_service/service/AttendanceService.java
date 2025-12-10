@@ -27,4 +27,8 @@ public class AttendanceService {
     public List<Attendance> getByUser(Long userId) {
         return repository.findByUserId(userId);
     }
+
+    public List<Attendance> saveAll(List<Attendance> attendances) {
+        return repository.saveAll(attendances);
+    }
 }
