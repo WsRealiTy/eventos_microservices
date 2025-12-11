@@ -34,7 +34,6 @@ public class UserController {
 
     @Value("${jwt.secret}")
     private String secret;
-
     public UserController(UserRepository repository) {
         this.repository = repository;
     }
@@ -78,7 +77,7 @@ public class UserController {
                     String token = Jwts.builder()
                             .setSubject(user.getEmail())
                             .claim("id", user.getId())
-                            .claim("role", user.getRole()) // Garanta que 'role' não seja null no banco
+                            .claim("role", user.getRole())
                             .setIssuedAt(new Date())
                             .setExpiration(new Date(System.currentTimeMillis() + 3600000)) 
                             .signWith(key)

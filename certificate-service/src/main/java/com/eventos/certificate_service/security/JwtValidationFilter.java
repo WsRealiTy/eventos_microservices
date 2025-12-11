@@ -43,10 +43,10 @@ public class JwtValidationFilter extends OncePerRequestFilter {
             return;
         }
 
-        String token = authHeader.substring(7); // Remove "Bearer "
+        String token = authHeader.substring(7); 
 
         try {
-            // 1. Validar e Ler o Token
+        
             Claims claims = Jwts.parserBuilder()
                     .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes()))
                     .build()
@@ -56,28 +56,23 @@ public class JwtValidationFilter extends OncePerRequestFilter {
             String userEmail = claims.getSubject();
             String role = claims.get("role", String.class); // Pega a role (ADMIN, PARTICIPANTE)
 
-            // 2. CRÍTICO: Avisar o Spring Security que o usuário está autenticado!
             if (userEmail != null) {
-                // Cria a lista de permissões (Ex: ROLE_ADMIN)
                 SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
                 
-                // Cria o objeto de autenticação oficial do Spring
                 UsernamePasswordAuthenticationToken authentication = 
                         new UsernamePasswordAuthenticationToken(userEmail, null, Collections.singletonList(authority));
                 
-                // Injeta no contexto
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
-            // Opcional: Passar atributos para o controller
             request.setAttribute("userId", claims.get("id"));
 
         } catch (Exception e) {
-            // Se o token for inválido, limpamos o contexto por segurança
+            
             SecurityContextHolder.clearContext();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.getWriter().write("Erro de Token: " + e.getMessage());
-            return; // Interrompe aqui
+            return; 
         }
 
         filterChain.doFilter(request, response);
