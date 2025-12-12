@@ -1,0 +1,5 @@
+com\eventos\email_service\controller\EmailController.class
+com\eventos\email_service\EmailServiceApplication.class
+com\eventos\email_service\repository\EmailLogRepository.class
+com\eventos\email_service\model\EmailLog.class
+com\eventos\email_service\service\EmailService.class
