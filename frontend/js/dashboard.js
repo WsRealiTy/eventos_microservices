@@ -88,15 +88,15 @@ function toggleCreateEvent() {
 }
 
 async function cadastrarNovoEvento() {
-    const title = document.getElementById('newEvtTitle').value;
-    const date = document.getElementById('newEvtDate').value;
-    const location = document.getElementById('newEvtLoc').value;
+    const titulo = document.getElementById('newEvtTitle').value;
+    const data = document.getElementById('newEvtDate').value;
+    const local = document.getElementById('newEvtLoc').value;
 
     await fetchAuth('/eventos', {
         method: 'POST',
-        body: JSON.stringify({ title, date, location })
+        body: JSON.stringify({ titulo, data, local })
     });
-    
+
     toggleCreateEvent();
     loadEvents();
 }

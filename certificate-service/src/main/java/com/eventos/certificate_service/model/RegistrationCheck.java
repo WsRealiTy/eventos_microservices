@@ -7,16 +7,19 @@ import lombok.Data;
 @Data
 @Table(name = "registrations")
 public class RegistrationCheck {
+   
     @Id
     private Long id;
     
+    @Column(name = "user_id") 
     private Long usuarioId;
+    
+    @Column(name = "evento_id") 
     private Long eventoId;
     
     @Column(name = "presente")
     private boolean presente;
 
-    // --- MÉTODOS MANUAIS ---
 
     public boolean isPresente() {
         return presente;

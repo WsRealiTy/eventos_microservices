@@ -54,21 +54,19 @@ public class JwtValidationFilter extends OncePerRequestFilter {
                     .getBody();
 
             String userEmail = claims.getSubject();
-            String role = claims.get("role", String.class); // Pega a role (ADMIN, PARTICIPANTE)
+            String role = claims.get("role", String.class);
 
             if (userEmail != null) {
                 SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
-                
                 UsernamePasswordAuthenticationToken authentication = 
                         new UsernamePasswordAuthenticationToken(userEmail, null, Collections.singletonList(authority));
-                
                 SecurityContextHolder.getContext().setAuthentication(authentication);
             }
 
-            request.setAttribute("userId", claims.get("id"));
+            Integer idInteger = claims.get("id", Integer.class);
+            request.setAttribute("userId", Long.valueOf(idInteger));
 
-        } catch (Exception e) {
-            
+        } catch (Exception e) {            
             SecurityContextHolder.clearContext();
             response.setStatus(HttpServletResponse.SC_FORBIDDEN);
             response.getWriter().write("Erro de Token: " + e.getMessage());

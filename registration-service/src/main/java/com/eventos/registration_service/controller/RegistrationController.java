@@ -33,14 +33,14 @@ public class RegistrationController {
     @GetMapping
     public List<Registration> minhasInscricoes() {
         Long userId = getAuthenticatedUserId();
-        return repository.findByUsuarioId(userId);
+        return repository.findByUserId(userId);
     }
 
     @PostMapping
     public ResponseEntity<?> inscrever(@RequestBody InscricaoDTO dto) {
         Long userId = resolverUserId(dto.userId);
 
-        if (repository.findByUsuarioIdAndEventoId(userId, dto.eventoId).isPresent()) {
+        if (repository.findByUserIdAndEventoId(userId, dto.eventoId).isPresent()) {
             return ResponseEntity.badRequest().body("Usuário já inscrito neste evento.");
         }
 
@@ -60,7 +60,7 @@ public class RegistrationController {
         Long userId = resolverUserId(dto.userId);
         
         // Tenta achar a inscrição
-        var optReg = repository.findByUsuarioIdAndEventoId(userId, dto.eventoId);
+        var optReg = repository.findByUserIdAndEventoId(userId, dto.eventoId);
     
         if (optReg.isEmpty()) {
             return ResponseEntity.badRequest().body("Inscrição não encontrada para este usuário/evento.");
