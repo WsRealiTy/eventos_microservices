@@ -6,24 +6,32 @@ spring:
     name: api-gateway
   cloud:
     gateway:
-      # Configuração global de CORS (Para o Frontend não ser bloqueado)
+      # --- CONFIGURAÇÃO GLOBAL DE CORS ---
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "*"   # Em produção, troque pelo domínio do front
+            allowedOrigins: "*"   # Em produção, mude para "http://localhost:3000"
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
+              - OPTIONS           # Essencial para o navegador validar a requisição antes de enviar
             allowedHeaders: "*"
+            
+      # --- SOLUÇÃO DO ERRO DE CORS DUPLO ---
+      # Isso garante que, se o User Service mandar CORS e o Gateway também,
+      # o Gateway remove a duplicata e entrega apenas um valor para o navegador.
+      default-filters:
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
 
+      # --- ROTAS ---
       routes:
         # 1. Rota para USER-SERVICE
         - id: user-services
           uri: http://user-service:8081
           predicates:
-            - Path=/users/**, /auth/** # Se chegar /users ou /auth, manda pra cá
+            - Path=/users/**, /auth/**
 
         # 2. Rota para EVENT-SERVICE
         - id: event-service
