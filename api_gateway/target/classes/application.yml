@@ -19,11 +19,8 @@ spring:
               - OPTIONS           # Essencial para o navegador validar a requisição antes de enviar
             allowedHeaders: "*"
             
-      # --- SOLUÇÃO DO ERRO DE CORS DUPLO ---
-      # Isso garante que, se o User Service mandar CORS e o Gateway também,
-      # o Gateway remove a duplicata e entrega apenas um valor para o navegador.
       default-filters:
-        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials
+        - DedupeResponseHeader=Access-Control-Allow-Origin Access-Control-Allow-Credentials, RETAIN_UNIQUE
 
       # --- ROTAS ---
       routes:

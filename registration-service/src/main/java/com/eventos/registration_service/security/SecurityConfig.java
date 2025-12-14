@@ -21,18 +21,13 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Desabilita proteção CSRF
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Sem sessão (Stateless)
+            .csrf(csrf -> csrf.disable())
+
+            .cors(cors -> cors.disable()) 
+            
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
             .authorizeHttpRequests(auth -> auth
-                // 2. MUDANÇA AQUI:
-                // Removemos a linha do "/eventos" pois este serviço não cuida disso.
-                
-                // Mantemos o actuator liberado para Health Check (opcional)
                 .requestMatchers("/actuator/**").permitAll() 
-                
-                // 3. REGRA DE OURO:
-                // Todas as requisições (/inscricoes) exigem autenticação.
-                // Isso garante que o Token chegue no Controller.
                 .anyRequest().authenticated() 
             )
             .addFilterBefore(jwtValidationFilter, UsernamePasswordAuthenticationFilter.class);

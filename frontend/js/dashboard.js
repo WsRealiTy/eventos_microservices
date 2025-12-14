@@ -7,14 +7,15 @@ async function loadEvents() {
     container.innerHTML = '';
 
     events.forEach(evt => {
+    
         const card = `
             <div class="col-md-4 mb-4">
                 <div class="card h-100">
                     <div class="card-body">
-                        <h5 class="card-title">${evt.title}</h5>
+                        <h5 class="card-title">${evt.titulo || evt.title}</h5> 
                         <p class="card-text">
-                            <strong>Data:</strong> ${evt.date}<br>
-                            <strong>Local:</strong> ${evt.location}
+                            <strong>Data:</strong> ${evt.data || evt.date}<br>
+                            <strong>Local:</strong> ${evt.local || evt.location}
                         </p>
                         <button onclick="inscrever(${evt.id})" class="btn btn-primary w-100">Inscrever-se</button>
                     </div>
@@ -86,7 +87,7 @@ function toggleCreateEvent() {
     document.getElementById('createEventForm').classList.toggle('d-none');
 }
 
-async function createEvent() {
+async function cadastrarNovoEvento() {
     const title = document.getElementById('newEvtTitle').value;
     const date = document.getElementById('newEvtDate').value;
     const location = document.getElementById('newEvtLoc').value;

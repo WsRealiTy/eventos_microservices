@@ -22,16 +22,23 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf.disable()) // Desabilita proteção CSRF (necessário para APIs)
-            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)) // Não guarda sessão (usa Token)
+            .csrf(csrf -> csrf.disable())
+            .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            
+            // --- CORREÇÃO AQUI ---
+            // O Gateway já gerencia o CORS. O microsserviço deve ficar mudo sobre isso.
+            .cors(cors -> cors.disable()) 
+            // ---------------------
+
             .authorizeHttpRequests(auth -> auth
-            // Permitir validação pública do QR Code/Link
-            .requestMatchers("/certificados/validar/**").permitAll() 
-            .requestMatchers("/actuator/**").permitAll()
-             // O resto (Emitir e Listar) exige login
-            .anyRequest().authenticated() 
-)
-            .addFilterBefore(jwtValidationFilter, UsernamePasswordAuthenticationFilter.class); // Adiciona nosso filtro JWT
+                // Rotas Públicas
+                .requestMatchers(HttpMethod.GET, "/eventos/**").permitAll()
+                .requestMatchers("/actuator/**").permitAll()
+                
+                // Todo o resto exige token válido
+                .anyRequest().authenticated()
+            )
+            .addFilterBefore(jwtValidationFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
