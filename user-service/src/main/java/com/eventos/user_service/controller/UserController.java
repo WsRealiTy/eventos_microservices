@@ -26,7 +26,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 
 @RestController
-@CrossOrigin(origins = "*") 
+// @CrossOrigin(origins = "*") 
 public class UserController {
 
     private final UserRepository repository;
