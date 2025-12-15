@@ -117,10 +117,19 @@ services:
       - SMTP_PORT=587
       - SMTP_USER=panzerweslley@gmail.com  
       - SMTP_PASSWORD=wjlvbojivrktmopm
-
+# --- FRONTEND (SITE) ---
+  frontend:
+    image: nginx:alpine
+    container_name: frontend-eventos
+    ports:
+      - "80:80"
+    volumes:
+      - ./frontend:/usr/share/nginx/html
+    networks:
+      - eventos-network
 networks:
   eventos-network:
     driver: bridge
-
+ 
 volumes:
   postgres_data:
