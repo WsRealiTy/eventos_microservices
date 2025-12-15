@@ -53,7 +53,7 @@ async function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
                     background-color: #f0f0f0; 
                 }
                 .certificado-borda {
-                    border: 10px double #198754; /* Verde sucesso bootstrap */
+                    border: 10px double #198754; 
                     padding: 50px;
                     background-color: #fff;
                     width: 900px;
@@ -142,6 +142,7 @@ async function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
 
                 <div class="codigo-area">
                     <p>Este documento possui autenticidade verificável.</p>
+                    <p>Acesse: <span class="validacao-link">http://localhost:8080/frontend/validar.html</span></p>
                     <p>Código de validação:</p>
                     <span class="uuid">${codigoValidacao}</span>
                 </div>
@@ -156,14 +157,12 @@ async function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
     printWindow.document.close();
 }
 
-// NOVA FUNÇÃO: Busca eventos onde o usuário tem presença para preencher o Select
 async function loadEventsForIssuance() {
     const select = document.getElementById('certEventId');
     const userId = getUserIdFromToken();
     if (!userId) return;
 
     try {
-        // 1. Busca todos os eventos para pegar os nomes (mapa de ID -> Título)
         const resEvents = await fetchAuth('/eventos');
         let eventosMap = {};
         if (resEvents.ok) {
@@ -171,7 +170,6 @@ async function loadEventsForIssuance() {
             eventos.forEach(e => eventosMap[e.id] = e.titulo || e.title);
         }
 
-        // 2. Busca presenças do usuário
         const resPresencas = await fetchAuth(`/presencas/usuario/${userId}`);
         
         select.innerHTML = '<option value="" selected disabled>Selecione um evento...</option>';
@@ -184,14 +182,13 @@ async function loadEventsForIssuance() {
                 return;
             }
 
-            // Preenche o Select com eventos onde o usuário tem presença
             presencas.forEach(p => {
                 const eventId = p.eventId;
                 const nomeEvento = eventosMap[eventId] || `Evento #${eventId}`;
                 
                 const option = document.createElement('option');
                 option.value = eventId;
-                option.text = nomeEvento; // Exibe o nome ao invés do ID
+                option.text = nomeEvento;
                 select.appendChild(option);
             });
         }
@@ -203,13 +200,11 @@ async function loadEventsForIssuance() {
 
 async function loadCertificates() {
     const container = document.getElementById('certContainer');
-    
-    // Chama o carregamento do Select aqui também
     loadEventsForIssuance();
     
     try {
         const res = await fetchAuth('/certificados');
-        if (!res) return; // Erro de auth já tratado no fetchAuth
+        if (!res) return;
 
         if (!res.ok) {
             throw new Error("Erro ao buscar certificados");
@@ -224,9 +219,7 @@ async function loadCertificates() {
         }
 
         certs.forEach(cert => {
-            // Formata data para exibição no card
             const dataCard = new Date(cert.issuedAt).toLocaleDateString('pt-BR');
-            // Nota: O backend retorna 'code', não 'signature'
             const codigo = cert.code; 
 
             const card = `
@@ -267,11 +260,10 @@ async function loadCertificates() {
 
 async function emitirCertificado() {
     const eventIdInput = document.getElementById('certEventId');
-    const eventId = eventIdInput.value; // Agora pega do Select
+    const eventId = eventIdInput.value;
 
     if (!eventId) return alert("Selecione um evento da lista");
 
-    // Feedback visual de carregamento
     const btn = document.querySelector('button[onclick="emitirCertificado()"]');
     const btnOriginalText = btn.innerText;
     btn.innerText = "Emitindo...";
@@ -285,7 +277,7 @@ async function emitirCertificado() {
 
         if (res.ok) {
             alert("Certificado emitido com sucesso!");
-            loadCertificates(); // Recarrega a lista e o select
+            loadCertificates(); 
         } else {
             const err = await res.text();
             alert("Não foi possível emitir: " + err);
@@ -294,15 +286,69 @@ async function emitirCertificado() {
         alert("Erro de conexão ao tentar emitir.");
         console.error(error);
     } finally {
-        // Restaura o botão
         btn.innerText = btnOriginalText;
         btn.disabled = false;
     }
 }
 
-// Carrega ao iniciar
+// --- FUNÇÕES DE EDIÇÃO DE PERFIL ---
+
+async function abrirModalPerfil() {
+    const userId = getUserIdFromToken();
+    const modalEl = document.getElementById('editProfileModal');
+    const modal = new bootstrap.Modal(modalEl);
+    
+    const res = await fetchAuth(`/users/${userId}`);
+    if(res.ok) {
+        const user = await res.json();
+        
+        document.getElementById('editName').value = user.name || '';
+        document.getElementById('editCpf').value = user.cpf || '';
+        document.getElementById('editEmail').value = user.email || '';
+        
+        document.getElementById('editRua').value = user.enderecoRua || '';
+        document.getElementById('editNum').value = user.enderecoNumero || '';
+        document.getElementById('editBairro').value = user.enderecoBairro || '';
+        document.getElementById('editCidade').value = user.enderecoCidade || '';
+        document.getElementById('editUF').value = user.enderecoEstado || '';
+        
+        document.getElementById('editPassword').value = ''; 
+        
+        modal.show();
+    } else {
+        alert("Erro ao carregar perfil.");
+    }
+}
+
+async function salvarPerfil() {
+    const userId = getUserIdFromToken();
+    const payload = {
+        name: document.getElementById('editName').value,
+        cpf: document.getElementById('editCpf').value,
+        enderecoRua: document.getElementById('editRua').value,
+        enderecoNumero: document.getElementById('editNum').value,
+        enderecoBairro: document.getElementById('editBairro').value,
+        enderecoCidade: document.getElementById('editCidade').value,
+        enderecoEstado: document.getElementById('editUF').value,
+        password: document.getElementById('editPassword').value
+    };
+
+    const res = await fetchAuth(`/users/${userId}`, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+    });
+
+    if(res.ok) {
+        alert('Perfil atualizado com sucesso!');
+        const modalEl = document.getElementById('editProfileModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+    } else {
+        alert('Erro ao atualizar perfil.');
+    }
+}
+
 document.addEventListener("DOMContentLoaded", () => {
     loadCertificates();
-    // Adicionado chamada para verificar se é admin e liberar opções da navbar
     verificarAdmin();
 });

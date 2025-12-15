@@ -15,7 +15,7 @@
                     <li class="nav-item"><a class="nav-link active" href="certificados.html">Certificados</a></li>
                     
                     <li class="nav-item">
-                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Alterar Senha</a>
+                        <a class="nav-link" href="#" onclick="abrirModalPerfil()">Editar Perfil</a>
                     </li>
 
                     <li class="nav-item"><button class="btn btn-danger btn-sm ms-3" onclick="logout()">Sair</button></li>
@@ -39,25 +39,65 @@
         </div>
 
         <div class="row" id="certContainer">
-            </div>
+        </div>
     </div>
 
-    <div class="modal fade" id="changePasswordModal" tabindex="-1">
-        <div class="modal-dialog">
+    <div class="modal fade" id="editProfileModal" tabindex="-1">
+        <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">Alterar Senha</h5>
+                    <h5 class="modal-title">Meu Perfil</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                 </div>
                 <div class="modal-body">
-                    <div class="mb-3">
-                        <label>Nova Senha</label>
-                        <input type="password" id="newPasswordInput" class="form-control" placeholder="Digite a nova senha">
-                    </div>
+                    <form id="editProfileForm">
+                        <div class="mb-3">
+                            <label>Nome Completo</label>
+                            <input type="text" id="editName" class="form-control" required>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label>CPF</label>
+                                <input type="text" id="editCpf" class="form-control">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label>Email (Não editável)</label>
+                                <input type="email" id="editEmail" class="form-control" disabled>
+                            </div>
+                        </div>
+
+                        <h6 class="text-muted border-bottom pb-1">Endereço</h6>
+                        <div class="row mt-2">
+                            <div class="col-9 mb-2">
+                                <input type="text" id="editRua" class="form-control" placeholder="Rua">
+                            </div>
+                            <div class="col-3 mb-2">
+                                <input type="text" id="editNum" class="form-control" placeholder="Nº">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-5 mb-3">
+                                <input type="text" id="editBairro" class="form-control" placeholder="Bairro">
+                            </div>
+                            <div class="col-5 mb-3">
+                                <input type="text" id="editCidade" class="form-control" placeholder="Cidade">
+                            </div>
+                            <div class="col-2 mb-3">
+                                <input type="text" id="editUF" class="form-control" placeholder="UF">
+                            </div>
+                        </div>
+
+                        <hr>
+                        <h6 class="text-muted">Segurança</h6>
+                        <div class="mb-3">
+                            <label>Nova Senha (Deixe em branco para manter a atual)</label>
+                            <input type="password" id="editPassword" class="form-control" placeholder="******">
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-primary" onclick="salvarNovaSenha()">Salvar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarPerfil()">Salvar Alterações</button>
                 </div>
             </div>
         </div>

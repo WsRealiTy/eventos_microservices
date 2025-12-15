@@ -1,7 +1,5 @@
 // frontend/js/portaria.js
 
-//const API_BASE_URL = "http://localhost:8080"; 
-
 // --- GESTÃO DE ESTADO ONLINE/OFFLINE ---
 
 function updateStatus() {
@@ -36,7 +34,6 @@ async function carregarOpcoesEventos() {
     const select = document.getElementById('eventoId');
     
     try {
-        // CORREÇÃO: Adicionado headers com Token para autenticação
         const token = getAdminToken();
         const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
 
@@ -44,7 +41,6 @@ async function carregarOpcoesEventos() {
         
         if (res.ok) {
             const eventos = await res.json();
-            // Salva em cache para quando estiver offline
             localStorage.setItem('eventos_cache', JSON.stringify(eventos));
             renderizarOpcoes(eventos);
         } else {
@@ -52,7 +48,6 @@ async function carregarOpcoesEventos() {
             throw new Error('Falha ao buscar eventos');
         }
     } catch (e) {
-        // Se falhar (offline), tenta carregar do cache
         console.warn('Usando cache de eventos:', e);
         const cache = localStorage.getItem('eventos_cache');
         if (cache) {
@@ -70,7 +65,6 @@ function renderizarOpcoes(eventos) {
     eventos.forEach(evt => {
         const option = document.createElement('option');
         option.value = evt.id;
-        // Mostra "ID - Nome"
         option.text = `${evt.id} - ${evt.titulo || evt.title}`; 
         select.appendChild(option);
     });
@@ -98,7 +92,6 @@ function limparFila() {
 
 // --- AÇÕES DO USUÁRIO ---
 
-// 1. Check-in Simples (Usuário já existe)
 async function realizarCheckIn() {
     const email = document.getElementById('emailCheckin').value;
     const eventoId = document.getElementById('eventoId').value;
@@ -122,13 +115,11 @@ async function realizarCheckIn() {
     }
 }
 
-// 2. Cadastro Rápido + Check-in
 async function cadastrarECheckIn() {
     const nome = document.getElementById('novoNome').value;
     const email = document.getElementById('novoEmail').value;
     const eventoId = document.getElementById('eventoId').value;
 
-    // CORREÇÃO: O erro "Preencha todos os campos" ocorria porque o eventoId era vazio (devido à falha no carregamento acima).
     if(!nome || !email || !eventoId) return alert('Preencha todos os campos (Nome, Email e Selecione o Evento).');
 
     const payload = { 
@@ -194,7 +185,6 @@ async function sincronizarAgora() {
 async function processarItemUnitario(item) {
     let userId = null;
     
-    // --- Lógica de obter usuário ---
     if (item.tipo === 'CADASTRO_NOVO') {
         const resCreate = await fetch(`${API_BASE_URL}/users`, {
             method: 'POST',
@@ -202,7 +192,7 @@ async function processarItemUnitario(item) {
             body: JSON.stringify({
                 name: item.nome,
                 email: item.email,
-                password: '123', // Senha padrão
+                password: '123', 
                 role: 'PARTICIPANTE'
             })
         });
@@ -230,7 +220,6 @@ async function processarItemUnitario(item) {
         userId = user.id;
     }
     
-    // Inscrição
     const resInscricao = await fetch(`${API_BASE_URL}/inscricoes`, {
         method: 'POST',
         headers: {
@@ -245,7 +234,6 @@ async function processarItemUnitario(item) {
         if (!txt.includes("já inscrito")) throw new Error("Erro na inscrição: " + txt);
     }
 
-    // Presença (Check-in)
     const resPresenca = await fetch(`${API_BASE_URL}/presencas`, {
         method: 'POST',
         headers: {
@@ -266,4 +254,78 @@ async function processarItemUnitario(item) {
 
 function getAdminToken() {
     return localStorage.getItem('token') || ''; 
+}
+
+// --- FUNÇÕES DE PERFIL (Adicionadas) ---
+
+function getUserIdFromToken() {
+    const token = getAdminToken();
+    if (!token) return null;
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload).id;
+    } catch (e) {
+        return null;
+    }
+}
+
+async function abrirModalPerfil() {
+    const userId = getUserIdFromToken();
+    if(!userId) return alert("Erro de autenticação.");
+
+    const modalEl = document.getElementById('editProfileModal');
+    const modal = new bootstrap.Modal(modalEl);
+    
+    const res = await fetchAuth(`/users/${userId}`);
+    if(res.ok) {
+        const user = await res.json();
+        
+        document.getElementById('editName').value = user.name || '';
+        document.getElementById('editCpf').value = user.cpf || '';
+        document.getElementById('editEmail').value = user.email || '';
+        
+        document.getElementById('editRua').value = user.enderecoRua || '';
+        document.getElementById('editNum').value = user.enderecoNumero || '';
+        document.getElementById('editBairro').value = user.enderecoBairro || '';
+        document.getElementById('editCidade').value = user.enderecoCidade || '';
+        document.getElementById('editUF').value = user.enderecoEstado || '';
+        
+        document.getElementById('editPassword').value = ''; 
+        
+        modal.show();
+    } else {
+        alert("Erro ao carregar perfil.");
+    }
+}
+
+async function salvarPerfil() {
+    const userId = getUserIdFromToken();
+    const payload = {
+        name: document.getElementById('editName').value,
+        cpf: document.getElementById('editCpf').value,
+        enderecoRua: document.getElementById('editRua').value,
+        enderecoNumero: document.getElementById('editNum').value,
+        enderecoBairro: document.getElementById('editBairro').value,
+        enderecoCidade: document.getElementById('editCidade').value,
+        enderecoEstado: document.getElementById('editUF').value,
+        password: document.getElementById('editPassword').value
+    };
+
+    const res = await fetchAuth(`/users/${userId}`, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+    });
+
+    if(res.ok) {
+        alert('Perfil atualizado com sucesso!');
+        const modalEl = document.getElementById('editProfileModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+    } else {
+        alert('Erro ao atualizar perfil.');
+    }
 }
