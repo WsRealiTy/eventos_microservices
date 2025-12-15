@@ -1,5 +1,4 @@
-package com.eventos.event_service.logging;
-
+package com.eventos.user_service.logging;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.*;

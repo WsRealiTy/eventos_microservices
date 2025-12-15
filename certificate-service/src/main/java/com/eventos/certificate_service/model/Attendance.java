@@ -5,7 +5,7 @@ import lombok.Data;
 
 @Data
 @Entity
-@Table(name = "attendances") // Mapeia a tabela criada pelo outro serviço
+@Table(name = "attendances") 
 public class Attendance {
 
     @Id
