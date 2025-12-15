@@ -188,7 +188,7 @@ async function sincronizarAgora() {
 async function processarItemUnitario(item) {
     let userId = null;
     
-    // Logica para CADASTRO_NOVO
+    // --- Lógica de obter usuário (Mantida igual) ---
     if (item.tipo === 'CADASTRO_NOVO') {
         const resCreate = await fetch(`${API_BASE_URL}/users`, {
             method: 'POST',
@@ -208,9 +208,7 @@ async function processarItemUnitario(item) {
         if (!resCreate.ok) throw new Error("Falha ao criar usuário");
         const userCreated = await resCreate.json();
         userId = userCreated.id;
-    } 
-    // Logica para CHECKIN_EXISTENTE
-    else {
+    } else {
         const resList = await fetch(`${API_BASE_URL}/users`, {
             headers: {
                 'Authorization': `Bearer ${getAdminToken()}`
@@ -225,8 +223,7 @@ async function processarItemUnitario(item) {
         if (!user) throw new Error("Usuário não encontrado no banco.");
         userId = user.id;
     }
-
-    // 1. Garante Inscrição
+    
     const resInscricao = await fetch(`${API_BASE_URL}/inscricoes`, {
         method: 'POST',
         headers: {
@@ -241,24 +238,23 @@ async function processarItemUnitario(item) {
         if (!txt.includes("já inscrito")) throw new Error("Erro na inscrição: " + txt);
     }
 
-    // 2. Registra Presença (Attendance Service)
-    // MUDANÇA: URL corrigida e Payload com 'eventId' para bater com o Java
+    
     const resPresenca = await fetch(`${API_BASE_URL}/presencas`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${getAdminToken()}`
         },
-        // ATENÇÃO: 'eventId' (inglês) no JSON para o backend, 'item.eventoId' do form
+        // O Java Attendance espera 'eventId' (inglês)
         body: JSON.stringify({ 
             userId: userId, 
-            eventId: item.eventoId 
+            eventId: parseInt(item.eventoId) 
         })
     });
 
     if (!resPresenca.ok) {
         const errTxt = await resPresenca.text();
-        throw new Error("Erro no Check-in: " + errTxt);
+        throw new Error("Erro no Check-in final: " + errTxt);
     }
 }
 

@@ -17,7 +17,6 @@ import org.springframework.web.filter.OncePerRequestFilter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import java.util.Collections;
-import java.util.List;
 
 @Component
 public class JwtValidationFilter extends OncePerRequestFilter {
@@ -35,6 +34,7 @@ public class JwtValidationFilter extends OncePerRequestFilter {
             try {
                 String token = header.replace("Bearer ", "");
                 
+                // Valida o token usando a chave secreta
                 Claims claims = Jwts.parserBuilder()
                         .setSigningKey(Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8)))
                         .build()
@@ -45,20 +45,19 @@ public class JwtValidationFilter extends OncePerRequestFilter {
                 String role = claims.get("role", String.class);
                 
                 if (userEmail != null) {
-                    // Define a autoridade baseada na role do token
                     SimpleGrantedAuthority authority = new SimpleGrantedAuthority("ROLE_" + role);
                     
                     UsernamePasswordAuthenticationToken auth = new UsernamePasswordAuthenticationToken(
                             userEmail, null, Collections.singletonList(authority));
                     
-                    // Passa o e-mail como 'details' para usarmos no Controller
+                    // Passa o e-mail nos detalhes para o Controller usar
                     auth.setDetails(userEmail);
                     
                     SecurityContextHolder.getContext().setAuthentication(auth);
                 }
             } catch (Exception e) {
-                // Token inválido ou expirado - Apenas ignora e segue (o SecurityConfig vai barrar se for endpoint privado)
-                System.err.println("Erro ao validar token no Attendance: " + e.getMessage());
+                // Token inválido: o SecurityConfig vai barrar se a rota for protegida
+                System.err.println("Token inválido no Attendance: " + e.getMessage());
             }
         }
         

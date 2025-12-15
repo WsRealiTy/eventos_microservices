@@ -13,12 +13,11 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtValidationFilter jwtValidationFilter) throws Exception {
         http
-            .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.disable()) // Desabilita CSRF para APIs REST
             .authorizeHttpRequests(auth -> auth
-                // Permite verificação de saúde e Swagger se tiver
-                .requestMatchers(HttpMethod.GET, "/actuator/**").permitAll()
-                // Endpoint de sincronização e listagem protegidos
-                .anyRequest().authenticated()
+                .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll() // Permite pre-flight do CORS
+                .requestMatchers("/actuator/**").permitAll() // Permite health check
+                .anyRequest().authenticated() // Exige token para todo o resto
             )
             .addFilterBefore(jwtValidationFilter, UsernamePasswordAuthenticationFilter.class);
 

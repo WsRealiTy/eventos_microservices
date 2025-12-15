@@ -1,9 +1,8 @@
 package com.eventos.certificate_service.service;
 
 import com.eventos.certificate_service.model.Certificate;
-import com.eventos.certificate_service.model.RegistrationCheck;
+import com.eventos.certificate_service.repository.AttendanceRepository; // NOVO IMPORT
 import com.eventos.certificate_service.repository.CertificateRepository;
-import com.eventos.certificate_service.repository.RegistrationCheckRepository;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -14,11 +13,12 @@ import java.util.UUID;
 public class CertificateService {
 
     private final CertificateRepository repository;
-    private final RegistrationCheckRepository checkRepository;
+    private final AttendanceRepository attendanceRepository; // Repositório novo
 
-    public CertificateService(CertificateRepository repository, RegistrationCheckRepository checkRepository) {
+    // Injeção de dependência atualizada
+    public CertificateService(CertificateRepository repository, AttendanceRepository attendanceRepository) {
         this.repository = repository;
-        this.checkRepository = checkRepository;
+        this.attendanceRepository = attendanceRepository;
     }
 
     public Certificate issueCertificate(Long userId, Long eventId) {
@@ -28,10 +28,10 @@ public class CertificateService {
         }
 
         // 2. VERIFICAÇÃO DE OURO: O usuário estava lá?
-        RegistrationCheck inscricao = checkRepository.findByUsuarioIdAndEventoId(userId, eventId)
-                .orElseThrow(() -> new RuntimeException("Inscrição não encontrada."));
+        // CORREÇÃO: Verifica na tabela de attendances (Attendance Service)
+        boolean estevePresente = attendanceRepository.existsByUserIdAndEventId(userId, eventId);
 
-        if (!inscricao.isPresente()) {
+        if (!estevePresente) {
             throw new RuntimeException("Certificado negado: O participante não tem presença confirmada (Check-in).");
         }
 
@@ -49,7 +49,6 @@ public class CertificateService {
         return repository.findByUserId(userId);
     }
     
-    // Para validação pública
     public Certificate validarPorCodigo(String code) {
         return repository.findByCode(code);
     }
