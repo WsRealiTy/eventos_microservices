@@ -9,7 +9,7 @@
 </head>
 <body class="bg-light d-flex align-items-center justify-content-center vh-100">
 
-    <div class="card shadow p-4" style="max-width: 400px; width: 100%;">
+    <div class="card shadow p-4" style="max-width: 500px; width: 100%;">
         <h3 class="text-center mb-4">Acesso ao Sistema</h3>
         
         <ul class="nav nav-tabs mb-3" id="authTab" role="tablist">
@@ -39,13 +39,41 @@
             <div class="tab-pane fade" id="register">
                 <form id="registerForm">
                     <div class="mb-3">
-                        <label>Nome</label>
+                        <label>Nome Completo</label>
                         <input type="text" id="regName" class="form-control" required>
                     </div>
-                    <div class="mb-3">
-                        <label>Email</label>
-                        <input type="email" id="regEmail" class="form-control" required>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label>CPF</label>
+                            <input type="text" id="regCpf" class="form-control" placeholder="000.000.000-00">
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label>Email</label>
+                            <input type="email" id="regEmail" class="form-control" required>
+                        </div>
                     </div>
+                    
+                    <div class="mb-2 border-bottom pb-1"><small class="text-muted fw-bold">Endereço</small></div>
+                    <div class="row">
+                        <div class="col-8 mb-2">
+                            <input type="text" id="regRua" class="form-control" placeholder="Rua">
+                        </div>
+                        <div class="col-4 mb-2">
+                            <input type="text" id="regNum" class="form-control" placeholder="Nº">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-5 mb-3">
+                            <input type="text" id="regBairro" class="form-control" placeholder="Bairro">
+                        </div>
+                        <div class="col-5 mb-3">
+                            <input type="text" id="regCidade" class="form-control" placeholder="Cidade">
+                        </div>
+                        <div class="col-2 mb-3">
+                            <input type="text" id="regUF" class="form-control" placeholder="UF">
+                        </div>
+                    </div>
+
                     <div class="mb-3">
                         <label>Senha</label>
                         <input type="password" id="regPass" class="form-control" required>

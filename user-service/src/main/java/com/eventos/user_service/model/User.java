@@ -30,12 +30,11 @@ public class User {
     private String password;
 
     private String role;
-    
+    private String cpf;
+    private String enderecoRua;
+    private String enderecoNumero;
+    private String enderecoBairro;
+    private String enderecoCidade;
+    private String enderecoEstado;
 
-    public String getEmail() { return email; }
-    public String getPassword() { return password; }
-    public String getRole() { return role; }
-    public Long getId() { return id; }
-    public void setPassword(String password) { this.password = password; }
-    public void setRole(String role) { this.role = role; }
 }

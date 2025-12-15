@@ -146,8 +146,6 @@ async function inscrever(eventoId) {
     }
 }
 
-// checkIn removido daqui pois é função da portaria/admin agora.
-
 function toggleCreateEvent() {
     const form = document.getElementById('createEventForm');
     if(form) form.classList.toggle('d-none');
@@ -165,6 +163,66 @@ async function cadastrarNovoEvento() {
 
     toggleCreateEvent();
     loadEvents();
+}
+
+// --- FUNÇÕES DE EDIÇÃO DE PERFIL ---
+
+async function abrirModalPerfil() {
+    const userId = getUserIdFromToken();
+    const modalEl = document.getElementById('editProfileModal');
+    const modal = new bootstrap.Modal(modalEl);
+    
+    // Busca dados atuais
+    const res = await fetchAuth(`/users/${userId}`);
+    if(res.ok) {
+        const user = await res.json();
+        
+        // Preenche campos
+        document.getElementById('editName').value = user.name || '';
+        document.getElementById('editCpf').value = user.cpf || '';
+        document.getElementById('editEmail').value = user.email || '';
+        
+        document.getElementById('editRua').value = user.enderecoRua || '';
+        document.getElementById('editNum').value = user.enderecoNumero || '';
+        document.getElementById('editBairro').value = user.enderecoBairro || '';
+        document.getElementById('editCidade').value = user.enderecoCidade || '';
+        document.getElementById('editUF').value = user.enderecoEstado || '';
+        
+        document.getElementById('editPassword').value = ''; // Senha sempre vazia
+        
+        modal.show();
+    } else {
+        alert("Erro ao carregar perfil.");
+    }
+}
+
+async function salvarPerfil() {
+    const userId = getUserIdFromToken();
+    const payload = {
+        name: document.getElementById('editName').value,
+        cpf: document.getElementById('editCpf').value,
+        enderecoRua: document.getElementById('editRua').value,
+        enderecoNumero: document.getElementById('editNum').value,
+        enderecoBairro: document.getElementById('editBairro').value,
+        enderecoCidade: document.getElementById('editCidade').value,
+        enderecoEstado: document.getElementById('editUF').value,
+        password: document.getElementById('editPassword').value
+    };
+
+    const res = await fetchAuth(`/users/${userId}`, {
+        method: 'PUT',
+        body: JSON.stringify(payload)
+    });
+
+    if(res.ok) {
+        alert('Perfil atualizado com sucesso!');
+        // Fecha o modal
+        const modalEl = document.getElementById('editProfileModal');
+        const modal = bootstrap.Modal.getInstance(modalEl);
+        modal.hide();
+    } else {
+        alert('Erro ao atualizar perfil.');
+    }
 }
 
 // Inicialização segura

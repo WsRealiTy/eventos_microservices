@@ -125,4 +125,36 @@ public class UserController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar senha.");
         }
     }
+
+    // 1. Endpoint para buscar dados de um usuário específico (Para Edição e Certificado)
+    @GetMapping("/users/{id}")
+    public ResponseEntity<User> buscarPorId(@PathVariable Long id) {
+        return repository.findById(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // 2. Endpoint unificado para atualizar Perfil (Dados + Senha Opcional)
+    // Substitui o antigo /users/{id}/senha se desejar, ou mantém ambos.
+    @PutMapping("/users/{id}")
+    public ResponseEntity<?> atualizarPerfil(@PathVariable Long id, @RequestBody User dados) {
+        return repository.findById(id).map(user -> {
+            // Atualiza dados cadastrais
+            user.setName(dados.getName());
+            user.setCpf(dados.getCpf());
+            user.setEnderecoRua(dados.getEnderecoRua());
+            user.setEnderecoNumero(dados.getEnderecoNumero());
+            user.setEnderecoBairro(dados.getEnderecoBairro());
+            user.setEnderecoCidade(dados.getEnderecoCidade());
+            user.setEnderecoEstado(dados.getEnderecoEstado());
+
+            // Atualiza senha APENAS se o usuário enviou uma nova
+            if (dados.getPassword() != null && !dados.getPassword().isEmpty()) {
+                user.setPassword(passwordEncoder.encode(dados.getPassword()));
+            }
+
+            repository.save(user);
+            return ResponseEntity.ok("Perfil atualizado com sucesso!");
+        }).orElse(ResponseEntity.notFound().build());
+    }
 }

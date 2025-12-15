@@ -26,22 +26,33 @@ document.getElementById('loginForm').addEventListener('submit', async (e) => {
 
 document.getElementById('registerForm').addEventListener('submit', async (e) => {
     e.preventDefault();
-    const name = document.getElementById('regName').value;
-    const email = document.getElementById('regEmail').value;
-    const password = document.getElementById('regPass').value;
+    
+    // Coleta dos dados completos
+    const payload = {
+        name: document.getElementById('regName').value,
+        email: document.getElementById('regEmail').value,
+        password: document.getElementById('regPass').value,
+        cpf: document.getElementById('regCpf').value,
+        enderecoRua: document.getElementById('regRua').value,
+        enderecoNumero: document.getElementById('regNum').value,
+        enderecoBairro: document.getElementById('regBairro').value,
+        enderecoCidade: document.getElementById('regCidade').value,
+        enderecoEstado: document.getElementById('regUF').value,
+        role: "PARTICIPANTE"
+    };
 
     try {
         const res = await fetch(`${API_BASE_URL}/users`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ name, email, password, role: "PARTICIPANTE" })
+            body: JSON.stringify(payload)
         });
 
         if (res.ok) {
             alert('Cadastro realizado! Faça login.');
             document.getElementById('login-tab').click();
         } else {
-            alert('Erro no cadastro.');
+            alert('Erro no cadastro. Verifique se o e-mail já existe.');
         }
     } catch (err) {
         alert('Erro ao conectar.');

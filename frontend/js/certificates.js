@@ -1,6 +1,6 @@
 // frontend/js/certificates.js
 
-// Função auxiliar para pegar o ID do usuário do Token (Necessária aqui pois este arquivo roda separado do dashboard)
+// Função auxiliar para pegar o ID do usuário do Token
 function getUserIdFromToken() {
     const token = localStorage.getItem('token');
     if (!token) return null;
@@ -16,8 +16,22 @@ function getUserIdFromToken() {
     }
 }
 
-function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
-    const nomeUsuario = localStorage.getItem('userEmail') || "Participante";
+async function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
+    // 1. Busca dados atualizados do usuário (Nome e CPF)
+    const userId = getUserIdFromToken();
+    let nomeUsuario = "Participante";
+    let cpfUsuario = "";
+
+    try {
+        const resUser = await fetchAuth(`/users/${userId}`);
+        if(resUser.ok) {
+            const user = await resUser.json();
+            nomeUsuario = user.name;
+            cpfUsuario = user.cpf ? `CPF: ${user.cpf}` : "";
+        }
+    } catch (e) {
+        console.error("Erro ao buscar dados do usuário para certificado", e);
+    }
     
     const dataFormatada = new Date(dataEmissao).toLocaleDateString('pt-BR', {
         day: '2-digit', month: 'long', year: 'numeric'
@@ -64,6 +78,11 @@ function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
                     display: inline-block; 
                     min-width: 400px; 
                     padding: 5px 20px;
+                }
+                .cpf {
+                    font-size: 16px;
+                    color: #666;
+                    margin-top: 5px;
                 }
                 
                 .codigo-area {
@@ -114,6 +133,7 @@ function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
                 
                 <p>Certificamos que</p>
                 <div class="destaque">${nomeUsuario}</div>
+                <div class="cpf">${cpfUsuario}</div>
                 
                 <p>participou com êxito do evento</p>
                 <div class="destaque">Evento ID #${eventId}</div>
