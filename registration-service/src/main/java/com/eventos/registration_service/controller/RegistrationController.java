@@ -88,7 +88,7 @@ public class RegistrationController {
         }).orElse(ResponseEntity.notFound().build());
     }
 
-    // Endpoint específico para Check-in chamado pelo Frontend
+    /* Endpoint específico para Check-in chamado pelo Frontend
     @PostMapping("/presenca")
     public ResponseEntity<?> registrarPresenca(@RequestBody InscricaoDTO dto) {
         Long userId = resolverUserId(dto.userId);
@@ -101,13 +101,13 @@ public class RegistrationController {
 
         Registration reg = optReg.get();
         
-        // Evita enviar e-mail duplicado se já estava presente
-        boolean jaEstavaPresente = reg.isPresente(); // Assumindo getter isPresente ou getPresente
+       
+        boolean jaEstavaPresente = reg.isPresente(); 
 
         reg.setPresente(true); 
         repository.save(reg);
         
-        // CORREÇÃO: Enviar e-mail de presença
+        
         if (!jaEstavaPresente) {
             String userEmail = getUserEmailFromToken();
             if (userEmail != null) {
@@ -117,7 +117,7 @@ public class RegistrationController {
         }
         
         return ResponseEntity.ok("Check-in realizado com sucesso!");
-    }
+    }*/
 
     @GetMapping("/{id}")
     public ResponseEntity<Registration> buscarPorId(@PathVariable Long id) {

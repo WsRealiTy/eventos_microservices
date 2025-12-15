@@ -24,7 +24,7 @@ function updateStatus() {
 window.addEventListener('online', updateStatus);
 window.addEventListener('offline', updateStatus);
 
-// MUDANÇA: Carregar eventos ao iniciar a página
+// Carregar eventos ao iniciar a página
 window.addEventListener('load', () => {
     updateStatus();
     carregarOpcoesEventos(); 
@@ -226,6 +226,7 @@ async function processarItemUnitario(item) {
         userId = user.id;
     }
 
+    // 1. Garante Inscrição
     const resInscricao = await fetch(`${API_BASE_URL}/inscricoes`, {
         method: 'POST',
         headers: {
@@ -240,16 +241,25 @@ async function processarItemUnitario(item) {
         if (!txt.includes("já inscrito")) throw new Error("Erro na inscrição: " + txt);
     }
 
-    const resPresenca = await fetch(`${API_BASE_URL}/inscricoes/presenca`, {
+    // 2. Registra Presença (Attendance Service)
+    // MUDANÇA: URL corrigida e Payload com 'eventId' para bater com o Java
+    const resPresenca = await fetch(`${API_BASE_URL}/presencas`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${getAdminToken()}`
         },
-        body: JSON.stringify({ userId: userId, eventoId: item.eventoId })
+        // ATENÇÃO: 'eventId' (inglês) no JSON para o backend, 'item.eventoId' do form
+        body: JSON.stringify({ 
+            userId: userId, 
+            eventId: item.eventoId 
+        })
     });
 
-    if (!resPresenca.ok) throw new Error("Erro no Check-in final");
+    if (!resPresenca.ok) {
+        const errTxt = await resPresenca.text();
+        throw new Error("Erro no Check-in: " + errTxt);
+    }
 }
 
 function getAdminToken() {
