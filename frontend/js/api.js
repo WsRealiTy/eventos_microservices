@@ -36,28 +36,35 @@ function logout() {
     window.location.href = 'index.html';
 }
 
+// Em frontend/js/api.js
+
 function verificarAdmin() {
     const token = localStorage.getItem('token');
     if (!token) return;
 
     try {
         const base64Url = token.split('.')[1];
-        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        let base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+
+        while (base64.length % 4) {
+            base64 += '=';
+        }
+
         const jsonString = decodeURIComponent(window.atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
 
         const payload = JSON.parse(jsonString);
 
+        // Verifica se a role é exatamente 'ADMIN'
         if (payload.role === 'ADMIN') {
             adicionarBotaoPortaria();
             
-            // Lógica nova: Mostrar botão de criar evento se ele existir na página
             const btnCriar = document.getElementById('btnCriarEvento');
             if (btnCriar) btnCriar.classList.remove('d-none');
         }
     } catch (e) {
-        console.error("Erro ao ler permissões", e);
+        console.error("Erro ao ler permissões ou token inválido", e);
     }
 }
 

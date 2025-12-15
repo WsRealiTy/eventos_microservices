@@ -30,10 +30,20 @@ async function loadEvents() {
 }
 
 async function loadRegistrations() {
-    const res = await fetchAuth('/inscricoes');
-    if (!res) return;
+    const resRegs = await fetchAuth('/inscricoes');
+    if (!resRegs) return;
+    const regs = await resRegs.json();
 
-    const regs = await res.json();
+    const resEvents = await fetchAuth('/eventos');
+    let eventosMap = {};
+    
+    if (resEvents && resEvents.ok) {
+        const eventos = await resEvents.json();
+        eventos.forEach(evt => {
+            eventosMap[evt.id] = evt.titulo || evt.title;
+        });
+    }
+
     const tbody = document.getElementById('myRegistrationsTable');
     if (tbody) {
         tbody.innerHTML = '';
@@ -53,9 +63,12 @@ async function loadRegistrations() {
                 actionBtn = `<a href="certificados.html" class="btn btn-sm btn-outline-primary">Ver Certificado</a>`;
             }
 
+            const nomeEvento = eventosMap[reg.eventoId] || 'Evento não encontrado';
+
             const row = `
                 <tr>
                     <td>${reg.eventoId}</td>
+                    <td><strong>${nomeEvento}</strong></td>
                     <td>${status}</td>
                     <td>${actionBtn}</td>
                 </tr>
