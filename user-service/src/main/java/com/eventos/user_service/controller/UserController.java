@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,13 +16,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eventos.user_service.dto.LoginDTO;
 import com.eventos.user_service.model.User;
 import com.eventos.user_service.repository.UserRepository;
-
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import com.eventos.user_service.service.EmailClient;
+import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
 // @CrossOrigin(origins = "*") 
@@ -31,6 +30,9 @@ public class UserController {
 
     private final UserRepository repository;
     private final BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+
+    @Autowired
+    private EmailClient emailClient;
 
     @Value("${jwt.secret}")
     private String secret;
@@ -51,10 +53,17 @@ public class UserController {
             }
 
             user.setPassword(passwordEncoder.encode(user.getPassword()));
-            
             if (user.getRole() == null) user.setRole("PARTICIPANTE");
 
             User salvo = repository.save(user);
+
+            // NOVO: Envia e-mail de boas-vindas
+            emailClient.enviarEmail(
+                salvo.getEmail(), 
+                "Bem-vindo ao EventosSystem", 
+                "Olá " + salvo.getName() + ", seu cadastro foi realizado com sucesso!"
+            );
+
             return ResponseEntity.status(HttpStatus.CREATED).body(salvo);
         } catch (Exception e) {
             e.printStackTrace();

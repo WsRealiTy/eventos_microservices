@@ -35,10 +35,22 @@ async function loadRegistrations() {
     tbody.innerHTML = '';
 
     regs.forEach(reg => {
-        const status = reg.presente ? '<span class="badge bg-success">Presente</span>' : '<span class="badge bg-warning">Pendente</span>';
-        const actionBtn = !reg.presente 
-            ? `<button onclick="checkIn(${reg.eventoId})" class="btn btn-sm btn-outline-success">Fazer Check-in</button>`
-            : `<a href="certificados.html" class="btn btn-sm btn-outline-primary">Ver Certificado</a>`;
+        const status = reg.presente 
+            ? '<span class="badge bg-success">Presente</span>' 
+            : '<span class="badge bg-warning">Pendente</span>';
+        
+        let actionBtn = '';
+        
+        if (!reg.presente) {
+            // Se não foi no evento, pode fazer check-in OU cancelar
+            actionBtn = `
+                <button onclick="checkIn(${reg.eventoId})" class="btn btn-sm btn-outline-success me-1">Check-in</button>
+                <button onclick="cancelarInscricao(${reg.id})" class="btn btn-sm btn-outline-danger">Cancelar</button>
+            `;
+        } else {
+            // Se já foi, só vê certificado
+            actionBtn = `<a href="certificados.html" class="btn btn-sm btn-outline-primary">Ver Certificado</a>`;
+        }
 
         const row = `
             <tr>
@@ -50,6 +62,21 @@ async function loadRegistrations() {
         `;
         tbody.innerHTML += row;
     });
+}
+
+async function cancelarInscricao(idInscricao) {
+    if(!confirm("Tem certeza que deseja cancelar sua inscrição?")) return;
+
+    const res = await fetchAuth(`/inscricoes/${idInscricao}`, {
+        method: 'DELETE'
+    });
+
+    if (res.ok) {
+        alert('Inscrição cancelada!');
+        loadRegistrations(); // Atualiza a tabela
+    } else {
+        alert('Erro ao cancelar inscrição.');
+    }
 }
 
 async function inscrever(eventoId) {

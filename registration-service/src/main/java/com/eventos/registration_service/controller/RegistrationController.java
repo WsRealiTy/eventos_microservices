@@ -2,7 +2,6 @@ package com.eventos.registration_service.controller;
 
 import java.time.LocalDateTime;
 import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -13,9 +12,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.eventos.registration_service.model.Registration;
 import com.eventos.registration_service.repository.RegistrationRepo;
+import com.eventos.registration_service.service.EmailClient;
+import org.springframework.web.bind.annotation.DeleteMapping;
 
 @RestController
 @RequestMapping("/inscricoes")
@@ -24,10 +24,12 @@ public class RegistrationController {
     @Autowired
     private RegistrationRepo repository;
 
-    // DTO para receber os dados do JSON
+    @Autowired
+    private EmailClient emailClient;
+
     public static class InscricaoDTO {
         public Long eventoId;
-        public Long userId; // Opcional, usado apenas por ADMINs
+        public Long userId; 
     }
 
     @GetMapping
@@ -36,7 +38,7 @@ public class RegistrationController {
         return repository.findByUserId(userId);
     }
 
-    @PostMapping
+   @PostMapping
     public ResponseEntity<?> inscrever(@RequestBody InscricaoDTO dto) {
         Long userId = resolverUserId(dto.userId);
 
@@ -51,7 +53,39 @@ public class RegistrationController {
         reg.setPresente(false);
         
         repository.save(reg);
+
+        // NOVO: Enviar e-mail de confirmação
+        String userEmail = getUserEmailFromToken();
+        if (userEmail != null) {
+            emailClient.enviarEmail(userEmail, "Inscrição Confirmada", 
+                "Sua inscrição no evento (ID: " + dto.eventoId + ") foi realizada com sucesso.");
+        }
+
         return ResponseEntity.ok(reg);
+    }
+
+    // NOVO: Endpoint de Cancelamento
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> cancelar(@PathVariable Long id) {
+        Long userId = getAuthenticatedUserId(); // Pega ID do token
+
+        return repository.findById(id).map(reg -> {
+            // Verifica se a inscrição pertence ao usuário logado (Segurança)
+            if (!reg.getUserId().equals(userId)) {
+                return ResponseEntity.status(403).body("Acesso negado a esta inscrição.");
+            }
+
+            repository.delete(reg);
+
+            // Envia e-mail de cancelamento
+            String userEmail = getUserEmailFromToken();
+            if (userEmail != null) {
+                emailClient.enviarEmail(userEmail, "Inscrição Cancelada", 
+                    "Sua inscrição no evento (ID: " + reg.getEventoId() + ") foi cancelada.");
+            }
+
+            return ResponseEntity.ok("Inscrição cancelada com sucesso.");
+        }).orElse(ResponseEntity.notFound().build());
     }
 
     // Endpoint específico para Check-in chamado pelo Frontend
@@ -105,5 +139,13 @@ public class RegistrationController {
         } catch (NumberFormatException e) {
             throw new RuntimeException("Token inválido: ID do usuário não é numérico.");
         }
+    }
+
+    private String getUserEmailFromToken() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        if (auth != null && auth.getDetails() instanceof String) {
+            return (String) auth.getDetails();
+        }
+        return null; // ou lançar exceção
     }
 }
