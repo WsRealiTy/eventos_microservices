@@ -10,9 +10,14 @@
         <div class="container">
             <a class="navbar-brand" href="#">EventosSystem</a>
             <div class="collapse navbar-collapse">
-                <ul class="navbar-nav ms-auto">
+                <ul class="navbar-nav ms-auto" id="navMenu">
                     <li class="nav-item"><a class="nav-link active" href="painel.html">Eventos</a></li>
                     <li class="nav-item"><a class="nav-link" href="certificados.html">Certificados</a></li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#changePasswordModal">Alterar Senha</a>
+                    </li>
+
                     <li class="nav-item"><button class="btn btn-danger btn-sm ms-3" onclick="logout()">Sair</button></li>
                 </ul>
             </div>
@@ -49,11 +54,34 @@
                     </tr>
                 </thead>
                 <tbody id="myRegistrationsTable">
-                    </tbody>
+                </tbody>
             </table>
         </div>
     </div>
 
+    <div class="modal fade" id="changePasswordModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Alterar Senha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label>Nova Senha</label>
+                        <input type="password" id="newPasswordInput" class="form-control" placeholder="Digite a nova senha">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" onclick="salvarNovaSenha()">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script src="js/api.js"></script>
     <script src="js/dashboard.js"></script>
 </body>

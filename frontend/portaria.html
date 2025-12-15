@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portaria - Check-in e Cadastro</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .offline-indicator {
+            display: none;
+            background-color: #dc3545;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+        .online-indicator {
+            background-color: #198754;
+            color: white;
+            text-align: center;
+            padding: 5px;
+            font-size: 0.8em;
+        }
+    </style>
+</head>
+<body class="bg-light">
+
+    <div id="offlineBanner" class="offline-indicator">
+        ⚠️ MODO OFFLINE ATIVADO - Os dados serão salvos localmente.
+    </div>
+    <div id="onlineBanner" class="online-indicator">
+        🟢 Sistema Online
+    </div>
+
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6">
+                <div class="card shadow">
+                    <div class="card-header bg-primary text-white">
+                        <h4 class="mb-0">Portaria do Evento</h4>
+                    </div>
+                    <div class="card-body">
+                        
+                        <div class="mb-3">
+                            <label class="form-label">ID do Evento:</label>
+                            <input type="number" id="eventoId" class="form-control" placeholder="Ex: 1" value="1">
+                        </div>
+
+                        <hr>
+
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" id="checkin-tab" data-bs-toggle="tab" data-bs-target="#checkin-pane" type="button">Check-in Rápido</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="cadastro-tab" data-bs-toggle="tab" data-bs-target="#cadastro-pane" type="button">Novo Participante</button>
+                            </li>
+                        </ul>
+
+                        <div class="tab-content mt-3" id="myTabContent">
+                            <div class="tab-pane fade show active" id="checkin-pane">
+                                <div class="mb-3">
+                                    <label>E-mail do Participante:</label>
+                                    <input type="email" id="emailCheckin" class="form-control" placeholder="cliente@email.com">
+                                </div>
+                                <button onclick="realizarCheckIn()" class="btn btn-success w-100">Confirmar Presença</button>
+                            </div>
+
+                            <div class="tab-pane fade" id="cadastro-pane">
+                                <div class="mb-3">
+                                    <label>Nome Completo:</label>
+                                    <input type="text" id="novoNome" class="form-control">
+                                </div>
+                                <div class="mb-3">
+                                    <label>E-mail:</label>
+                                    <input type="email" id="novoEmail" class="form-control">
+                                </div>
+                                <p class="text-muted small">O participante completará o cadastro no portal depois.</p>
+                                <button onclick="cadastrarECheckIn()" class="btn btn-primary w-100">Cadastrar e Dar Presença</button>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <div class="card mt-4 border-warning">
+                    <div class="card-body">
+                        <h5>Sincronização Pendente</h5>
+                        <p>Itens salvos localmente: <strong id="pendentesCount">0</strong></p>
+                        <button id="btnSync" onclick="sincronizarAgora()" class="btn btn-warning w-100" disabled>
+                             Sincronizar com Servidor
+                        </button>
+                        <div id="logSync" class="mt-2 text-small text-muted" style="max-height: 100px; overflow-y: auto;"></div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <script src="js/portaria.js"></script>
+</body>
+</html>

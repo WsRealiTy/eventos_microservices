@@ -13,7 +13,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import com.eventos.user_service.dto.LoginDTO;
@@ -101,6 +103,26 @@ public class UserController {
         } catch (Exception e) {
             e.printStackTrace(); 
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro no servidor: " + e.getMessage());
+        }
+    }
+
+    @PutMapping("/users/{id}/senha")
+    public ResponseEntity<?> atualizarSenha(@PathVariable Long id, @RequestBody Map<String, String> payload) {
+        try {
+            String novaSenha = payload.get("password");
+            
+            if (novaSenha == null || novaSenha.isEmpty()) {
+                return ResponseEntity.badRequest().body("A nova senha é obrigatória.");
+            }
+
+            return repository.findById(id).map(user -> {
+                user.setPassword(passwordEncoder.encode(novaSenha)); // Criptografa antes de salvar
+                repository.save(user);
+                return ResponseEntity.ok("Senha atualizada com sucesso!");
+            }).orElse(ResponseEntity.notFound().build());
+            
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body("Erro ao atualizar senha.");
         }
     }
 }
