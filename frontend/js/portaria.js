@@ -1,6 +1,6 @@
 // frontend/js/portaria.js
 
-const API_BASE_URL = "http://localhost:8080"; 
+//const API_BASE_URL = "http://localhost:8080"; 
 
 // --- GESTÃO DE ESTADO ONLINE/OFFLINE ---
 
