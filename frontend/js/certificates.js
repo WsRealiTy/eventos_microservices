@@ -142,7 +142,6 @@ async function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
 
                 <div class="codigo-area">
                     <p>Este documento possui autenticidade verificável.</p>
-                    <p>Acesse: <span class="validacao-link">http://localhost:8080/frontend/validar.html</span></p>
                     <p>Código de validação:</p>
                     <span class="uuid">${codigoValidacao}</span>
                 </div>
