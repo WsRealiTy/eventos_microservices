@@ -1,37 +1,5 @@
-const API_BASE_URL = "http://localhost:8080"; 
-
-async function fetchAuth(endpoint, options = {}) {
-    const token = localStorage.getItem('token');
-    
-    if (!token) {
-        window.location.href = 'index.html';
-        return;
-    }
-
-    const headers = {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`,
-        ...options.headers
-    };
-
-    const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-        ...options,
-        headers
-    });
-
-    if (response.status === 403 || response.status === 401) {
-        alert("Sessão expirada. Faça login novamente.");
-        logout();
-    }
-
-    return response;
-}
-
-function logout() {
-    localStorage.removeItem('token');
-    localStorage.removeItem('userEmail');
-    window.location.href = 'index.html';
-}
+// frontend/js/dashboard.js
+// Observação: API_BASE_URL, fetchAuth e logout são herdados de api.js
 
 async function loadEvents() {
     const res = await fetchAuth('/eventos');
@@ -161,7 +129,6 @@ async function cadastrarNovoEvento() {
     loadEvents();
 }
 
-// --- FUNÇÃO CORRIGIDA: SALVAR NOVA SENHA ---
 async function salvarNovaSenha() {
     const novaSenha = document.getElementById('newPasswordInput').value;
     
@@ -178,7 +145,6 @@ async function salvarNovaSenha() {
         const base64Url = token.split('.')[1];
         const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
         
-        // CORREÇÃO AQUI: Dividi em duas linhas para garantir que os parênteses fechem corretamente
         const jsonString = decodeURIComponent(window.atob(base64).split('').map(function(c) {
             return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
         }).join(''));
@@ -199,7 +165,6 @@ async function salvarNovaSenha() {
     if (res.ok) {
         alert("Senha alterada com sucesso! Faça login novamente com a nova senha.");
         
-        // Tenta fechar o modal visualmente usando o Bootstrap
         const modalEl = document.getElementById('changePasswordModal');
         if (typeof bootstrap !== 'undefined' && modalEl) {
             const modal = bootstrap.Modal.getInstance(modalEl);
@@ -242,7 +207,6 @@ function adicionarBotaoPortaria() {
         return;
     }
     
-    // Verifica se já não foi adicionado para evitar duplicidade
     if(document.getElementById('btnPortaria')) return;
 
     const li = document.createElement('li');

@@ -13,7 +13,7 @@ function updateStatus() {
     const btnSync = document.getElementById('btnSync');
     if (isOnline && pendentes.length > 0) {
         btnSync.disabled = false;
-        btnSync.innerText = `🔄 Sincronizar (${pendentes.length} itens)`;
+        btnSync.innerText = `Sincronizar (${pendentes.length} itens)`;
     } else {
         btnSync.disabled = true;
     }
@@ -23,7 +23,53 @@ function updateStatus() {
 
 window.addEventListener('online', updateStatus);
 window.addEventListener('offline', updateStatus);
-window.addEventListener('load', updateStatus);
+
+// MUDANÇA: Carregar eventos ao iniciar a página
+window.addEventListener('load', () => {
+    updateStatus();
+    carregarOpcoesEventos(); 
+});
+
+// --- LÓGICA DO DROPDOWN DE EVENTOS ---
+
+async function carregarOpcoesEventos() {
+    const select = document.getElementById('eventoId');
+    
+    try {
+        // Tenta buscar online
+        const res = await fetch(`${API_BASE_URL}/eventos`);
+        if (res.ok) {
+            const eventos = await res.json();
+            // Salva em cache para quando estiver offline
+            localStorage.setItem('eventos_cache', JSON.stringify(eventos));
+            renderizarOpcoes(eventos);
+        } else {
+            throw new Error('Falha ao buscar');
+        }
+    } catch (e) {
+        // Se falhar (offline), tenta carregar do cache
+        console.warn('Usando cache de eventos:', e);
+        const cache = localStorage.getItem('eventos_cache');
+        if (cache) {
+            renderizarOpcoes(JSON.parse(cache));
+        } else {
+            select.innerHTML = '<option value="">Sem eventos (Conecte-se para carregar)</option>';
+        }
+    }
+}
+
+function renderizarOpcoes(eventos) {
+    const select = document.getElementById('eventoId');
+    select.innerHTML = '<option value="" disabled selected>Selecione um evento</option>';
+    
+    eventos.forEach(evt => {
+        const option = document.createElement('option');
+        option.value = evt.id;
+        // Mostra "ID - Nome"
+        option.text = `${evt.id} - ${evt.titulo || evt.title}`; 
+        select.appendChild(option);
+    });
+}
 
 // --- LÓGICA DE FILA OFFLINE ---
 
@@ -52,7 +98,7 @@ async function realizarCheckIn() {
     const email = document.getElementById('emailCheckin').value;
     const eventoId = document.getElementById('eventoId').value;
 
-    if(!email || !eventoId) return alert('Preencha todos os campos');
+    if(!email || !eventoId) return alert('Preencha o e-mail e selecione o evento.');
 
     const payload = { email, eventoId, tipo: 'CHECKIN_EXISTENTE' };
 
@@ -77,7 +123,7 @@ async function cadastrarECheckIn() {
     const email = document.getElementById('novoEmail').value;
     const eventoId = document.getElementById('eventoId').value;
 
-    if(!nome || !email || !eventoId) return alert('Preencha tudo');
+    if(!nome || !email || !eventoId) return alert('Preencha todos os campos.');
 
     const payload = { 
         nome, 
@@ -103,7 +149,7 @@ async function cadastrarECheckIn() {
     }
 }
 
-// --- LÓGICA DE SINCRONIZAÇÃO (O "CÉREBRO" DO SISTEMA) ---
+// --- LÓGICA DE SINCRONIZAÇÃO ---
 
 async function sincronizarAgora() {
     const fila = getFilaOffline();
@@ -139,7 +185,6 @@ async function sincronizarAgora() {
     }
 }
 
-// Função Auxiliar que faz as chamadas reais à API
 async function processarItemUnitario(item) {
     let userId = null;
     
@@ -166,7 +211,6 @@ async function processarItemUnitario(item) {
     } 
     // Logica para CHECKIN_EXISTENTE
     else {
-        // --- CORREÇÃO AQUI: Adicionado header Authorization ---
         const resList = await fetch(`${API_BASE_URL}/users`, {
             headers: {
                 'Authorization': `Bearer ${getAdminToken()}`
@@ -182,7 +226,6 @@ async function processarItemUnitario(item) {
         userId = user.id;
     }
 
-    // Passo 2: Garantir Inscrição
     const resInscricao = await fetch(`${API_BASE_URL}/inscricoes`, {
         method: 'POST',
         headers: {
@@ -197,7 +240,6 @@ async function processarItemUnitario(item) {
         if (!txt.includes("já inscrito")) throw new Error("Erro na inscrição: " + txt);
     }
 
-    // Passo 3: Registrar Presença (Check-in)
     const resPresenca = await fetch(`${API_BASE_URL}/inscricoes/presenca`, {
         method: 'POST',
         headers: {
