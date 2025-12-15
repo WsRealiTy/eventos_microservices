@@ -1,4 +1,4 @@
-// js/portaria.js
+// frontend/js/portaria.js
 
 const API_BASE_URL = "http://localhost:8080"; 
 
@@ -36,15 +36,20 @@ async function carregarOpcoesEventos() {
     const select = document.getElementById('eventoId');
     
     try {
-        // Tenta buscar online
-        const res = await fetch(`${API_BASE_URL}/eventos`);
+        // CORREÇÃO: Adicionado headers com Token para autenticação
+        const token = getAdminToken();
+        const headers = token ? { 'Authorization': `Bearer ${token}` } : {};
+
+        const res = await fetch(`${API_BASE_URL}/eventos`, { headers });
+        
         if (res.ok) {
             const eventos = await res.json();
             // Salva em cache para quando estiver offline
             localStorage.setItem('eventos_cache', JSON.stringify(eventos));
             renderizarOpcoes(eventos);
         } else {
-            throw new Error('Falha ao buscar');
+            console.error("Erro ao buscar eventos:", res.status);
+            throw new Error('Falha ao buscar eventos');
         }
     } catch (e) {
         // Se falhar (offline), tenta carregar do cache
@@ -53,7 +58,7 @@ async function carregarOpcoesEventos() {
         if (cache) {
             renderizarOpcoes(JSON.parse(cache));
         } else {
-            select.innerHTML = '<option value="">Sem eventos (Conecte-se para carregar)</option>';
+            select.innerHTML = '<option value="">Não foi possível carregar eventos (Verifique se é Admin)</option>';
         }
     }
 }
@@ -123,7 +128,8 @@ async function cadastrarECheckIn() {
     const email = document.getElementById('novoEmail').value;
     const eventoId = document.getElementById('eventoId').value;
 
-    if(!nome || !email || !eventoId) return alert('Preencha todos os campos.');
+    // CORREÇÃO: O erro "Preencha todos os campos" ocorria porque o eventoId era vazio (devido à falha no carregamento acima).
+    if(!nome || !email || !eventoId) return alert('Preencha todos os campos (Nome, Email e Selecione o Evento).');
 
     const payload = { 
         nome, 
@@ -188,7 +194,7 @@ async function sincronizarAgora() {
 async function processarItemUnitario(item) {
     let userId = null;
     
-    // --- Lógica de obter usuário (Mantida igual) ---
+    // --- Lógica de obter usuário ---
     if (item.tipo === 'CADASTRO_NOVO') {
         const resCreate = await fetch(`${API_BASE_URL}/users`, {
             method: 'POST',
@@ -196,7 +202,7 @@ async function processarItemUnitario(item) {
             body: JSON.stringify({
                 name: item.nome,
                 email: item.email,
-                password: '123', 
+                password: '123', // Senha padrão
                 role: 'PARTICIPANTE'
             })
         });
@@ -224,6 +230,7 @@ async function processarItemUnitario(item) {
         userId = user.id;
     }
     
+    // Inscrição
     const resInscricao = await fetch(`${API_BASE_URL}/inscricoes`, {
         method: 'POST',
         headers: {
@@ -238,14 +245,13 @@ async function processarItemUnitario(item) {
         if (!txt.includes("já inscrito")) throw new Error("Erro na inscrição: " + txt);
     }
 
-    
+    // Presença (Check-in)
     const resPresenca = await fetch(`${API_BASE_URL}/presencas`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${getAdminToken()}`
         },
-        // O Java Attendance espera 'eventId' (inglês)
         body: JSON.stringify({ 
             userId: userId, 
             eventId: parseInt(item.eventoId) 

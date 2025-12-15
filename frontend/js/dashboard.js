@@ -64,7 +64,6 @@ async function loadRegistrations() {
     }
 
     // 3. BUSCA CRÍTICA: Busca as Presenças reais (Attendance Service)
-    // Isso resolve o problema do status sempre "Pendente"
     let presencasIds = [];
     try {
         const resPresencas = await fetchAuth(`/presencas/usuario/${userId}`);
@@ -82,8 +81,7 @@ async function loadRegistrations() {
         tbody.innerHTML = '';
         
         regs.forEach(reg => {
-            // VERIFICAÇÃO DE OURO: O usuário está na lista de presenças do Attendance Service?
-            // Ignoramos o campo 'presente' do registration-service pois ele pode estar desatualizado
+            // Verifica se o usuário está na lista de presenças
             const isPresente = presencasIds.includes(reg.eventoId);
 
             const status = isPresente 
@@ -93,14 +91,12 @@ async function loadRegistrations() {
             let actionBtn = '';
             
             if (!isPresente) {
-                // Botão corrigido para usar a nova lógica de check-in
+                // ALTERAÇÃO: Removido o botão de check-in. O participante só pode cancelar.
                 actionBtn = `
-                    <button onclick="checkIn(${reg.eventoId})" class="btn btn-sm btn-outline-success me-1">Check-in</button>
                     <button onclick="cancelarInscricao(${reg.id})" class="btn btn-sm btn-outline-danger">Cancelar</button>
                 `;
             } else {
                 // Se já está presente, libera certificado
-                // Passamos os dados na URL ou salvamos no storage para a pag de certificados usar
                 actionBtn = `<a href="certificados.html" class="btn btn-sm btn-outline-primary">Ver Certificado</a>`;
             }
 
@@ -150,27 +146,7 @@ async function inscrever(eventoId) {
     }
 }
 
-// CORREÇÃO CRÍTICA: Aponta para o Attendance Service
-async function checkIn(eventoId) {
-    const userId = getUserIdFromToken();
-    
-    // Agora bate em /presencas e manda userId + eventId
-    const res = await fetchAuth('/presencas', {
-        method: 'POST',
-        body: JSON.stringify({ 
-            userId: userId, 
-            eventId: eventoId 
-        })
-    });
-
-    if (res.ok) {
-        alert('Check-in realizado! Você agora pode emitir seu certificado.');
-        loadRegistrations();
-    } else {
-        const erro = await res.text();
-        alert('Erro ao realizar check-in: ' + erro);
-    }
-}
+// checkIn removido daqui pois é função da portaria/admin agora.
 
 function toggleCreateEvent() {
     const form = document.getElementById('createEventForm');

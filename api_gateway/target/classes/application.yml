@@ -10,13 +10,13 @@ spring:
       globalcors:
         cors-configurations:
           '[/**]':
-            allowedOrigins: "*"   # Em produção, mude para "http://localhost:3000"
+            allowedOrigins: "*"   
             allowedMethods:
               - GET
               - POST
               - PUT
               - DELETE
-              - OPTIONS           # Essencial para o navegador validar a requisição antes de enviar
+              - OPTIONS           
             allowedHeaders: "*"
             
       default-filters:

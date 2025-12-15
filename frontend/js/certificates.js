@@ -1,3 +1,21 @@
+// frontend/js/certificates.js
+
+// Função auxiliar para pegar o ID do usuário do Token (Necessária aqui pois este arquivo roda separado do dashboard)
+function getUserIdFromToken() {
+    const token = localStorage.getItem('token');
+    if (!token) return null;
+    try {
+        const base64Url = token.split('.')[1];
+        const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
+        const jsonPayload = decodeURIComponent(window.atob(base64).split('').map(function(c) {
+            return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
+        }).join(''));
+        return JSON.parse(jsonPayload).id;
+    } catch (e) {
+        return null;
+    }
+}
+
 function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
     const nomeUsuario = localStorage.getItem('userEmail') || "Participante";
     
@@ -119,8 +137,56 @@ function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
     printWindow.document.close();
 }
 
+// NOVA FUNÇÃO: Busca eventos onde o usuário tem presença para preencher o Select
+async function loadEventsForIssuance() {
+    const select = document.getElementById('certEventId');
+    const userId = getUserIdFromToken();
+    if (!userId) return;
+
+    try {
+        // 1. Busca todos os eventos para pegar os nomes (mapa de ID -> Título)
+        const resEvents = await fetchAuth('/eventos');
+        let eventosMap = {};
+        if (resEvents.ok) {
+            const eventos = await resEvents.json();
+            eventos.forEach(e => eventosMap[e.id] = e.titulo || e.title);
+        }
+
+        // 2. Busca presenças do usuário
+        const resPresencas = await fetchAuth(`/presencas/usuario/${userId}`);
+        
+        select.innerHTML = '<option value="" selected disabled>Selecione um evento...</option>';
+
+        if (resPresencas.ok) {
+            const presencas = await resPresencas.json();
+            
+            if (presencas.length === 0) {
+                select.innerHTML = '<option disabled>Nenhuma presença registrada.</option>';
+                return;
+            }
+
+            // Preenche o Select com eventos onde o usuário tem presença
+            presencas.forEach(p => {
+                const eventId = p.eventId;
+                const nomeEvento = eventosMap[eventId] || `Evento #${eventId}`;
+                
+                const option = document.createElement('option');
+                option.value = eventId;
+                option.text = nomeEvento; // Exibe o nome ao invés do ID
+                select.appendChild(option);
+            });
+        }
+    } catch (e) {
+        console.error("Erro ao carregar eventos para select", e);
+        select.innerHTML = '<option disabled>Erro ao carregar lista</option>';
+    }
+}
+
 async function loadCertificates() {
     const container = document.getElementById('certContainer');
+    
+    // Chama o carregamento do Select aqui também
+    loadEventsForIssuance();
     
     try {
         const res = await fetchAuth('/certificados');
@@ -182,9 +248,9 @@ async function loadCertificates() {
 
 async function emitirCertificado() {
     const eventIdInput = document.getElementById('certEventId');
-    const eventId = eventIdInput.value;
+    const eventId = eventIdInput.value; // Agora pega do Select
 
-    if (!eventId) return alert("Digite o ID do evento");
+    if (!eventId) return alert("Selecione um evento da lista");
 
     // Feedback visual de carregamento
     const btn = document.querySelector('button[onclick="emitirCertificado()"]');
@@ -200,8 +266,7 @@ async function emitirCertificado() {
 
         if (res.ok) {
             alert("Certificado emitido com sucesso!");
-            eventIdInput.value = ""; // Limpa campo
-            loadCertificates(); // Recarrega a lista
+            loadCertificates(); // Recarrega a lista e o select
         } else {
             const err = await res.text();
             alert("Não foi possível emitir: " + err);
