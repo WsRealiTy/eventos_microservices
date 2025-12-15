@@ -1,13 +1,10 @@
 function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
-    // Tenta pegar o nome do usuário logado (salvo no login) ou usa um genérico
     const nomeUsuario = localStorage.getItem('userEmail') || "Participante";
     
-    // Formata a data
     const dataFormatada = new Date(dataEmissao).toLocaleDateString('pt-BR', {
         day: '2-digit', month: 'long', year: 'numeric'
     });
 
-    // Cria uma nova janela em branco
     const printWindow = window.open('', '_blank');
     
     const htmlContent = `
@@ -112,7 +109,7 @@ function visualizarCertificado(eventId, dataEmissao, codigoValidacao) {
                     <span class="uuid">${codigoValidacao}</span>
                 </div>
 
-                <button class="btn-print" onclick="window.print()">🖨️ Imprimir Certificado</button>
+                <button class="btn-print" onclick="window.print()">Imprimir Certificado</button>
             </div>
         </body>
         </html>
@@ -151,7 +148,7 @@ async function loadCertificates() {
                 <div class="col-md-6 mb-4">
                     <div class="card h-100 shadow-sm border-success">
                         <div class="card-header bg-success text-white d-flex justify-content-between align-items-center">
-                            <span>🎓 Certificado Emitido</span>
+                            <span>Certificado Emitido</span>
                             <small>Evento #${cert.eventId}</small>
                         </div>
                         <div class="card-body">
@@ -164,7 +161,7 @@ async function loadCertificates() {
                             <div class="d-grid gap-2">
                                 <button onclick="visualizarCertificado('${cert.eventId}', '${cert.issuedAt}', '${codigo}')" 
                                         class="btn btn-outline-success">
-                                    🖨️ Visualizar / Imprimir
+                                    Visualizar / Imprimir
                                 </button>
                             </div>
                         </div>
@@ -202,12 +199,12 @@ async function emitirCertificado() {
         });
 
         if (res.ok) {
-            alert("✅ Certificado emitido com sucesso!");
+            alert("Certificado emitido com sucesso!");
             eventIdInput.value = ""; // Limpa campo
             loadCertificates(); // Recarrega a lista
         } else {
             const err = await res.text();
-            alert("❌ Não foi possível emitir: " + err);
+            alert("Não foi possível emitir: " + err);
         }
     } catch (error) {
         alert("Erro de conexão ao tentar emitir.");
@@ -220,4 +217,8 @@ async function emitirCertificado() {
 }
 
 // Carrega ao iniciar
-document.addEventListener("DOMContentLoaded", loadCertificates);
+document.addEventListener("DOMContentLoaded", () => {
+    loadCertificates();
+    // Adicionado chamada para verificar se é admin e liberar opções da navbar
+    verificarAdmin();
+});

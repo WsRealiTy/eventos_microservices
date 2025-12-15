@@ -26,7 +26,7 @@
 
     <div class="container mt-5">
         <h2>Eventos Disponíveis</h2>
-        <button class="btn btn-outline-secondary mb-3 btn-sm" onclick="toggleCreateEvent()">+ Criar Novo Evento (Teste)</button>
+        <button id="btnCriarEvento" class="btn btn-outline-secondary mb-3 btn-sm d-none" onclick="toggleCreateEvent()">+ Criar Novo Evento (Teste)</button>
         
         <div id="createEventForm" class="card p-3 mb-4 d-none">
             <h5>Novo Evento</h5>
@@ -47,7 +47,6 @@
             <table class="table table-bordered">
                 <thead>
                     <tr>
-                        <th>ID Inscrição</th>
                         <th>Evento ID</th>
                         <th>Status</th>
                         <th>Ações</th>

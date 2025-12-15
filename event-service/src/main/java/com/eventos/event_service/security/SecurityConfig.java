@@ -31,6 +31,8 @@ public class SecurityConfig {
                 // Rotas Públicas
                 .requestMatchers(HttpMethod.GET, "/eventos/**").permitAll()
                 .requestMatchers("/actuator/**").permitAll()
+
+                .requestMatchers(HttpMethod.POST, "/eventos/**").hasRole("ADMIN")
                 
                 // Todo o resto exige token válido
                 .anyRequest().authenticated()
