@@ -112,6 +112,11 @@ services:
     depends_on:
       postgres-db:
         condition: service_healthy
+    environment:
+      - SMTP_HOST=smtp.gmail.com
+      - SMTP_PORT=587
+      - SMTP_USER=panzerweslley@gmail.com  
+      - SMTP_PASSWORD=wjlvbojivrktmopm
 
 networks:
   eventos-network:

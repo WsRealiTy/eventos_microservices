@@ -93,7 +93,6 @@ public class RegistrationController {
     public ResponseEntity<?> registrarPresenca(@RequestBody InscricaoDTO dto) {
         Long userId = resolverUserId(dto.userId);
         
-        // Tenta achar a inscrição
         var optReg = repository.findByUserIdAndEventoId(userId, dto.eventoId);
     
         if (optReg.isEmpty()) {
@@ -101,8 +100,21 @@ public class RegistrationController {
         }
 
         Registration reg = optReg.get();
+        
+        // Evita enviar e-mail duplicado se já estava presente
+        boolean jaEstavaPresente = reg.isPresente(); // Assumindo getter isPresente ou getPresente
+
         reg.setPresente(true); 
         repository.save(reg);
+        
+        // CORREÇÃO: Enviar e-mail de presença
+        if (!jaEstavaPresente) {
+            String userEmail = getUserEmailFromToken();
+            if (userEmail != null) {
+                emailClient.enviarEmail(userEmail, "Presença Confirmada!", 
+                    "Sua presença no evento (ID: " + dto.eventoId + ") foi registrada com sucesso. Obrigado por comparecer!");
+            }
+        }
         
         return ResponseEntity.ok("Check-in realizado com sucesso!");
     }
@@ -146,6 +158,6 @@ public class RegistrationController {
         if (auth != null && auth.getDetails() instanceof String) {
             return (String) auth.getDetails();
         }
-        return null; // ou lançar exceção
+        return null; 
     }
 }
