@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Validar Certificado</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body { background-color: #f8f9fa; }
+        .validation-card { max-width: 500px; margin: 50px auto; }
+        .result-box { display: none; margin-top: 20px; padding: 15px; border-radius: 5px; }
+        .valid { background-color: #d1e7dd; color: #0f5132; border: 1px solid #badbcc; }
+        .invalid { background-color: #f8d7da; color: #842029; border: 1px solid #f5c2c7; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="card shadow validation-card">
+            <div class="card-header bg-secondary text-white text-center">
+                <h4>Validação Pública de Certificado</h4>
+            </div>
+            <div class="card-body">
+                <p class="text-center text-muted">Insira o código de autenticidade presente no certificado para verificar sua validade.</p>
+                
+                <div class="mb-3">
+                    <label for="codigoInput" class="form-label fw-bold">Código do Certificado (UUID)</label>
+                    <input type="text" id="codigoInput" class="form-control form-control-lg text-center font-monospace" placeholder="Ex: a1b2c3d4-..." autocomplete="off">
+                </div>
+
+                <div class="d-grid gap-2">
+                    <button onclick="validarCertificado()" class="btn btn-primary btn-lg">Verificar Agora</button>
+                    <a href="index.html" class="btn btn-link text-secondary">Voltar ao Login</a>
+                </div>
+
+                <div id="resultado" class="result-box text-center"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api.js"></script>
+    <script>
+        async function validarCertificado() {
+            const codigo = document.getElementById('codigoInput').value.trim();
+            const resultDiv = document.getElementById('resultado');
+            
+            // Limpa resultado anterior
+            resultDiv.style.display = 'none';
+            resultDiv.className = 'result-box';
+            
+            if (!codigo) {
+                alert("Por favor, digite o código do certificado.");
+                return;
+            }
+
+            // Mostra carregando
+            resultDiv.style.display = 'block';
+            resultDiv.innerHTML = 'Verificando...';
+
+            try {
+                // Endpoint público configurado no seu Gateway/Service
+                const response = await fetch(`${API_BASE_URL}/certificados/validar/${codigo}`);
+                
+                if (response.ok) {
+                    const data = await response.json();
+                    
+                    // Sucesso: Certificado Encontrado
+                    resultDiv.className = 'result-box valid';
+                    const dataEmissao = new Date(data.issuedAt).toLocaleDateString('pt-BR');
+                    
+                    resultDiv.innerHTML = `
+                        <h4>✅ Certificado Válido!</h4>
+                        <hr>
+                        <p class="mb-1"><strong>Evento ID:</strong> ${data.eventId}</p>
+                        <p class="mb-1"><strong>Emitido em:</strong> ${dataEmissao}</p>
+                        <p class="mb-0"><small>O documento é autêntico e está registrado em nossa base.</small></p>
+                    `;
+                } else {
+                    // Erro 404 (Não encontrado)
+                    resultDiv.className = 'result-box invalid';
+                    resultDiv.innerHTML = `
+                        <h4>❌ Certificado Não Encontrado</h4>
+                        <p class="mb-0">O código informado não existe ou é inválido. Verifique a digitação.</p>
+                    `;
+                }
+            } catch (error) {
+                console.error(error);
+                resultDiv.className = 'result-box invalid';
+                resultDiv.innerHTML = `⚠️ Erro de conexão com o servidor. Tente novamente mais tarde.`;
+            }
+        }
+    </script>
+</body>
+</html>
